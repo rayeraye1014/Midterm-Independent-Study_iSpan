@@ -3,7 +3,7 @@ require __DIR__ . '/0.parts/pdo-connect.php';
 $title = '註冊會員';
 $pageName = 'register';
 
-
+123
 ?>
 <?php include __DIR__ . '/0.parts/html-head.php' ?>
 <div class="container-fluid px-0 mx-0">
@@ -163,7 +163,7 @@ $pageName = 'register';
         if (passwordEl.value !== password2El.value) {
             isPass = false; // 沒有通過檢查
             password2El.style.border = '1px solid red';
-            password2El.nextElementSibling.innerHTML = '請填寫正確的密碼!';
+            password2El.nextElementSibling.innerHTML = '請確認填寫相同的密碼!';
         }
 
         if (mobileEl.value && !validateMobile(mobileEl.value)) {

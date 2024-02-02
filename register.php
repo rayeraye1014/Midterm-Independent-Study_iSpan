@@ -3,7 +3,7 @@ require __DIR__ . '/0.parts/pdo-connect.php';
 $title = '註冊會員';
 $pageName = 'register';
 
-123
+
 ?>
 <?php include __DIR__ . '/0.parts/html-head.php' ?>
 <div class="container-fluid px-0 mx-0">

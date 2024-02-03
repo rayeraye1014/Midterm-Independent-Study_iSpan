@@ -48,7 +48,8 @@ if (!empty($_POST)) {
     //生成隨機鹽值
     $salt = bin2hex(random_bytes(16));
     //將鹽值和密碼結合，使用雜湊函數計算雜湊值
-    $passwordHash = password_hash(($_POST['password']), PASSWORD_DEFAULT);
+    $passwordWithSalt = $_POST['password'] . $salt;
+    $passwordHash = password_hash($passwordWithSalt, PASSWORD_DEFAULT);
 
     $sql = "INSERT INTO team_user
       (`email`,

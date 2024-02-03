@@ -86,6 +86,11 @@ $pageName = 'login';
     return re.test(email);
   }
 
+  function validatePassword(password) {
+    const re = /^(?=.*\d)(?=.*[A-z])[\da-zA-Z]{6,16}$/;
+    return re.test(password);
+  }
+
   function sendData(e) {
     // 回復欄位的外觀
     for (let el of fields) {
@@ -102,6 +107,12 @@ $pageName = 'login';
       isPass = false;
       emailEl.style.border = '1px solid red';
       emailEl.nextElementSibling.innerHTML = '請填寫正確的 Email !';
+    }
+
+    if (passwordEl.value && !validatePassword(passwordEl.value)) {
+      isPass = false; // 沒有通過檢查
+      passwordEl.style.border = '1px solid red';
+      passwordEl.nextElementSibling.innerHTML = '請填寫正確的密碼!';
     }
 
     // 有通過檢查才發送表單

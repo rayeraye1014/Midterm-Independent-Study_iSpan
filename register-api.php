@@ -20,14 +20,14 @@ if (!empty($_POST)) {
         exit;
     }
 
-    if (strlen($_POST['password']) < 1) {
+    if (strlen($_POST['password']) < 6) {
         $output['error'] = '請填寫正確的密碼';
         $output['code'] = 200;
         echo json_encode($output,  JSON_UNESCAPED_UNICODE);
         exit;
     }
 
-    if (strlen($_POST['mobile']) < 11) {
+    if (strlen($_POST['mobile']) < 10) {
         $output['error'] = '請填寫正確的手機';
         $output['code'] = 300;
         echo json_encode($output, JSON_UNESCAPED_UNICODE);
@@ -48,12 +48,19 @@ if (!empty($_POST)) {
     //生成隨機鹽值
     $salt = bin2hex(random_bytes(16));
     //將鹽值和密碼結合，使用雜湊函數計算雜湊值
-    $passwordHash = hash(($_POST['password']), PASSWORD_DEFAULT);
+    $passwordHash = password_hash(($_POST['password']), PASSWORD_DEFAULT);
 
     $sql = "INSERT INTO team_user
-      (`email`, `password`, `mobile`, `address` ,`birthday`, `nickname`, `created_at`) 
+      (`email`,
+       `password`,
+       `mobile`,
+       `address`,
+       `birthday`,
+       `hash`,
+       `nickname`,
+       `create_at`) 
       VALUES 
-      (?, ?, ?, ?, ?, ?, NOW())";
+      (?, ?, ?, ?, ?, ?, ?, NOW())";
 
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
@@ -62,6 +69,7 @@ if (!empty($_POST)) {
         $_POST['mobile'],
         $_POST['address'],
         $birthday,
+        $salt,
         $_POST['nickname']
     ]);
 

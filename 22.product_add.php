@@ -274,8 +274,6 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         status: statusEl,
     } = document.form1;
 
-
-
     const fields = [sellerEl, mainEl, subEl, photosEls, nameEl, priceEl, qtyEl, introEl, carbonPointsEl, createdTEl, editTEl, statusEl];
     const photosValues = Array.from(photosEls.files).map((file) => file.name);
 

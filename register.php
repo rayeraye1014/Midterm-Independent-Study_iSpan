@@ -55,7 +55,11 @@ $pageName = 'register';
                                 <input type="text" class="form-control" id="nickname" name="nickname">
                                 <div class="form-text"></div>
                             </div>
-
+                            <div class="mb-3">
+                                <label for="createdT" class="form-label">建立時間</label>
+                                <input type="text" class="form-control" name="createdT" id="createdT" placeholder="" readonly>
+                                <div class="form-text"></div>
+                            </div>
                             <button type="submit" class="btn btn-primary">送出註冊申請</button>
                         </form>
                     </div>
@@ -109,6 +113,23 @@ $pageName = 'register';
 
 <?php include __DIR__ . '/0.parts/script.php' ?>
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 獲取當前時間
+        var currentTime = new Date();
+
+        // 格式化時間成 YYYY-MM-DD HH:MM:SS
+        var formattedTime = currentTime.getFullYear() + '-' +
+            ('0' + (currentTime.getMonth() + 1)).slice(-2) + '-' +
+            ('0' + currentTime.getDate()).slice(-2) + ' ' +
+            ('0' + currentTime.getHours()).slice(-2) + ':' +
+            ('0' + currentTime.getMinutes()).slice(-2) + ':' +
+            ('0' + currentTime.getSeconds()).slice(-2);
+
+        // 將格式化後的時間設置到 input 的值中
+        document.getElementById('createdT').value = formattedTime;
+    });
+
+
     const {
         email: emailEl,
         password: passwordEl,
@@ -117,9 +138,10 @@ $pageName = 'register';
         address: addressEl,
         birthday: birthdayEl,
         nickname: nicknameEl,
+        createdT: createdTEl,
     } = document.form1;
 
-    const fields = [emailEl, passwordEl, password2El, mobileEl, addressEl, birthdayEl, nicknameEl, ];
+    const fields = [emailEl, passwordEl, password2El, mobileEl, addressEl, birthdayEl, nicknameEl, createdTEl];
 
     function validateEmail(email) {
         const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -154,17 +176,18 @@ $pageName = 'register';
             emailEl.nextElementSibling.innerHTML = '請填寫正確的Email !';
         }
 
-        if (passwordEl.value && !validatePassword(passwordEl)) {
+        if (passwordEl.value && !validatePassword(passwordEl.value)) {
             isPass = false; // 沒有通過檢查
             passwordEl.style.border = '1px solid red';
             passwordEl.nextElementSibling.innerHTML = '請填寫正確的密碼!';
         }
-
-        if (passwordEl.value !== password2El.value) {
-            isPass = false; // 沒有通過檢查
-            password2El.style.border = '1px solid red';
-            password2El.nextElementSibling.innerHTML = '請確認填寫相同的密碼!';
-        }
+        password2El.addEventListener('blur', function() {
+            if (password2El.value && passwordEl.value !== password2El.value) {
+                isPass = false; // 沒有通過檢查
+                password2El.style.border = '1px solid red';
+                password2El.nextElementSibling.innerHTML = '密碼填寫不一致!';
+            }
+        });
 
         if (mobileEl.value && !validateMobile(mobileEl.value)) {
             isPass = false;

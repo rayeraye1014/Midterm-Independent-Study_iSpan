@@ -45,7 +45,7 @@
 
 <div class="side-bar flex-shrink-0 p-3">
   <a href="index_confirm.php" class="d-flex align-items-center justify-content-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
-    <img src="../address_book/02.imgs/logo.png" alt="" class="logo me-2 mb-2">
+    <img src="./02.imgs/logo.png" alt="" class="logo me-2 mb-2">
     <span class="fs-5 fw-semibold span-font pt-1">
       <h2>DEAL CMS</h2>
     </span>

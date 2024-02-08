@@ -38,7 +38,12 @@ if ($totalRows) {
 <?php include __DIR__ . '/0.parts/sidebar.php' ?>
 <div class="container-fluid px-0 mx-0">
     <?php include __DIR__ . '/0.parts/navbar.40_order.php' ?>
-    <div class="container table-bordered table-striped">
+    <style>
+        .overflow-auto {
+            height: 1000px;
+        }
+    </style>
+    <div class="container table-bordered table-striped overflow-auto">
         <div class="row mt-3">
             <div class="col">
                 <nav aria-label="Page navigation example">

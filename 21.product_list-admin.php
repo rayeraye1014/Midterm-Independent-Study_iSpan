@@ -102,7 +102,7 @@ if ($totalRows) {
                             <th>Price</th>
                             <th>Qty</th>
                             <th>Intro</th>
-                            <th>C points</th>
+                            <th class="text-nowrap">C points</th>
                             <th>Created time</th>
                             <th>Updated time</th>
                             <th>Status</th>

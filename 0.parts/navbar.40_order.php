@@ -2,7 +2,6 @@
 if (!isset($pageName)) {
     $pageName = '';
 }
-
 ?>
 
 <style>
@@ -28,7 +27,7 @@ if (!isset($pageName)) {
     }
 </style>
 
-<?php if ($pageName == 'add_product' || $pageName == 'edit_product') : ?>
+<?php if ($pageName == 'add_order' || $pageName == 'edit_order') : ?>
     <div class="px-0 mx-0 shadow">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
@@ -43,14 +42,14 @@ if (!isset($pageName)) {
                                 <a class="nav-link" href="#">ADMIN MODE</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link color-strong <?= $pageName == 'product_list' ? 'active' : '' ?>" href="21.product_list.php">商品列表</a>
+                                <a class="nav-link <?= $pageName == 'order_list' ? 'active' : '' ?>" href="41.order_list.php">訂單列表</a>
                             </li>
                         <?php else : ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">USER MODE</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link <?= $pageName == 'product_list' ? 'active' : '' ?>" href="21.product_list.php">商品列表</a>
+                                <a class="nav-link <?= $pageName == 'order_list' ? 'active' : '' ?>" href="41.order_list.php">商品列表</a>
                             </li>
                         <?php endif; ?>
                     </ul>
@@ -91,17 +90,17 @@ if (!isset($pageName)) {
                                 <a class="nav-link" href="#">ADMIN MODE</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link color-strong <?= $pageName == 'product_list' ? 'active' : '' ?>" href="21.product_list.php">商品列表</a>
+                                <a class="nav-link color-strong <?= $pageName == 'order_list' ? 'active' : '' ?>" href="41.order_list.php">訂單列表</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link color-strong <?= $pageName == 'product_index' ? 'active' : '' ?>" href="20.product_index.php">商品圖表統計</a>
+                                <a class="nav-link color-strong <?= $pageName == 'order_index' ? 'active' : '' ?>" href="40.order_index.php">訂單圖表統計</a>
                             </li>
                         <?php else : ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">USER MODE</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link <?= $pageName == 'product_list' ? 'active' : '' ?>" href="21.product_list.php">商品列表</a>
+                                <a class="nav-link <?= $pageName == 'order_list' ? 'active' : '' ?>" href="41.order_list.php">訂單列表</a>
                             </li>
                         <?php endif; ?>
                     </ul>
@@ -127,73 +126,39 @@ if (!isset($pageName)) {
             </div>
         </nav>
     </div>
-    <?php if ($pageName == 'product_list' || $pageName == 'product_list-boy' || $pageName == 'product_list-girl' || $pageName == 'product_list-beauty' || $pageName == 'product_list-home' || $pageName == 'product_list-baby' || $pageName == 'product_list-pet') : ?>
+    <?php if ($pageName == 'order_list') : ?>
         <div class="mx-1">
             <div class="card text-center mt-3">
                 <div class="card-header">
-                    <ul class="nav nav-tabs card-header-tabs">
-                        <li class="nav-item">
-                            <a class="nav-link <?= $pageName == 'product_list' ? 'active' : '' ?>" aria-current="<?= $pageName == 'product_list' ? 'true' : '' ?>" href="21.product_list.php">所有商品</a>
+                    <ul class="nav nav-tabs card-header-tabs d-flex justify-content-center">
+                        <li class="nav-item me-5 mb-2">
+                            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                <option selected disabled>篩選訂單類型</option>
+                                <option value="1"><a href="">一般訂單</a></option>
+                                <option value="2"><a href="">以物易物</a></option>
+                                <option value="3"><a href="">混合訂單</a></option>
+                            </select>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?= $pageName == '' ? 'active' : '' ?>" aria-current="<?= $pageName == '' ? 'true' : '' ?>" href="#">免費禮物</a>
+                        <li class="nav-item me-5">
+                            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                <option selected disabled>篩選付款狀態</option>
+                                <option value="1"><a href="">已付款</a>One</option>
+                                <option value="2"><a href="">尚未付款</a>Two</option>
+                            </select>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?= $pageName == '' ? 'active' : '' ?>" aria-current="<?= $pageName == '' ? 'true' : '' ?>" href="#">電腦科技</a>
+                        <li class="nav-item me-5">
+                            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                <option selected disabled>篩選運送狀態</option>
+                                <option value="1"><a href="">已寄出</a>One</option>
+                                <option value="2"><a href="">尚未寄出</a>Two</option>
+                            </select>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?= $pageName == '' ? 'active' : '' ?>" aria-current="<?= $pageName == '' ? 'true' : '' ?>" href="#">手機配件</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?= $pageName == 'product_list-boy' ? 'active' : '' ?>" aria-current="<?= $pageName == 'product_list-boy' ? 'true' : '' ?>" href="21.product_list-admin_boy.php">男裝服飾</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?= $pageName == 'product_list-girl' ? 'active' : '' ?>" aria-current="<?= $pageName == 'product_list-girl' ? 'true' : '' ?>" href="21.product_list-admin_girl.php">女裝服飾</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?= $pageName == 'product_list-beauty' ? 'active' : '' ?>" aria-current="<?= $pageName == 'product_list-beauty' ? 'true' : '' ?>" href="21.product_list-admin_beauty.php">美妝保養</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?= $pageName == '' ? 'active' : '' ?>" aria-current="<?= $pageName == '' ? 'true' : '' ?>" href="#">名牌精品</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?= $pageName == '' ? 'active' : '' ?>" aria-current="<?= $pageName == '' ? 'true' : '' ?>" href="#">電玩遊戲</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?= $pageName == '' ? 'active' : '' ?>" aria-current="<?= $pageName == '' ? 'true' : '' ?>" href="#">耳機錄音</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?= $pageName == '' ? 'active' : '' ?>" aria-current="<?= $pageName == '' ? 'true' : '' ?>" href="#">相機拍攝</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?= $pageName == 'product_list-home' ? 'active' : '' ?>" aria-current="<?= $pageName == 'product_list-home' ? 'true' : '' ?>" href="21.product_list-admin_home.php">家具家居</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?= $pageName == '' ? 'active' : '' ?>" aria-current="<?= $pageName == '' ? 'true' : '' ?>" href="#">電視電器</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?= $pageName == 'product_list-baby' ? 'active' : '' ?>" aria-current="<?= $pageName == 'product_list-baby' ? 'true' : '' ?>" href="21.product_list-admin_baby.php">嬰兒孩童</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?= $pageName == '' ? 'active' : '' ?>" aria-current="<?= $pageName == '' ? 'true' : '' ?>" href="#">健康營養品</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?= $pageName == '' ? 'active' : '' ?>" aria-current="<?= $pageName == '' ? 'true' : '' ?>" href="#">運動用品</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?= $pageName == '' ? 'active' : '' ?>" aria-current="<?= $pageName == '' ? 'true' : '' ?>" href="#">食物飲料</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?= $pageName == 'product_list-pet' ? 'active' : '' ?>" aria-current="<?= $pageName == 'product_list-pet' ? 'true' : '' ?>" href="21.product_list-admin_pet.php">寵物用品</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?= $pageName == '' ? 'active' : '' ?>" aria-current="<?= $pageName == '' ? 'true' : '' ?>" href="#">門票票券</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?= $pageName == '' ? 'active' : '' ?>" aria-current="<?= $pageName == '' ? 'true' : '' ?>" href="#">機車汽車</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link <?= $pageName == '' ? 'active' : '' ?>" aria-current="<?= $pageName == '' ? 'true' : '' ?>" href="#">其他其他</a>
+                        <li class="nav-item me-5">
+                            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                <option selected disabled>篩選訂單完成狀態</option>
+                                <option value="1"><a href="">已完成</a>One</option>
+                                <option value="2"><a href="">進行中</a>Two</option>
+                            </select>
                         </li>
                     </ul>
                 </div>
@@ -203,8 +168,8 @@ if (!isset($pageName)) {
                         <button class="btn btn-outline-secondary btn-sm" type="button" onclick="searchProd()">
                             搜尋產品
                         </button>
-                        <div class="d-flex align-item-center  p-1">
-                            <a href="21.product_list.php">
+                        <div class="d-flex align-item-center p-1">
+                            <a href="41.order_list.php">
                                 <i class="fa-solid fa-rotate-left"></i>
                             </a>
                         </div>
@@ -217,19 +182,17 @@ if (!isset($pageName)) {
                             搜尋價格
                         </button>
                         <div class="d-flex align-item-center  p-1">
-                            <a href="21.product_list.php">
+                            <a href="41.order_list.php">
                                 <i class="fa-solid fa-rotate-left"></i>
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-between my-1 mx-2">
+                <div class="d-flex justify-content-start my-1 mx-2">
                     <div class="">
-                        <button type="button" class="btn btn-warning btn-sm"><a class="color-a text-decoration-none" href="javascript:void(0);" onclick="change_status_down(id)">一鍵下架</a></button>
-                        <button type="button" class="btn btn-success btn-sm"><a class="color-a text-decoration-none" href="javascript:void(0);" onclick="change_status_up(id)">一鍵上架</a></button>
                         <button type="button" class="btn btn-danger btn-sm"><a class="color-a text-decoration-none" href="javascript:void(0);" onclick="delete_moreThenOne()">一鍵刪除</a></button>
                     </div>
-                    <div class="">
+                    <div class="ms-3">
                         <button type="button" class="btn btn-info me-2 btn-sm"><a class="color-a text-decoration-none" href="22.product_add.php">添加商品</a></button>
                         <!--<button type="button" class="btn btn-info btn-sm"><a class="color-a text-decoration-none" href="file_excel-product.php">匯出Excel表單</a></button>-->
                     </div>

@@ -128,7 +128,7 @@ if (!isset($pageName)) {
             </div>
         </nav>
     </div>
-    <?php if ($pageName == 'product_list') : ?>
+    <?php if ($pageName == 'product_list' || $pageName == 'product_list-boy' || $pageName == 'product_list-girl' || $pageName == 'product_list-beauty' || $pageName == 'product_list-home' || $pageName == 'product_list-baby' || $pageName == 'product_list-pet') : ?>
         <div class="mx-1">
             <div class="card text-center mt-3">
                 <div class="card-header">

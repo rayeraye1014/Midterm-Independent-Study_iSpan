@@ -142,22 +142,22 @@ if (!isset($pageName)) {
                         <li class="nav-item me-5">
                             <select class="form-select form-select-sm" aria-label=".form-select-sm example">
                                 <option selected disabled>篩選付款狀態</option>
-                                <option value="1"><a href="">已付款</a>One</option>
-                                <option value="2"><a href="">尚未付款</a>Two</option>
+                                <option value="1"><a href="">已付款</a></option>
+                                <option value="2"><a href="">尚未付款</a></option>
                             </select>
                         </li>
                         <li class="nav-item me-5">
                             <select class="form-select form-select-sm" aria-label=".form-select-sm example">
                                 <option selected disabled>篩選運送狀態</option>
-                                <option value="1"><a href="">已寄出</a>One</option>
-                                <option value="2"><a href="">尚未寄出</a>Two</option>
+                                <option value="1"><a href="">已寄出</a></option>
+                                <option value="2"><a href="">尚未寄出</a></option>
                             </select>
                         </li>
                         <li class="nav-item me-5">
                             <select class="form-select form-select-sm" aria-label=".form-select-sm example">
                                 <option selected disabled>篩選訂單完成狀態</option>
-                                <option value="1"><a href="">已完成</a>One</option>
-                                <option value="2"><a href="">進行中</a>Two</option>
+                                <option value="1"><a href="">已完成</a></option>
+                                <option value="2"><a href="">進行中</a></option>
                             </select>
                         </li>
                     </ul>

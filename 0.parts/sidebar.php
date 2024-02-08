@@ -89,25 +89,19 @@
       </div>
     </li>
     <hr>
-    <li class="mb-1 d-flex flex-column">
-      <button class="order-btn btn btn-toggle rounded collapsed" data-bs-toggle="collapse" data-bs-target="#Order-collapse" aria-expanded="false" type="button">
-        <div class="title d-flex align-items-center justify-content-center">
-          <h5><i class="fa-solid fa-clipboard me-1"></i></h5>
-          <h4>Order management</h4>
-          <i class="fa-solid fa-angle-down ms-2"></i>
-        </div>
-      </button>
-      <div class="collapse mt-2 mx-auto" id="Order-collapse">
-        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-          <li class="mb-2 sub-li"><a href="41.order-normal_list.php" class=" text-decoration-none rounded ">Normal orders</a></li>
-          <li class="mb-2 sub-li"><a href="41.order-barter_list.php" class=" text-decoration-none rounded ">Barter orders</a></li>
-          <li class="sub-li"><a href="41.order-bargain_list.php" class="text-decoration-none rounded ">Bargain orders</a></li>
-        </ul>
-      </div>
+    <li class="mb-1 d-flex justify-content-center">
+      <a href="41.order_list.php">
+        <button class="cou-btn btn btn-toggle rounded collapsed" data-bs-toggle="collapse" data-bs-target="#Order-collapse" aria-expanded="false" type="button">
+          <div class="title d-flex">
+            <h5><i class="fa-solid fa-clipboard me-1"></i></h5>
+            <h4>Order management</h4>
+          </div>
+        </button>
+      </a>
     </li>
     <hr>
     <li class="mb-1 d-flex justify-content-center">
-      <a href="50.coupon_list.php">
+      <a href="51.coupon_list.php">
         <button class="cou-btn btn btn-toggle rounded collapsed" data-bs-toggle="collapse" data-bs-target="#Coupon-collapse" aria-expanded="false" type="button">
           <div class="title d-flex">
             <h5><i class="fa-solid fa-hand-holding-dollar me-1"></i></h5>
@@ -117,21 +111,15 @@
       </a>
     </li>
     <hr>
-    <li class="mb-1 d-flex flex-column">
-      <button class="eval-btn btn btn-toggle rounded collapsed" data-bs-toggle="collapse" data-bs-target="#Evaluation-collapse" aria-expanded="false" type="button">
-        <div class="title d-flex align-items-center justify-content-center">
-          <h5><i class="fa-regular fa-star-half-stroke me-1"></i></h5>
-          <h4>Evaluation management</h4>
-          <i class="fa-solid fa-angle-down ms-2"></i>
-        </div>
-      </button>
-      <div class="collapse mt-2 mx-auto" id="Evaluation-collapse">
-        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-          <li class="mb-2 sub-li"><a href="60.evaluation-normal_list.php" class="text-decoration-none rounded sub-li ">Form normal orders</a></li>
-          <li class="mb-2 sub-li"><a href="60.evaluation-barter_list.php" class="text-decoration-none rounded sub-li">From barter orders</a></li>
-          <li class=" sub-li"><a href="60.evaluation-bargain_list.php" class=" text-decoration-none rounded sub-li">From bargain orders</a></li>
-        </ul>
-      </div>
+    <li class="mb-1 d-flex justify-content-center">
+      <a href="61.evaluation_list.php">
+        <button class="cou-btn btn btn-toggle rounded collapsed" data-bs-toggle="collapse" data-bs-target="#Evaluation-collapse" aria-expanded="false" type="button">
+          <div class="title d-flex">
+            <h5><i class="fa-regular fa-star-half-stroke me-1"></i></h5>
+            <h4>Evaluation management</h4>
+          </div>
+        </button>
+      </a>
     </li>
   </ul>
 </div>

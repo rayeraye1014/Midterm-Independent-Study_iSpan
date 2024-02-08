@@ -90,10 +90,10 @@ if (!isset($pageName)) {
                                 <a class="nav-link" href="#">ADMIN MODE</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link color-strong" href="01.member_list.php">會員列表</a>
+                                <a class="nav-link color-strong <?= $pageName == 'list' ? 'active' : '' ?>" href="01.member_list.php">會員列表</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link color-strong <?= $pageName == 'product_index' ? 'active' : '' ?>" href="10.member_index.php">會員圖表統計</a>
+                                <a class="nav-link color-strong <?= $pageName == 'member_index' ? 'active' : '' ?>" href="10.member_index.php">會員圖表統計</a>
                             </li>
                         <?php else : ?>
                             <li class="nav-item">

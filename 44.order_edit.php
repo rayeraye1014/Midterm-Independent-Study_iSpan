@@ -1,8 +1,8 @@
 <?php
 require __DIR__ . '/0.parts/admin-require.php';
 require __DIR__ . '/0.parts/pdo-connect.php';
-$title = '新增訂單';
-$pageName = 'add_order';
+$title = '編輯訂單';
+$pageName = 'edit_order';
 
 $product = "SELECT * FROM products";
 $stmt4 = $pdo->query($product);
@@ -11,6 +11,19 @@ $rows4 = $stmt4->fetchAll(PDO::FETCH_ASSOC);
 $order = "SELECT orders.id, order_type, orders.seller_id, buyer_id, product_id, shipment_fee, payment_status, shipment_status, order_date, complete_status, complete_date, product_name, product_price FROM orders JOIN products ON orders.product_id = products.id";
 $stmt = $pdo->query($order);
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+if (empty($id)) {
+    header('Location: 41.order_list.php');
+    exit;
+}
+
+$sql = "SELECT orders.id, order_type, orders.seller_id, buyer_id, product_id, shipment_fee, payment_status, shipment_status, order_date, complete_status, complete_date, product_name, product_price FROM orders JOIN products ON orders.product_id = products.id WHERE orders.id=$id";
+$r = $pdo->query($sql)->fetch();
+if (empty($r)) {
+    header('Location: 41.order_list.php');
+    exit;
+}
 
 ?>
 <?php include __DIR__ . '/0.parts/html-head.php' ?>
@@ -35,41 +48,39 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">新增訂單</h5>
+                        <h5 class="card-title">編輯訂單內容</h5>
                         <form name="form1" onsubmit="sendData(event)"> <!-- 因為有下onsubmit，故action和methon就沒有用處了，可以刪除 -->
+                            <input type="hidden" name="id" value="<?= $r['id'] ?>">
                             <div class="mb-3">
                                 <label for="orderType" class="form-label">*訂單類型</label>
                                 <select class="form-select" aria-label="Default select example" id="orderType" name="orderType">
-                                    <option selected disabled>請選擇選項</option>
-                                    <option value="一般訂單">一般訂單</option>
-                                    <option value="混合訂單">混合訂單</option>
-                                    <option value="以物易物">以物易物</option>
+                                    <option value="一般訂單" <?= $r['order_type'] == '一般訂單' ? 'selected' : '' ?>>一般訂單</option>
+                                    <option value="混合訂單" <?= $r['order_type'] == '混合訂單' ? 'selected' : '' ?>>混合訂單</option>
+                                    <option value="以物易物" <?= $r['order_type'] == '以物易物' ? 'selected' : '' ?>>以物易物</option>
                                 </select>
                                 <div class="form-text"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="seller" class="form-label">*賣家編號</label>
                                 <select class="form-select" aria-label="Default select example" id="seller" name="seller">
-                                    <option selected disabled>請選擇選項</option>
-                                    <option value="eragg98556">eragg98556</option>
-                                    <option value="hr3gdsh333">hr3gdsh333</option>
-                                    <option value="sdF35555">sdF35555</option>
-                                    <option value="dfshh52225">dfshh52225</option>
-                                    <option value="rg653213">rg653213</option>
-                                    <option value="gsff55555">gsff55555</option>
-                                    <option value="	efagrg8226"> efagrg8226</option>
+                                    <option value="eragg98556" <?= $r['seller_id'] == 'eragg98556' ? 'selected' : '' ?>>eragg98556</option>
+                                    <option value="hr3gdsh333" <?= $r['seller_id'] == 'hr3gdsh333' ? 'selected' : '' ?>>hr3gdsh333</option>
+                                    <option value="sdF35555" <?= $r['seller_id'] == 'sdF35555' ? 'selected' : '' ?>>sdF35555</option>
+                                    <option value="dfshh52225" <?= $r['seller_id'] == 'dfshh52225' ? 'selected' : '' ?>>dfshh52225</option>
+                                    <option value="rg653213" <?= $r['seller_id'] == 'rg653213' ? 'selected' : '' ?>>rg653213</option>
+                                    <option value="gsff55555" <?= $r['seller_id'] == 'gsff55555' ? 'selected' : '' ?>>gsff55555</option>
+                                    <option value="efagrg8226" <?= $r['seller_id'] == 'efagrg8226' ? 'selected' : '' ?>> efagrg8226</option>
                                 </select>
                                 <div class="form-text"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="buyer" class="form-label">*買家編號</label>
                                 <select class="form-select" aria-label="Default select example" id="buyer" name="buyer">
-                                    <option selected disabled>請選擇選項</option>
-                                    <option value="fwsg25256">fwsg25256</option>
-                                    <option value="wsaf2256">wsaf2256</option>
-                                    <option value="fehasg226">fehasg226</option>
-                                    <option value="rgasdg2312">rgasdg2312</option>
-                                    <option value="aaa123456">aaa123456</option>
+                                    <option value="fwsg25256" <?= $r['buyer_id'] == 'fwsg25256' ? 'selected' : '' ?>>fwsg25256</option>
+                                    <option value="wsaf2256" <?= $r['buyer_id'] == 'wsaf2256' ? 'selected' : '' ?>>wsaf2256</option>
+                                    <option value="fehasg226" <?= $r['buyer_id'] == 'fehasg226' ? 'selected' : '' ?>>fehasg226</option>
+                                    <option value="rgasdg2312" <?= $r['buyer_id'] == 'rgasdg2312' ? 'selected' : '' ?>>rgasdg2312</option>
+                                    <option value="aaa123456" <?= $r['buyer_id'] == 'aaa123456' ? 'selected' : '' ?>>aaa123456</option>
                                 </select>
                                 <div class="form-text"></div>
                             </div>
@@ -78,7 +89,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <select class="form-select" aria-label="Default select example" id="productName" name="productName">
                                     <option selected disabled>請選擇選項</option>
                                     <?php foreach ($rows4 as $r4) : ?>
-                                        <option value="<?= $r4['id'] ?>"><?= $r4['product_name'] ?></option>
+                                        <option value="<?= $r4['id'] ?>" <?= $r['product_id'] == $r4['id'] ? 'selected' : '' ?>><?= $r4['product_name'] ?></option>
                                     <?php endforeach ?>
                                 </select>
                                 <div class="form-text"></div>
@@ -86,7 +97,15 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="mb-3">
                                 <label for="productPrice" class="form-label">*商品金額</label>
                                 <select class="form-select" aria-label="Default select example" id="productPrice" name="productPrice">
-                                    <option selected disabled>請選擇選項</option>
+                                    <?php foreach ($rows4 as $r4) : ?>
+                                        <?php if ($r['product_id'] == $r4['id']) : ?>
+                                            <?php if ($r['order_type'] == '以物易物') : ?>
+                                                <option value="0" selected>0</option>
+                                            <?php elseif ($r['order_type'] == '一般訂單' || $r['order_type'] == '混合訂單') : ?>
+                                                <option value="<?= $r4['product_price'] ?>" selected><?= $r4['product_price'] ?></option>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
                                 </select>
                                 <div class="form-text"></div>
                             </div>
@@ -100,48 +119,53 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="mb-3">
                                 <label for="totalPrice" class="form-label">*總金額(含運費)</label>
                                 <select class="form-select" aria-label="Default select example" id="totalPrice" name="totalPrice">
-                                    <option selected disabled>請選擇選項</option>
+                                    <?php foreach ($rows4 as $r4) : ?>
+                                        <?php if ($r['product_id'] == $r4['id']) : ?>
+                                            <?php if ($r['order_type'] == '以物易物') : ?>
+                                                <option value="0" selected>120</option>
+                                            <?php elseif ($r['order_type'] == '一般訂單' || $r['order_type'] == '混合訂單') : ?>
+                                                <option value="<?= $r['id'] ?>" selected><?= $r4['product_price'] + 120 ?></option>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
                                 </select>
                                 <div class="form-text"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="payStatus" class="form-label">*付款狀態</label>
                                 <select class="form-select" aria-label="Default select example" id="payStatus" name="payStatus">
-                                    <option selected disabled>請選擇選項</option>
-                                    <option value="尚未付款">尚未付款</option>
-                                    <option value="已付款">已付款</option>
+                                    <option value="尚未付款" <?= $r['payment_status'] == '尚未付款' ? 'selected' : '' ?>>尚未付款</option>
+                                    <option value="已付款" <?= $r['payment_status'] == '已付款' ? 'selected' : '' ?>>已付款</option>
                                 </select>
                                 <div class="form-text"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="shipStatus" class="form-label">*運送狀態</label>
                                 <select class="form-select" aria-label="Default select example" id="shipStatus" name="shipStatus">
-                                    <option selected disabled>請選擇選項</option>
-                                    <option value="尚未寄出">尚未寄出</option>
-                                    <option value="已寄出">已寄出</option>
+                                    <option value="尚未寄出" <?= $r['shipment_status'] == '尚未寄出' ? 'selected' : '' ?>>尚未寄出</option>
+                                    <option value="已寄出" <?= $r['shipment_status'] == '已寄出' ? 'selected' : '' ?>>已寄出</option>
                                 </select>
                                 <div class="form-text"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="createdT" class="form-label">訂單建立時間</label>
-                                <input type="text" class="form-control" name="createdT" id="createdT" placeholder="" readonly>
+                                <input type="text" class="form-control" name="createdT" id="createdT" value="<?= $r['order_date'] ?>" placeholder="" readonly>
                                 <div class="form-text"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="orderStatus" class="form-label">*訂單完成狀態</label>
                                 <select class="form-select" aria-label="Default select example" id="orderStatus" name="orderStatus">
-                                    <option selected disabled>請選擇選項</option>
-                                    <option value="進行中">進行中</option>
-                                    <option value="已完成">已完成</option>
+                                    <option value="進行中" <?= $r['complete_status'] == '進行中' ? 'selected' : '' ?>>進行中</option>
+                                    <option value="已完成" <?= $r['complete_status'] == '已完成' ? 'selected' : '' ?>>已完成</option>
                                 </select>
                                 <div class="form-text"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="completeD" class="form-label">訂單完成日期</label>
-                                <input type="date" class="form-control" name="completeD" id="completeD" placeholder="">
+                                <input type="date" class="form-control" name="completeD" id="completeD" placeholder="" value="<?= $r['complete_date'] ?>">
                                 <div class="form-text"></div>
                             </div>
-                            <button type="submit" class="btn btn-primary">新增</button>
+                            <button type="submit" class="btn btn-primary">送出編輯</button>
                         </form>
                     </div>
                 </div>
@@ -155,12 +179,12 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5">新增結果</h1>
+                <h1 class="modal-title fs-5">編輯結果</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="alert alert-success" role="alert">
-                    訂單新增成功
+                    訂單編輯成功
                 </div>
             </div>
             <div class="modal-footer">
@@ -176,12 +200,12 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5">新增結果</h1>
+                <h1 class="modal-title fs-5">編輯結果</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="alert alert-danger" role="alert" id="failureInfo">
-                    訂單新增失敗
+                    訂單無編輯
                 </div>
             </div>
             <div class="modal-footer">
@@ -202,9 +226,6 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     document.getElementById('productName').addEventListener('change', function() {
         let selectedProductId = this.value;
         let priceSelect = document.getElementById('productPrice');
-
-        // 清空價格選單
-        priceSelect.innerHTML = '<option selected disabled>請選擇選項</option>';
 
         // 遍歷產品數據，僅添加與所選訂單類型相符的單價和總價
         product.forEach(function(productItem) {
@@ -245,14 +266,14 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         let selectedProductId = this.value;
         let priceSelect = document.getElementById('productPrice');
 
-        // 清空價格選單
-        priceSelect.innerHTML = '<option selected disabled>請選擇選項</option>';
 
         // 遍歷產品數據，僅添加與所選訂單類型相符的單價和總價
         product.forEach(function(productItem) {
             if (productItem.id == selectedProductId) {
                 let selectType = document.getElementById('orderType');
                 let selectTotalP = document.getElementById('totalPrice');
+
+
                 if (selectType.value == '以物易物') {
                     priceSelect.innerHTML = '<option selected disabled>請選擇選項</option>';
                     let option = document.createElement('option');
@@ -413,7 +434,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if (isPass) {
             const fd = new FormData(document.form1); // 沒有外觀的表單物件
 
-            fetch(`42.order_add-api.php`, {
+            fetch(`44.order_edit-api.php`, {
                 method: 'POST',
                 body: fd,
             }).then(r => r.json()).then(data => {

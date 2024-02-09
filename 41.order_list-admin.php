@@ -92,7 +92,7 @@ if ($totalRows) {
                             <th>商品名稱</th>
                             <th class="text-nowrap">商品金額</th>
                             <th class="text-nowrap">運費</th>
-                            <th>總金額</th>
+                            <th class="text-nowrap">總金額</th>
                             <th class="text-nowrap">付款狀態</th>
                             <th class="text-nowrap">運送狀態</th>
                             <th>下單日期</th>

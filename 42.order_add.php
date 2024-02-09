@@ -38,8 +38,8 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <h5 class="card-title">新增訂單</h5>
                         <form name="form1" onsubmit="sendData(event)"> <!-- 因為有下onsubmit，故action和methon就沒有用處了，可以刪除 -->
                             <div class="mb-3">
-                                <label for="order-type" class="form-label">*訂單類型</label>
-                                <select class="form-select" aria-label="Default select example" id="order-type" name="order-type">
+                                <label for="orderType" class="form-label">*訂單類型</label>
+                                <select class="form-select" aria-label="Default select example" id="orderType" name="orderType">
                                     <option selected disabled>請選擇選項</option>
                                     <option value="一般訂單">一般訂單</option>
                                     <option value="混合訂單">混合訂單</option>
@@ -75,8 +75,8 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <div class="form-text"></div>
                             </div>
                             <div class="mb-3">
-                                <label for="product-name" class="form-label">*商品名稱</label>
-                                <select class="form-select" aria-label="Default select example" id="product-name" name="product-name">
+                                <label for="productName" class="form-label">*商品名稱</label>
+                                <select class="form-select" aria-label="Default select example" id="productName" name="productName">
                                     <option selected disabled>請選擇選項</option>
                                     <?php foreach ($rows4 as $r4) : ?>
                                         <option value="<?= $r4['id'] ?>"><?= $r4['product_name'] ?></option>
@@ -85,69 +85,61 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <div class="form-text"></div>
                             </div>
                             <div class="mb-3">
-                                <label for="product-price" class="form-label">*商品金額</label>
-                                <select class="form-select" aria-label="Default select example" id="product-price" name="product-price">
+                                <label for="productPrice" class="form-label">*商品金額</label>
+                                <select class="form-select" aria-label="Default select example" id="productPrice" name="productPrice">
                                     <option selected disabled>請選擇選項</option>
                                 </select>
                                 <div class="form-text"></div>
                             </div>
                             <div class="mb-3">
-                                <label for="shipment-fee" class="form-label">*運費</label>
-                                <select class="form-select" aria-label="Default select example" id="shipment-fee" name="shipment-fee">
+                                <label for="shipmentFee" class="form-label">*運費</label>
+                                <select class="form-select" aria-label="Default select example" id="shipmentFee" name="shipmentFee">
+                                    <option selected value="120">120</option>
+                                </select>
+                                <div class="form-text"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="totalPrice" class="form-label">*總金額(含運費)</label>
+                                <select class="form-select" aria-label="Default select example" id="totalPrice" name="totalPrice">
                                     <option selected disabled>請選擇選項</option>
                                 </select>
                                 <div class="form-text"></div>
                             </div>
                             <div class="mb-3">
-                                <label for="photos" class="form-label">*商品圖片</label>
-                                <div class="card-container"></div>
-                                <input type="file" class="form-control" id="photos" name="photos[]" multiple accept="image/*" onchange="uploadFile()">
-                                <div class="form-text"></div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="name" class="form-label">*商品名稱</label>
-                                <input type="text" class="form-control" id="name" name="name" required>
-                                <div class="form-text"></div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="price" class="form-label">*商品價格</label>
-                                <input type="text" class="form-control" id="price" name="price" required>
-                                <div class="form-text"></div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="qty" class="form-label">*商品數量</label>
-                                <input type="text" class="form-control" id="qty" name="qty" required>
-                                <div class="form-text"></div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="intro" class="form-label">商品介紹</label>
-                                <textarea class="form-control" name="intro" id="intro" cols="30" rows="5"></textarea>
-                                <div class="form-text"></div>
-                            </div>
-                            <div class="mb-3">
-                                <label for="carbonPoints" class="form-label">*可獲得小碳點數</label>
-                                <select class="form-select" aria-label="Default select example" id="carbonPoints" name="carbonPoints">
+                                <label for="payStatus" class="form-label">*付款狀態</label>
+                                <select class="form-select" aria-label="Default select example" id="payStatus" name="payStatus">
                                     <option selected disabled>請選擇選項</option>
+                                    <option value="尚未付款">尚未付款</option>
+                                    <option value="已付款">已付款</option>
                                 </select>
                                 <div class="form-text"></div>
                             </div>
                             <div class="mb-3">
-                                <label for="createdT" class="form-label">商品建立時間</label>
+                                <label for="shipStatus" class="form-label">*運送狀態</label>
+                                <select class="form-select" aria-label="Default select example" id="shipStatus" name="shipStatus">
+                                    <option selected disabled>請選擇選項</option>
+                                    <option value="尚未寄出">尚未寄出</option>
+                                    <option value="已寄出">已寄出</option>
+                                </select>
+                                <div class="form-text"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="createdT" class="form-label">訂單建立時間</label>
                                 <input type="text" class="form-control" name="createdT" id="createdT" placeholder="" readonly>
                                 <div class="form-text"></div>
                             </div>
                             <div class="mb-3">
-                                <label for="editT" class="form-label">商品編輯時間</label>
-                                <input type="text" class="form-control" name="editT" id="editT" placeholder="" readonly>
+                                <label for="orderStatus" class="form-label">*訂單完成狀態</label>
+                                <select class="form-select" aria-label="Default select example" id="orderStatus" name="orderStatus">
+                                    <option selected disabled>請選擇選項</option>
+                                    <option value="進行中">進行中</option>
+                                    <option value="已完成">已完成</option>
+                                </select>
                                 <div class="form-text"></div>
                             </div>
                             <div class="mb-3">
-                                <label for="status" class="form-label">*上架狀態</label>
-                                <select class="form-select" aria-label="Default select example" id="status" name="status">
-                                    <option selected disabled>請選擇選項</option>
-                                    <option value="上架中">上架中</option>
-                                    <option value="下架中">下架中</option>
-                                </select>
+                                <label for="completeD" class="form-label">訂單完成日期</label>
+                                <input type="date" class="form-control" name="completeD" id="completeD" placeholder="">
                                 <div class="form-text"></div>
                             </div>
                             <button type="submit" class="btn btn-primary">新增</button>
@@ -169,12 +161,12 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
             <div class="modal-body">
                 <div class="alert alert-success" role="alert">
-                    資料新增成功
+                    訂單新增成功
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
-                <a href="21.product_list.php" class="btn btn-primary">回到列表頁</a>
+                <a href="41.order_list.php" class="btn btn-primary">回到列表頁</a>
             </div>
         </div>
     </div>
@@ -185,17 +177,17 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5">新增失敗</h1>
+                <h1 class="modal-title fs-5">新增結果</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="alert alert-danger" role="alert" id="failureInfo">
-                    資料新增失敗
+                    訂單新增失敗
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
-                <a href="21.product_list.php" class="btn btn-primary">回到列表頁</a>
+                <a href="41.order_list.php" class="btn btn-primary">回到列表頁</a>
             </div>
         </div>
     </div>
@@ -208,56 +200,88 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     var product = <?= json_encode($rows4) ?>;
 
     // 當產品選擇變化時，更新價格選單
-    document.getElementById('product-name').addEventListener('change', function() {
-        var selectedProductId = this.value;
-        var priceSelect = document.getElementById('product-price');
+    document.getElementById('productName').addEventListener('change', function() {
+        let selectedProductId = this.value;
+        let priceSelect = document.getElementById('productPrice');
 
         // 清空價格選單
         priceSelect.innerHTML = '<option selected disabled>請選擇選項</option>';
 
-        // 遍歷產品數據，僅添加與所選產品相符的價格
+        // 遍歷產品數據，僅添加與所選訂單類型相符的單價和總價
         product.forEach(function(productItem) {
             if (productItem.id == selectedProductId) {
-                let selectType = document.getElementById('order-type');
+                let selectType = document.getElementById('orderType');
+                let selectTotalP = document.getElementById('totalPrice');
                 if (selectType.value == '以物易物') {
-                    var option = document.createElement('option');
+                    priceSelect.innerHTML = '<option selected disabled>請選擇選項</option>';
+                    let option = document.createElement('option');
                     option.value = 0;
                     option.text = 0;
                     priceSelect.add(option);
+
+                    selectTotalP.innerHTML = '<option selected disabled>請選擇選項</option>';
+                    let option3 = document.createElement('option');
+                    option3.value = 120;
+                    option3.text = 120;
+                    selectTotalP.add(option3);
                 } else if (selectType.value == '一般訂單' || selectType.value == '混合訂單') {
-                    var option2 = document.createElement('option');
+                    priceSelect.innerHTML = '<option selected disabled>請選擇選項</option>';
+                    let option2 = document.createElement('option');
                     option2.value = productItem.product_price;
                     option2.text = productItem.product_price;
                     priceSelect.add(option2);
+
+                    selectTotalP.innerHTML = '<option selected disabled>請選擇選項</option>';
+                    let option4 = document.createElement('option');
+                    option4.value = productItem.product_price + 120;
+                    option4.text = productItem.product_price + 120;
+                    selectTotalP.add(option4);
                 }
             }
         });
     });
 
+    // 當訂單類型選擇變化時，更新價格選單
+    document.getElementById('orderType').addEventListener('change', function() {
+        let selectedProductId = this.value;
+        let priceSelect = document.getElementById('productPrice');
 
-    const container = document.querySelector(".card-container");
+        // 清空價格選單
+        priceSelect.innerHTML = '<option selected disabled>請選擇選項</option>';
 
-    function uploadFile() {
-        const container = document.querySelector(".card-container");
-        const fileInput = document.getElementById('photos');
+        // 遍歷產品數據，僅添加與所選訂單類型相符的單價和總價
+        product.forEach(function(productItem) {
+            if (productItem.id == selectedProductId) {
+                let selectType = document.getElementById('orderType');
+                let selectTotalP = document.getElementById('totalPrice');
+                if (selectType.value == '以物易物') {
+                    priceSelect.innerHTML = '<option selected disabled>請選擇選項</option>';
+                    let option = document.createElement('option');
+                    option.value = 0;
+                    option.text = 0;
+                    priceSelect.add(option);
 
-        //清空先前的card-container內容
-        container.innerHTML = '';
+                    selectTotalP.innerHTML = '<option selected disabled>請選擇選項</option>';
+                    let option3 = document.createElement('option');
+                    option3.value = 120;
+                    option3.text = 120;
+                    selectTotalP.add(option3);
+                } else if (selectType.value == '一般訂單' || selectType.value == '混合訂單') {
+                    priceSelect.innerHTML = '<option selected disabled>請選擇選項</option>';
+                    let option2 = document.createElement('option');
+                    option2.value = productItem.product_price;
+                    option2.text = productItem.product_price;
+                    priceSelect.add(option2);
 
-        for (const file of fileInput.files) {
-            const reader = new FileReader();
-
-            reader.onload = function(e) {
-                const previewCard = document.createElement('div');
-                previewCard.className = 'my-card';
-                previewCard.innerHTML = `<img src="${e.target.result}" alt="Preview" />`;
-
-                container.appendChild(previewCard);
-            };
-
-            reader.readAsDataURL(file);
-        }
-    }
+                    selectTotalP.innerHTML = '<option selected disabled>請選擇選項</option>';
+                    let option4 = document.createElement('option');
+                    option4.value = productItem.product_price + 120;
+                    option4.text = productItem.product_price + 120;
+                    selectTotalP.add(option4);
+                }
+            }
+        });
+    });
 
 
     document.addEventListener('DOMContentLoaded', function() {
@@ -274,36 +298,25 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         // 將格式化後的時間設置到 input 的值中
         document.getElementById('createdT').value = formattedTime;
-        document.getElementById('editT').value = formattedTime;
     });
 
     const {
+        orderType: orderTypeEl,
         seller: sellerEl,
-        main: mainEl,
-        sub: subEl,
-        photos: photosEls,
-        name: nameEl,
-        price: priceEl,
-        qty: qtyEl,
-        intro: introEl,
-        carbonPoints: carbonPointsEl,
+        buyer: buyerEl,
+        productName: productNameEl,
+        productPrice: productPriceEl,
+        shipmemtFee: shipmentFeeEl,
+        totalPrice: totalPriceEl,
+        payStatus: payStatusEl,
+        shipStatus: shipStatusEl,
         createdT: createdTEl,
-        editT: editTEl,
-        status: statusEl,
+        orderStatus: orderStatusEl,
+        completeD: completeDEl,
     } = document.form1;
 
-    const fields = [sellerEl, mainEl, subEl, photosEls, nameEl, priceEl, qtyEl, introEl, carbonPointsEl, createdTEl, editTEl, statusEl];
-    const photosValues = Array.from(photosEls.files).map((file) => file.name);
+    const fields = [orderTypeEl, sellerEl, buyerEl, productNameEl, productPriceEl, shipmentFeeEl, totalPriceEl, payStatusEl, shipStatusEl, createdTEl, orderStatusEl, completeDEl, ];
 
-    function validatePrice(price) {
-        const re = /^[0-9]+$/;
-        return re.test(price);
-    }
-
-    function validateQty(qty) {
-        const re = /^[0-9]+$/;
-        return re.test(qty);
-    }
 
     function sendData(e) {
         // 回復欄位的外觀
@@ -318,66 +331,90 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         let isPass = true; // 整個表單有沒有通過檢查
 
         // TODO: 檢查各個欄位的資料, 有沒有符合規定
+        if (!orderTypeEl.value) {
+            isPass = false; // 沒有通過檢查
+            orderTypeEl.style.border = '1px solid red';
+            orderTypeEl.nextElementSibling.innerHTML = '請選擇訂單類型!';
+        }
 
-        if (sellerEl.value == "") {
+        if (!sellerEl.value) {
             isPass = false; // 沒有通過檢查
             sellerEl.style.border = '1px solid red';
-            sellerEl.nextElementSibling.innerHTML = '請選擇上架者名稱!';
+            sellerEl.nextElementSibling.innerHTML = '請選擇賣家編號!';
         }
 
-        if (mainEl.value == "") {
+        if (!buyerEl.value) {
             isPass = false; // 沒有通過檢查
-            mainEl.style.border = '1px solid red';
-            mainEl.nextElementSibling.innerHTML = '請選擇主分類選項!';
+            buyerEl.style.border = '1px solid red';
+            buyerEl.nextElementSibling.innerHTML = '請選擇買家編號!';
         }
 
-        if (subEl.value == "") {
+        if (!productNameEl.value) {
             isPass = false; // 沒有通過檢查
-            subEl.style.border = '1px solid red';
-            subEl.nextElementSibling.innerHTML = '請選擇子分類選項!';
+            productNameEl.style.border = '1px solid red';
+            productNameEl.nextElementSibling.innerHTML = '請選擇商品名稱!';
         }
 
-        if (photosEls.files.length === 0) {
+        if (!productPriceEl.value) {
             isPass = false; // 沒有通過檢查
-            photosEls.style.border = '1px solid red';
-            photosEls.nextElementSibling.innerHTML = '請至少上傳一張照片!';
+            productPriceEl.style.border = '1px solid red';
+            productPriceEl.nextElementSibling.innerHTML = '請選擇商品金額!';
         }
 
-        if (nameEl.value == "") {
+        if (!totalPriceEl.value) {
             isPass = false; // 沒有通過檢查
-            nameEl.style.border = '1px solid red';
-            nameEl.nextElementSibling.innerHTML = '請填入商品名稱或超過字數限制(60)!';
+            totalPriceEl.style.border = '1px solid red';
+            totalPriceEl.nextElementSibling.innerHTML = '請選擇商品總金額!';
         }
 
-        if (priceEl.value == "" && !validatePrice(priceEl.value)) {
-            isPass = false; // 沒有通過檢查
-            priceEl.style.border = '1px solid red';
-            priceEl.nextElementSibling.innerHTML = '請填入正確商品價格!';
-        }
-
-        if (qtyEl.value == "" || !validateQty(qtyEl.value)) {
-            isPass = false; // 沒有通過檢查
-            qtyEl.style.border = '1px solid red';
-            qtyEl.nextElementSibling.innerHTML = '請填入正確商品數量!';
-        }
-
-        if (carbonPointsEl.value == "") {
+        if (!payStatusEl.value) {
             isPass = false;
-            carbon_pointsEl.style.border = '1px solid red';
-            carbon_pointsEl.nextElementSibling.innerHTML = '請選擇小碳點數!';
+            payStatusEl.style.border = '1px solid red';
+            payStatusEl.nextElementSibling.innerHTML = '請選擇付款狀態!';
         }
 
-        if (statusEl.value == "") {
+        if (payStatusEl.value == '尚未付款' && shipStatusEl.value == '已寄出') {
             isPass = false;
-            statusEl.style.border = '1px solid red';
-            statusEl.nextElementSibling.innerHTML = '請選擇上架狀態!';
+            shipStatusEl.style.border = '1px solid red';
+            shipStatusEl.nextElementSibling.innerHTML = '尚未付款不可寄出!';
         }
+
+        if (payStatusEl.value == '尚未付款' && orderStatusEl.value == '已完成') {
+            isPass = false;
+            orderStatusEl.style.border = '1px solid red';
+            orderStatusEl.nextElementSibling.innerHTML = '尚未付款不可完成訂單!';
+        }
+
+        if (shipStatusEl.value == '尚未寄出' && orderStatusEl.value == '已完成') {
+            isPass = false;
+            orderStatusEl.style.border = '1px solid red';
+            orderStatusEl.nextElementSibling.innerHTML = '尚未寄出商品不可完成訂單!';
+        }
+
+        if (!shipStatusEl.value) {
+            isPass = false;
+            shipStatusEl.style.border = '1px solid red';
+            shipStatusEl.nextElementSibling.innerHTML = '請選擇運送狀態!';
+        }
+
+        if (!orderStatusEl.value) {
+            isPass = false;
+            orderStatusEl.style.border = '1px solid red';
+            orderStatusEl.nextElementSibling.innerHTML = '請選擇訂單狀態!';
+        }
+
+        if (orderStatusEl.value == '已完成' && !completeDEl.value) {
+            isPass = false;
+            completeDEl.style.border = '1px solid red';
+            completeDEl.nextElementSibling.innerHTML = '請選擇訂單完成日期!';
+        }
+
 
         // 有通過檢查才發送表單
         if (isPass) {
             const fd = new FormData(document.form1); // 沒有外觀的表單物件
 
-            fetch(`22.product_add-api.php`, {
+            fetch(`42.order_add-api.php`, {
                 method: 'POST',
                 body: fd,
             }).then(r => r.json()).then(data => {
@@ -391,8 +428,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 }
             })
         }
-        // 地址: 兩層選單的參考
-        // https://dennykuo.github.io/tw-city-selector/#/
+
 
     }
     const successModal = new bootstrap.Modal('#successModal');

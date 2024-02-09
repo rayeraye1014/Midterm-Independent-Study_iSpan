@@ -120,9 +120,6 @@ if ($totalRows) {
                                 <td id="completeTime<?= $r['id'] ?>" class="completeTime"><?= $r['complete_date'] ?></td>
                                 <td>
                                     <div class="d-flex flex-column">
-                                        <a class="load" name="load" href="javascript: change_status(<?= $r['id'] ?>)" id="statusIcon<?= $r['id'] ?>">
-                                            <i class="fa-solid fa-rectangle-list"></i>
-                                        </a>
                                         <a href="44.order_edit.php?id=<?= $r['id'] ?>">
                                             <i class="fa-solid fa-file-pen"></i>
                                         </a>

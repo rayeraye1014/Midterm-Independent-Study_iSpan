@@ -141,7 +141,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             </div>
             <div class="modal-body">
                 <div class="alert alert-success" role="alert">
-                    資料新增成功
+                    商品新增成功
                 </div>
             </div>
             <div class="modal-footer">
@@ -157,12 +157,12 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5">新增失敗</h1>
+                <h1 class="modal-title fs-5">新增結果</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="alert alert-danger" role="alert" id="failureInfo">
-                    資料新增失敗
+                    商品新增失敗
                 </div>
             </div>
             <div class="modal-footer">
@@ -301,19 +301,19 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         // TODO: 檢查各個欄位的資料, 有沒有符合規定
 
-        if (sellerEl.value == "") {
+        if (!sellerEl.value) {
             isPass = false; // 沒有通過檢查
             sellerEl.style.border = '1px solid red';
             sellerEl.nextElementSibling.innerHTML = '請選擇上架者名稱!';
         }
 
-        if (mainEl.value == "") {
+        if (!mainEl.value) {
             isPass = false; // 沒有通過檢查
             mainEl.style.border = '1px solid red';
             mainEl.nextElementSibling.innerHTML = '請選擇主分類選項!';
         }
 
-        if (subEl.value == "") {
+        if (!subEl.value) {
             isPass = false; // 沒有通過檢查
             subEl.style.border = '1px solid red';
             subEl.nextElementSibling.innerHTML = '請選擇子分類選項!';
@@ -325,31 +325,31 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             photosEls.nextElementSibling.innerHTML = '請至少上傳一張照片!';
         }
 
-        if (nameEl.value == "") {
+        if (!nameEl.value) {
             isPass = false; // 沒有通過檢查
             nameEl.style.border = '1px solid red';
             nameEl.nextElementSibling.innerHTML = '請填入商品名稱或超過字數限制(60)!';
         }
 
-        if (priceEl.value == "" && !validatePrice(priceEl.value)) {
+        if (priceEl.value && !validatePrice(priceEl.value)) {
             isPass = false; // 沒有通過檢查
             priceEl.style.border = '1px solid red';
             priceEl.nextElementSibling.innerHTML = '請填入正確商品價格!';
         }
 
-        if (qtyEl.value == "" || !validateQty(qtyEl.value)) {
+        if (qtyEl.value && !validateQty(qtyEl.value)) {
             isPass = false; // 沒有通過檢查
             qtyEl.style.border = '1px solid red';
             qtyEl.nextElementSibling.innerHTML = '請填入正確商品數量!';
         }
 
-        if (carbonPointsEl.value == "") {
+        if (!carbonPointsEl.value) {
             isPass = false;
             carbon_pointsEl.style.border = '1px solid red';
             carbon_pointsEl.nextElementSibling.innerHTML = '請選擇小碳點數!';
         }
 
-        if (statusEl.value == "") {
+        if (!statusEl.value) {
             isPass = false;
             statusEl.style.border = '1px solid red';
             statusEl.nextElementSibling.innerHTML = '請選擇上架狀態!';

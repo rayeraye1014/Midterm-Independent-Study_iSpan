@@ -15,7 +15,7 @@ if (!empty($_POST)) {
     // TODO: 檢查各個欄位的資料, 有沒有符合規定
 
     if ($_POST['seller'] == "") {
-        $output['error'] = '請選擇名稱!';
+        $output['error'] = '請選擇上架者名稱';
         $output['code'] = 100;
         echo json_encode($output, JSON_UNESCAPED_UNICODE);
         exit;

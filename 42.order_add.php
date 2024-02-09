@@ -216,12 +216,20 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         priceSelect.innerHTML = '<option selected disabled>請選擇選項</option>';
 
         // 遍歷產品數據，僅添加與所選產品相符的價格
-        product.forEach(function(product) {
-            if (product.id == selectedProductId) {
-                var option = document.createElement('option');
-                option.value = product.id;
-                option.text = product.product_price;
-                priceSelect.add(option);
+        product.forEach(function(productItem) {
+            if (productItem.id == selectedProductId) {
+                let selectType = document.getElementById('order-type');
+                if (selectType.value == '以物易物') {
+                    var option = document.createElement('option');
+                    option.value = 0;
+                    option.text = 0;
+                    priceSelect.add(option);
+                } else if (selectType.value == '一般訂單' || selectType.value == '混合訂單') {
+                    var option2 = document.createElement('option');
+                    option2.value = productItem.product_price;
+                    option2.text = productItem.product_price;
+                    priceSelect.add(option2);
+                }
             }
         });
     });

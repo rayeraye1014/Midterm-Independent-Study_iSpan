@@ -25,13 +25,11 @@ if ($totalRows) {
     }
 
     # ``可以不用標，這個只用來標示資料表名稱；''單引號只可以用來標示值
-    $sql = sprintf("SELECT * FROM `orders` ORDER BY id DESC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
+    $sql = sprintf("SELECT orders.id, order_type, orders.seller_id, buyer_id, product_id, shipment_fee, payment_status, shipment_status, order_date, complete_status, complete_date, product_name, product_price FROM orders JOIN products ON orders.product_id = products.id ORDER BY id DESC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
     $rows = $pdo->query($sql)->fetchAll();
 }
 
-#取得分頁資料
-// echo json_encode($rows);
-// exit;
+
 
 ?>
 <?php include __DIR__ . '/0.parts/html-head.php' ?>
@@ -88,15 +86,15 @@ if ($totalRows) {
                             <th><i id="selectAll" class="fa-solid fa-check-to-slot"></i></a>
                             </th>
                             <th>ID<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()"></th>
-                            <th>訂單類型</th>
+                            <th class="text-nowrap">訂單類型</th>
                             <th>賣家編號</th>
                             <th>買家編號</th>
+                            <th>商品名稱</th>
+                            <th class="text-nowrap">商品金額</th>
+                            <th class="text-nowrap">運費</th>
                             <th>總金額</th>
-                            <th>總數量</th>
-                            <th>運費</th>
-                            <th>含運費金額</th>
-                            <th>付款狀態</th>
-                            <th>運送狀態</th>
+                            <th class="text-nowrap">付款狀態</th>
+                            <th class="text-nowrap">運送狀態</th>
                             <th>下單日期</th>
                             <th>訂單完成狀態</th>
                             <th>訂單完成日期</th>
@@ -111,15 +109,15 @@ if ($totalRows) {
                                 <td><?= $r['order_type'] ?></td>
                                 <td><?= $r['seller_id'] ?></td>
                                 <td><?= $r['buyer_id'] ?></td>
-                                <td><?= $r['total_price'] ?></td>
-                                <td><?= $r['total_amount'] ?></td>
+                                <td><?= $r['product_name'] ?></td>
+                                <td><?= ($r['order_type'] == '以物易物') ? '0' : $r['product_price'] ?></td>
                                 <td><?= $r['shipment_fee'] ?></td>
-                                <td><?= $r['price_withship'] ?></td>
+                                <td><?= ($r['order_type'] == '以物易物') ? '0' + $r['shipment_fee'] : $r['product_price'] + $r['shipment_fee'] ?></td>
                                 <td><?= $r['payment_status'] ?></td>
                                 <td><?= $r['shipment_status'] ?></td>
                                 <td><?= $r['order_date'] ?></td>
                                 <td class="completeStatus" id="statusText<?= $r['id'] ?>"><?= $r['complete_status'] ?></td>
-                                <td id="completeTime<?= $r['id'] ?>"><?= $r['complete_date'] ?></td>
+                                <td id="completeTime<?= $r['id'] ?>" class="completeTime"><?= $r['complete_date'] ?></td>
                                 <td>
                                     <div class="d-flex flex-column">
                                         <a class="load" name="load" href="javascript: change_status(<?= $r['id'] ?>)" id="statusIcon<?= $r['id'] ?>">

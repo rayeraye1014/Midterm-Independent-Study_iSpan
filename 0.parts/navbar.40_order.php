@@ -126,47 +126,51 @@ if (!isset($pageName)) {
             </div>
         </nav>
     </div>
-    <?php if ($pageName == 'order_list') : ?>
+    <?php if ($pageName == 'order_list' || $pageName == 'normal-order_list') : ?>
         <div class="mx-1">
             <div class="card text-center mt-3">
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs d-flex justify-content-center">
                         <li class="nav-item me-5 mb-2">
-                            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                            <select id="orderTypeFilter" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="filterOrders()">
                                 <option selected disabled>篩選訂單類型</option>
-                                <option value="1"><a href="">一般訂單</a></option>
-                                <option value="2"><a href="">以物易物</a></option>
-                                <option value="3"><a href="">混合訂單</a></option>
+                                <option value="全部">全部</option>
+                                <option value="一般訂單">一般訂單</option>
+                                <option value="以物易物">以物易物</option>
+                                <option value="混合訂單">混合訂單</option>
                             </select>
                         </li>
                         <li class="nav-item me-5">
-                            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                            <select id="paymentFilter" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="filterPayment()">
                                 <option selected disabled>篩選付款狀態</option>
-                                <option value="1"><a href="">已付款</a></option>
-                                <option value="2"><a href="">尚未付款</a></option>
+                                <option value="全部">全部</option>
+                                <option value="已付款"><a href="">已付款</a></option>
+                                <option value="尚未付款"><a href="">尚未付款</a></option>
                             </select>
                         </li>
                         <li class="nav-item me-5">
-                            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                            <select id="shipmentFilter" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="filterShipment()">
                                 <option selected disabled>篩選運送狀態</option>
-                                <option value="1"><a href="">已寄出</a></option>
-                                <option value="2"><a href="">尚未寄出</a></option>
+                                <option value="全部">全部</option>
+                                <option value="已寄出"><a href="">已寄出</a></option>
+                                <option value="尚未寄出"><a href="">尚未寄出</a></option>
                             </select>
                         </li>
                         <li class="nav-item me-5">
-                            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                            <select id="statusFilter" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="filterStatus()">
                                 <option selected disabled>篩選訂單完成狀態</option>
-                                <option value="1"><a href="">已完成</a></option>
-                                <option value="2"><a href="">進行中</a></option>
+                                <option value="全部">全部</option>
+                                <option value="已完成"><a href="">已完成</a></option>
+                                <option value="進行中"><a href="">進行中</a></option>
                             </select>
                         </li>
                     </ul>
                 </div>
                 <div class="mt-1 d-flex justify-content-between">
                     <div class="input-group-sm d-flex ms-2">
-                        <input id="searchInput" type="text" class="rounded-start ps-1" placeholder="搜尋產品名稱關鍵字">
+                        <input id="searchInput" type="text" class="rounded-start ps-1" placeholder="搜尋訂單類別">
                         <button class="btn btn-outline-secondary btn-sm" type="button" onclick="searchProd()">
-                            搜尋產品
+                            搜尋訂單
                         </button>
                         <div class="d-flex align-item-center p-1">
                             <a href="41.order_list.php">
@@ -179,7 +183,7 @@ if (!isset($pageName)) {
                         <input id="minPrice" type="number" name="low" class="rounded-start ps-1" placeholder="輸入最低價格">
                         <input id="maxPrice" type="number" name="high" class="ps-1" placeholder="輸入最高價格">
                         <button class="btn btn-outline-secondary btn-sm" type="button" onclick="searchPrice()">
-                            搜尋價格
+                            搜尋訂單總價格
                         </button>
                         <div class="d-flex align-item-center  p-1">
                             <a href="41.order_list.php">

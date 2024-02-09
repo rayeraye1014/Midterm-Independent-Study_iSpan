@@ -96,7 +96,7 @@ if ($totalRows) {
                             <th class="text-nowrap">付款狀態</th>
                             <th class="text-nowrap">運送狀態</th>
                             <th>下單日期</th>
-                            <th>訂單完成狀態</th>
+                            <th class="text-nowrap">訂單狀態</th>
                             <th>訂單完成日期</th>
                             <th><i class="fa-solid fa-wrench"></i></th>
                         </tr>
@@ -200,6 +200,102 @@ if ($totalRows) {
         }
     }
 
+    function filterOrders() {
+        // 獲取下拉式選單的值
+        var selectedOrderType = document.getElementById("orderTypeFilter").value;
+
+        // 獲取表格的所有行
+        var rows = document.getElementById("myTable").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+        // 遍歷每一行，根據選擇的值來顯示或隱藏行
+        for (let i = 0; i < rows.length; i++) {
+            var orderTypeCell = rows[i].getElementsByTagName("td")[2]; // 第3列是訂單類型列
+
+            if (orderTypeCell) {
+                var orderType = orderTypeCell.textContent || orderTypeCell.innerText;
+
+                // 判斷是否要顯示或隱藏該行
+                if (selectedOrderType === '全部' || orderType.trim() === selectedOrderType.trim()) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    function filterPayment() {
+        // 獲取下拉式選單的值
+        var selectedOrderType = document.getElementById("paymentFilter").value;
+
+        // 獲取表格的所有行
+        var rows = document.getElementById("myTable").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+        // 遍歷每一行，根據選擇的值來顯示或隱藏行
+        for (let i = 0; i < rows.length; i++) {
+            var orderTypeCell = rows[i].getElementsByTagName("td")[9]; // 第10列是付款狀態列
+
+            if (orderTypeCell) {
+                var orderType = orderTypeCell.textContent || orderTypeCell.innerText;
+
+                // 判斷是否要顯示或隱藏該行
+                if (selectedOrderType === '全部' || orderType.trim() === selectedOrderType.trim()) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    function filterShipment() {
+        // 獲取下拉式選單的值
+        var selectedOrderType = document.getElementById("shipmentFilter").value;
+
+        // 獲取表格的所有行
+        var rows = document.getElementById("myTable").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+        // 遍歷每一行，根據選擇的值來顯示或隱藏行
+        for (let i = 0; i < rows.length; i++) {
+            var orderTypeCell = rows[i].getElementsByTagName("td")[10]; // 第11列是運送狀態列
+
+            if (orderTypeCell) {
+                var orderType = orderTypeCell.textContent || orderTypeCell.innerText;
+
+                // 判斷是否要顯示或隱藏該行
+                if (selectedOrderType === '全部' || orderType.trim() === selectedOrderType.trim()) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+    }
+
+    function filterStatus() {
+        // 獲取下拉式選單的值
+        var selectedOrderType = document.getElementById("statusFilter").value;
+
+        // 獲取表格的所有行
+        var rows = document.getElementById("myTable").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+        // 遍歷每一行，根據選擇的值來顯示或隱藏行
+        for (let i = 0; i < rows.length; i++) {
+            var orderTypeCell = rows[i].getElementsByTagName("td")[12]; // 第13列是訂單狀態列
+
+            if (orderTypeCell) {
+                var orderType = orderTypeCell.textContent || orderTypeCell.innerText;
+
+                // 判斷是否要顯示或隱藏該行
+                if (selectedOrderType === '全部' || orderType.trim() === selectedOrderType.trim()) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+    }
+
     document.addEventListener("DOMContentLoaded", function() {
         // 連結icon和checkbox
         var selectAllIcon = document.getElementById("selectAll");
@@ -249,7 +345,7 @@ if ($totalRows) {
 
         // 遍歷表格的每一行，進行價格範圍搜尋
         for (var i = 1; i < tr.length; i++) {
-            var td = tr[i].getElementsByTagName("td")[5]; // 價格在第6個欄位
+            var td = tr[i].getElementsByTagName("td")[8]; // 總價格在第9個欄位
 
             if (td) {
                 var price = parseFloat(td.textContent || td.innerText);

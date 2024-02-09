@@ -182,7 +182,7 @@ if ($totalRows) {
 <script>
     function delete_one(id) {
         if (confirm(`是否要刪除編號為 ${id} 的資料?`)) {
-            location.href = `43.order-normal_delete.php?id=${id}`;
+            location.href = `43.order_delete.php?id=${id}`;
         }
     }
 
@@ -196,7 +196,7 @@ if ($totalRows) {
         }
         if (selectedIds.length > 0 && confirm('是否要刪除所選資料?')) {
             var idsQueryString = selectedIds.join('&delete_ids[]=');
-            location.href = `43.order-normal_delete.php?delete_ids[]=${idsQueryString}`;
+            location.href = `43.order_delete.php?delete_ids[]=${idsQueryString}`;
         }
     }
 

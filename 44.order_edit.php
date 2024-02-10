@@ -54,6 +54,7 @@ if (empty($r)) {
                             <div class="mb-3">
                                 <label for="orderType" class="form-label">*訂單類型</label>
                                 <select class="form-select" aria-label="Default select example" id="orderType" name="orderType">
+                                    <option value="disabled" disabled>請選擇選項</option>
                                     <option value="一般訂單" <?= $r['order_type'] == '一般訂單' ? 'selected' : '' ?>>一般訂單</option>
                                     <option value="混合訂單" <?= $r['order_type'] == '混合訂單' ? 'selected' : '' ?>>混合訂單</option>
                                     <option value="以物易物" <?= $r['order_type'] == '以物易物' ? 'selected' : '' ?>>以物易物</option>
@@ -63,6 +64,7 @@ if (empty($r)) {
                             <div class="mb-3">
                                 <label for="seller" class="form-label">*賣家編號</label>
                                 <select class="form-select" aria-label="Default select example" id="seller" name="seller">
+                                    <option value="disabled" disabled>請選擇選項</option>
                                     <option value="eragg98556" <?= $r['seller_id'] == 'eragg98556' ? 'selected' : '' ?>>eragg98556</option>
                                     <option value="hr3gdsh333" <?= $r['seller_id'] == 'hr3gdsh333' ? 'selected' : '' ?>>hr3gdsh333</option>
                                     <option value="sdF35555" <?= $r['seller_id'] == 'sdF35555' ? 'selected' : '' ?>>sdF35555</option>
@@ -76,6 +78,7 @@ if (empty($r)) {
                             <div class="mb-3">
                                 <label for="buyer" class="form-label">*買家編號</label>
                                 <select class="form-select" aria-label="Default select example" id="buyer" name="buyer">
+                                    <option value="disabled" disabled>請選擇選項</option>
                                     <option value="fwsg25256" <?= $r['buyer_id'] == 'fwsg25256' ? 'selected' : '' ?>>fwsg25256</option>
                                     <option value="wsaf2256" <?= $r['buyer_id'] == 'wsaf2256' ? 'selected' : '' ?>>wsaf2256</option>
                                     <option value="fehasg226" <?= $r['buyer_id'] == 'fehasg226' ? 'selected' : '' ?>>fehasg226</option>
@@ -87,7 +90,7 @@ if (empty($r)) {
                             <div class="mb-3">
                                 <label for="productName" class="form-label">*商品名稱</label>
                                 <select class="form-select" aria-label="Default select example" id="productName" name="productName">
-                                    <option selected disabled>請選擇選項</option>
+                                    <option value="disabled" selected disabled>請選擇選項</option>
                                     <?php foreach ($rows4 as $r4) : ?>
                                         <option value="<?= $r4['id'] ?>" <?= $r['product_id'] == $r4['id'] ? 'selected' : '' ?>><?= $r4['product_name'] ?></option>
                                     <?php endforeach ?>
@@ -134,6 +137,7 @@ if (empty($r)) {
                             <div class="mb-3">
                                 <label for="payStatus" class="form-label">*付款狀態</label>
                                 <select class="form-select" aria-label="Default select example" id="payStatus" name="payStatus">
+                                    <option value="disabled" disabled>請選擇選項</option>
                                     <option value="尚未付款" <?= $r['payment_status'] == '尚未付款' ? 'selected' : '' ?>>尚未付款</option>
                                     <option value="已付款" <?= $r['payment_status'] == '已付款' ? 'selected' : '' ?>>已付款</option>
                                 </select>
@@ -142,6 +146,7 @@ if (empty($r)) {
                             <div class="mb-3">
                                 <label for="shipStatus" class="form-label">*運送狀態</label>
                                 <select class="form-select" aria-label="Default select example" id="shipStatus" name="shipStatus">
+                                    <option value="disabled" disabled>請選擇選項</option>
                                     <option value="尚未寄出" <?= $r['shipment_status'] == '尚未寄出' ? 'selected' : '' ?>>尚未寄出</option>
                                     <option value="已寄出" <?= $r['shipment_status'] == '已寄出' ? 'selected' : '' ?>>已寄出</option>
                                 </select>
@@ -155,6 +160,7 @@ if (empty($r)) {
                             <div class="mb-3">
                                 <label for="orderStatus" class="form-label">*訂單完成狀態</label>
                                 <select class="form-select" aria-label="Default select example" id="orderStatus" name="orderStatus">
+                                    <option value="disabled" disabled>請選擇選項</option>
                                     <option value="進行中" <?= $r['complete_status'] == '進行中' ? 'selected' : '' ?>>進行中</option>
                                     <option value="已完成" <?= $r['complete_status'] == '已完成' ? 'selected' : '' ?>>已完成</option>
                                 </select>
@@ -233,25 +239,25 @@ if (empty($r)) {
                 let selectType = document.getElementById('orderType');
                 let selectTotalP = document.getElementById('totalPrice');
                 if (selectType.value == '以物易物') {
-                    priceSelect.innerHTML = '<option selected disabled>請選擇選項</option>';
+                    priceSelect.innerHTML = '<option value="disabled" selected disabled>請選擇選項</option>';
                     let option = document.createElement('option');
                     option.value = 0;
                     option.text = 0;
                     priceSelect.add(option);
 
-                    selectTotalP.innerHTML = '<option selected disabled>請選擇選項</option>';
+                    selectTotalP.innerHTML = '<option value="disabled" selected disabled>請選擇選項</option>';
                     let option3 = document.createElement('option');
                     option3.value = 120;
                     option3.text = 120;
                     selectTotalP.add(option3);
                 } else if (selectType.value == '一般訂單' || selectType.value == '混合訂單') {
-                    priceSelect.innerHTML = '<option selected disabled>請選擇選項</option>';
+                    priceSelect.innerHTML = '<option value="disabled" selected disabled>請選擇選項</option>';
                     let option2 = document.createElement('option');
                     option2.value = productItem.product_price;
                     option2.text = productItem.product_price;
                     priceSelect.add(option2);
 
-                    selectTotalP.innerHTML = '<option selected disabled>請選擇選項</option>';
+                    selectTotalP.innerHTML = '<option value="disabled" selected disabled>請選擇選項</option>';
                     let option4 = document.createElement('option');
                     option4.value = productItem.product_price + 120;
                     option4.text = productItem.product_price + 120;
@@ -275,25 +281,25 @@ if (empty($r)) {
 
 
                 if (selectType.value == '以物易物') {
-                    priceSelect.innerHTML = '<option selected disabled>請選擇選項</option>';
+                    priceSelect.innerHTML = '<option value="disabled" selected disabled>請選擇選項</option>';
                     let option = document.createElement('option');
                     option.value = 0;
                     option.text = 0;
                     priceSelect.add(option);
 
-                    selectTotalP.innerHTML = '<option selected disabled>請選擇選項</option>';
+                    selectTotalP.innerHTML = '<option value="disabled" selected disabled>請選擇選項</option>';
                     let option3 = document.createElement('option');
                     option3.value = 120;
                     option3.text = 120;
                     selectTotalP.add(option3);
                 } else if (selectType.value == '一般訂單' || selectType.value == '混合訂單') {
-                    priceSelect.innerHTML = '<option selected disabled>請選擇選項</option>';
+                    priceSelect.innerHTML = '<option value="disabled" selected disabled>請選擇選項</option>';
                     let option2 = document.createElement('option');
                     option2.value = productItem.product_price;
                     option2.text = productItem.product_price;
                     priceSelect.add(option2);
 
-                    selectTotalP.innerHTML = '<option selected disabled>請選擇選項</option>';
+                    selectTotalP.innerHTML = '<option value="disabled" selected disabled>請選擇選項</option>';
                     let option4 = document.createElement('option');
                     option4.value = productItem.product_price + 120;
                     option4.text = productItem.product_price + 120;
@@ -351,43 +357,43 @@ if (empty($r)) {
         let isPass = true; // 整個表單有沒有通過檢查
 
         // TODO: 檢查各個欄位的資料, 有沒有符合規定
-        if (!orderTypeEl.value) {
+        if (orderTypeEl.value && orderTypeEl.value == "disabled") {
             isPass = false; // 沒有通過檢查
             orderTypeEl.style.border = '1px solid red';
             orderTypeEl.nextElementSibling.innerHTML = '請選擇訂單類型!';
         }
 
-        if (!sellerEl.value) {
+        if (sellerEl.value && sellerEl.value == "disabled") {
             isPass = false; // 沒有通過檢查
             sellerEl.style.border = '1px solid red';
             sellerEl.nextElementSibling.innerHTML = '請選擇賣家編號!';
         }
 
-        if (!buyerEl.value) {
+        if (buyerEl.value && buyerEl.value == "disabled") {
             isPass = false; // 沒有通過檢查
             buyerEl.style.border = '1px solid red';
             buyerEl.nextElementSibling.innerHTML = '請選擇買家編號!';
         }
 
-        if (!productNameEl.value) {
+        if (productNameEl.value && productNameEl.value == "disabled") {
             isPass = false; // 沒有通過檢查
             productNameEl.style.border = '1px solid red';
             productNameEl.nextElementSibling.innerHTML = '請選擇商品名稱!';
         }
 
-        if (!productPriceEl.value) {
+        if (productPriceEl.value && productPriceEl.value == "disabled") {
             isPass = false; // 沒有通過檢查
             productPriceEl.style.border = '1px solid red';
             productPriceEl.nextElementSibling.innerHTML = '請選擇商品金額!';
         }
 
-        if (!totalPriceEl.value) {
+        if (totalPriceEl.value && totalPriceEl.value == "disabled") {
             isPass = false; // 沒有通過檢查
             totalPriceEl.style.border = '1px solid red';
             totalPriceEl.nextElementSibling.innerHTML = '請選擇商品總金額!';
         }
 
-        if (!payStatusEl.value) {
+        if (payStatusEl.value && payStatusEl.value == "disabled") {
             isPass = false;
             payStatusEl.style.border = '1px solid red';
             payStatusEl.nextElementSibling.innerHTML = '請選擇付款狀態!';
@@ -411,13 +417,13 @@ if (empty($r)) {
             orderStatusEl.nextElementSibling.innerHTML = '尚未寄出商品不可完成訂單!';
         }
 
-        if (!shipStatusEl.value) {
+        if (shipStatusEl.value && shipStatusEl.value == "disabled") {
             isPass = false;
             shipStatusEl.style.border = '1px solid red';
             shipStatusEl.nextElementSibling.innerHTML = '請選擇運送狀態!';
         }
 
-        if (!orderStatusEl.value) {
+        if (orderStatusEl.value && orderStatusEl.value == "disabled") {
             isPass = false;
             orderStatusEl.style.border = '1px solid red';
             orderStatusEl.nextElementSibling.innerHTML = '請選擇訂單狀態!';

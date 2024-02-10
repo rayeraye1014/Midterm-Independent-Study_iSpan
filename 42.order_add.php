@@ -40,7 +40,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="mb-3">
                                 <label for="orderType" class="form-label">*訂單類型</label>
                                 <select class="form-select" aria-label="Default select example" id="orderType" name="orderType">
-                                    <option selected disabled>請選擇選項</option>
+                                    <option value="disabled" selected disabled>請選擇選項</option>
                                     <option value="一般訂單">一般訂單</option>
                                     <option value="混合訂單">混合訂單</option>
                                     <option value="以物易物">以物易物</option>
@@ -50,7 +50,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="mb-3">
                                 <label for="seller" class="form-label">*賣家編號</label>
                                 <select class="form-select" aria-label="Default select example" id="seller" name="seller">
-                                    <option selected disabled>請選擇選項</option>
+                                    <option value="disabled" selected disabled>請選擇選項</option>
                                     <option value="eragg98556">eragg98556</option>
                                     <option value="hr3gdsh333">hr3gdsh333</option>
                                     <option value="sdF35555">sdF35555</option>
@@ -64,7 +64,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="mb-3">
                                 <label for="buyer" class="form-label">*買家編號</label>
                                 <select class="form-select" aria-label="Default select example" id="buyer" name="buyer">
-                                    <option selected disabled>請選擇選項</option>
+                                    <option value="disabled" selected disabled>請選擇選項</option>
                                     <option value="fwsg25256">fwsg25256</option>
                                     <option value="wsaf2256">wsaf2256</option>
                                     <option value="fehasg226">fehasg226</option>
@@ -76,7 +76,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="mb-3">
                                 <label for="productName" class="form-label">*商品名稱</label>
                                 <select class="form-select" aria-label="Default select example" id="productName" name="productName">
-                                    <option selected disabled>請選擇選項</option>
+                                    <option value="disabled" selected disabled>請選擇選項</option>
                                     <?php foreach ($rows4 as $r4) : ?>
                                         <option value="<?= $r4['id'] ?>"><?= $r4['product_name'] ?></option>
                                     <?php endforeach ?>
@@ -86,7 +86,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="mb-3">
                                 <label for="productPrice" class="form-label">*商品金額</label>
                                 <select class="form-select" aria-label="Default select example" id="productPrice" name="productPrice">
-                                    <option selected disabled>請選擇選項</option>
+                                    <option value="disabled" selected disabled>請選擇選項</option>
                                 </select>
                                 <div class="form-text"></div>
                             </div>
@@ -100,14 +100,14 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="mb-3">
                                 <label for="totalPrice" class="form-label">*總金額(含運費)</label>
                                 <select class="form-select" aria-label="Default select example" id="totalPrice" name="totalPrice">
-                                    <option selected disabled>請選擇選項</option>
+                                    <option value="disabled" selected disabled>請選擇選項</option>
                                 </select>
                                 <div class="form-text"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="payStatus" class="form-label">*付款狀態</label>
                                 <select class="form-select" aria-label="Default select example" id="payStatus" name="payStatus">
-                                    <option selected disabled>請選擇選項</option>
+                                    <option value="disabled" selected disabled>請選擇選項</option>
                                     <option value="尚未付款">尚未付款</option>
                                     <option value="已付款">已付款</option>
                                 </select>
@@ -116,7 +116,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="mb-3">
                                 <label for="shipStatus" class="form-label">*運送狀態</label>
                                 <select class="form-select" aria-label="Default select example" id="shipStatus" name="shipStatus">
-                                    <option selected disabled>請選擇選項</option>
+                                    <option value="disabled" selected disabled>請選擇選項</option>
                                     <option value="尚未寄出">尚未寄出</option>
                                     <option value="已寄出">已寄出</option>
                                 </select>
@@ -130,7 +130,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="mb-3">
                                 <label for="orderStatus" class="form-label">*訂單完成狀態</label>
                                 <select class="form-select" aria-label="Default select example" id="orderStatus" name="orderStatus">
-                                    <option selected disabled>請選擇選項</option>
+                                    <option value="disabled" selected disabled>請選擇選項</option>
                                     <option value="進行中">進行中</option>
                                     <option value="已完成">已完成</option>
                                 </select>
@@ -204,7 +204,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         let priceSelect = document.getElementById('productPrice');
 
         // 清空價格選單
-        priceSelect.innerHTML = '<option selected disabled>請選擇選項</option>';
+        priceSelect.innerHTML = '<option value="disabled" selected disabled>請選擇選項</option>';
 
         // 遍歷產品數據，僅添加與所選訂單類型相符的單價和總價
         product.forEach(function(productItem) {
@@ -212,25 +212,25 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 let selectType = document.getElementById('orderType');
                 let selectTotalP = document.getElementById('totalPrice');
                 if (selectType.value == '以物易物') {
-                    priceSelect.innerHTML = '<option selected disabled>請選擇選項</option>';
+                    priceSelect.innerHTML = '<option value="disabled" selected disabled>請選擇選項</option>';
                     let option = document.createElement('option');
                     option.value = 0;
                     option.text = 0;
                     priceSelect.add(option);
 
-                    selectTotalP.innerHTML = '<option selected disabled>請選擇選項</option>';
+                    selectTotalP.innerHTML = '<option value="disabled" selected disabled>請選擇選項</option>';
                     let option3 = document.createElement('option');
                     option3.value = 120;
                     option3.text = 120;
                     selectTotalP.add(option3);
                 } else if (selectType.value == '一般訂單' || selectType.value == '混合訂單') {
-                    priceSelect.innerHTML = '<option selected disabled>請選擇選項</option>';
+                    priceSelect.innerHTML = '<option value="disabled" selected disabled>請選擇選項</option>';
                     let option2 = document.createElement('option');
                     option2.value = productItem.product_price;
                     option2.text = productItem.product_price;
                     priceSelect.add(option2);
 
-                    selectTotalP.innerHTML = '<option selected disabled>請選擇選項</option>';
+                    selectTotalP.innerHTML = '<option value="disabled" selected disabled>請選擇選項</option>';
                     let option4 = document.createElement('option');
                     option4.value = productItem.product_price + 120;
                     option4.text = productItem.product_price + 120;
@@ -246,7 +246,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         let priceSelect = document.getElementById('productPrice');
 
         // 清空價格選單
-        priceSelect.innerHTML = '<option selected disabled>請選擇選項</option>';
+        priceSelect.innerHTML = '<option value="disabled" selected disabled>請選擇選項</option>';
 
         // 遍歷產品數據，僅添加與所選訂單類型相符的單價和總價
         product.forEach(function(productItem) {
@@ -254,25 +254,25 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 let selectType = document.getElementById('orderType');
                 let selectTotalP = document.getElementById('totalPrice');
                 if (selectType.value == '以物易物') {
-                    priceSelect.innerHTML = '<option selected disabled>請選擇選項</option>';
+                    priceSelect.innerHTML = '<option value="disabled" selected disabled>請選擇選項</option>';
                     let option = document.createElement('option');
                     option.value = 0;
                     option.text = 0;
                     priceSelect.add(option);
 
-                    selectTotalP.innerHTML = '<option selected disabled>請選擇選項</option>';
+                    selectTotalP.innerHTML = '<option value="disabled" selected disabled>請選擇選項</option>';
                     let option3 = document.createElement('option');
                     option3.value = 120;
                     option3.text = 120;
                     selectTotalP.add(option3);
                 } else if (selectType.value == '一般訂單' || selectType.value == '混合訂單') {
-                    priceSelect.innerHTML = '<option selected disabled>請選擇選項</option>';
+                    priceSelect.innerHTML = '<option value="disabled" selected disabled>請選擇選項</option>';
                     let option2 = document.createElement('option');
                     option2.value = productItem.product_price;
                     option2.text = productItem.product_price;
                     priceSelect.add(option2);
 
-                    selectTotalP.innerHTML = '<option selected disabled>請選擇選項</option>';
+                    selectTotalP.innerHTML = '<option value="disabled" selected disabled>請選擇選項</option>';
                     let option4 = document.createElement('option');
                     option4.value = productItem.product_price + 120;
                     option4.text = productItem.product_price + 120;
@@ -330,43 +330,43 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         let isPass = true; // 整個表單有沒有通過檢查
 
         // TODO: 檢查各個欄位的資料, 有沒有符合規定
-        if (!orderTypeEl.value) {
+        if (orderTypeEl.value && orderTypeEl.value == "disabled") {
             isPass = false; // 沒有通過檢查
             orderTypeEl.style.border = '1px solid red';
             orderTypeEl.nextElementSibling.innerHTML = '請選擇訂單類型!';
         }
 
-        if (!sellerEl.value) {
+        if (sellerEl.value && sellerEl.value == "disabled") {
             isPass = false; // 沒有通過檢查
             sellerEl.style.border = '1px solid red';
             sellerEl.nextElementSibling.innerHTML = '請選擇賣家編號!';
         }
 
-        if (!buyerEl.value) {
+        if (buyerEl.value && buyerEl.value == "disabled") {
             isPass = false; // 沒有通過檢查
             buyerEl.style.border = '1px solid red';
             buyerEl.nextElementSibling.innerHTML = '請選擇買家編號!';
         }
 
-        if (!productNameEl.value) {
+        if (productNameEl.value && productNameEl.value == "disabled") {
             isPass = false; // 沒有通過檢查
             productNameEl.style.border = '1px solid red';
             productNameEl.nextElementSibling.innerHTML = '請選擇商品名稱!';
         }
 
-        if (!productPriceEl.value) {
+        if (productPriceEl.value && productPriceEl.value == "disabled") {
             isPass = false; // 沒有通過檢查
             productPriceEl.style.border = '1px solid red';
             productPriceEl.nextElementSibling.innerHTML = '請選擇商品金額!';
         }
 
-        if (!totalPriceEl.value) {
+        if (totalPriceEl.value && totalPriceEl.value == "disabled") {
             isPass = false; // 沒有通過檢查
             totalPriceEl.style.border = '1px solid red';
             totalPriceEl.nextElementSibling.innerHTML = '請選擇商品總金額!';
         }
 
-        if (!payStatusEl.value) {
+        if (payStatusEl.value && payStatusEl.value == "disabled") {
             isPass = false;
             payStatusEl.style.border = '1px solid red';
             payStatusEl.nextElementSibling.innerHTML = '請選擇付款狀態!';
@@ -390,13 +390,13 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             orderStatusEl.nextElementSibling.innerHTML = '尚未寄出商品不可完成訂單!';
         }
 
-        if (!shipStatusEl.value) {
+        if (shipStatusEl.value && shipStatusEl.value == "disabled") {
             isPass = false;
             shipStatusEl.style.border = '1px solid red';
             shipStatusEl.nextElementSibling.innerHTML = '請選擇運送狀態!';
         }
 
-        if (!orderStatusEl.value) {
+        if (orderStatusEl.value && orderStatusEl.value == "disabled") {
             isPass = false;
             orderStatusEl.style.border = '1px solid red';
             orderStatusEl.nextElementSibling.innerHTML = '請選擇訂單狀態!';

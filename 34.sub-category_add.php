@@ -115,13 +115,13 @@ $pageName = 'add_sub-category';
 
     // TODO: 檢查各個欄位的資料, 有沒有符合規定
 
-    if (subEl.value.length < 1 && !validateSub(sub)) {
+    if (subEl.value.length < 1 || (subEl.value && !validateSub(sub))) {
       isPass = false; // 沒有通過檢查
       subEl.style.border = '1px solid red';
       subEl.nextElementSibling.innerHTML = '請填寫正確的名稱!';
     }
 
-    if (main_categoryEl.value.length < 1 && !validateMC(main_category)) {
+    if (main_categoryEl.value.length < 1 || (main_categoryEl.value && !validateMC(main_category))) {
       isPass = false;
       main_categoryEl.style.border = '1px solid red';
       main_categoryEl.nextElementSibling.innerHTML = '請填寫正確的主分類編號';

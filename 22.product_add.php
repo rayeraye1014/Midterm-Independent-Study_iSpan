@@ -40,7 +40,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="mb-3">
                                 <label for="seller" class="form-label">*上架者</label>
                                 <select class="form-select" aria-label="Default select example" id="seller" name="seller">
-                                    <option selected disabled>請選擇選項</option>
+                                    <option value="disabled" selected disabled>請選擇選項</option>
                                     <option value="ellie12345">ellie12345</option>
                                     <option value="ken222222">ken222222</option>
                                     <option value="amy333333">amy333333</option>
@@ -56,7 +56,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="mb-3">
                                 <label for="main" class="form-label">*商品主分類</label>
                                 <select class="form-select" aria-label="Default select example" id="main" name="main">
-                                    <option selected disabled>請選擇選項</option>
+                                    <option value="disabled" selected disabled>請選擇選項</option>
                                     <?php foreach ($rows2 as $r2) : ?>
                                         <option value="<?= $r2['id'] ?>"><?= $r2['main'] ?></option>
                                     <?php endforeach ?>
@@ -66,7 +66,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="mb-3">
                                 <label for="sub" class="form-label">*商品子分類</label>
                                 <select class="form-select" aria-label="Default select example" id="sub" name="sub">
-                                    <option selected disabled>請選擇選項</option>
+                                    <option value="disabled" selected disabled>請選擇選項</option>
                                 </select>
                                 <div class="form-text"></div>
                             </div>
@@ -99,7 +99,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="mb-3">
                                 <label for="carbonPoints" class="form-label">*可獲得小碳點數</label>
                                 <select class="form-select" aria-label="Default select example" id="carbonPoints" name="carbonPoints">
-                                    <option selected disabled>請選擇選項</option>
+                                    <option value="disabled" selected disabled>請選擇選項</option>
                                 </select>
                                 <div class="form-text"></div>
                             </div>
@@ -116,7 +116,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="mb-3">
                                 <label for="status" class="form-label">*上架狀態</label>
                                 <select class="form-select" aria-label="Default select example" id="status" name="status">
-                                    <option selected disabled>請選擇選項</option>
+                                    <option value="disabled" selected disabled>請選擇選項</option>
                                     <option value="上架中">上架中</option>
                                     <option value="下架中">下架中</option>
                                 </select>
@@ -185,7 +185,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         var subSelect = document.getElementById('sub');
 
         // 清空子分類選單
-        subSelect.innerHTML = '<option selected disabled>請選擇選項</option>';
+        subSelect.innerHTML = '<option value="disabled" selected disabled>請選擇選項</option>';
 
         // 遍歷子分類數據，僅添加與所選主分類相符的子分類
         subCategories.forEach(function(sub) {
@@ -204,7 +204,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         var cpSelect = document.getElementById('carbonPoints');
 
         // 清空小碳點選單
-        cpSelect.innerHTML = '<option selected disabled>請選擇選項</option>';
+        cpSelect.innerHTML = '<option value="disabled" selected disabled>請選擇選項</option>';
 
         // 遍歷小碳點數據，僅添加與所選主分類相符的小碳點
         mainCategories.forEach(function(main) {
@@ -301,19 +301,19 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         // TODO: 檢查各個欄位的資料, 有沒有符合規定
 
-        if (!sellerEl.value) {
+        if (sellerEl.value && sellerEl.value == "disabled") {
             isPass = false; // 沒有通過檢查
             sellerEl.style.border = '1px solid red';
             sellerEl.nextElementSibling.innerHTML = '請選擇上架者名稱!';
         }
 
-        if (!mainEl.value) {
+        if (mainEl.value && mainEl.value == "disabled") {
             isPass = false; // 沒有通過檢查
             mainEl.style.border = '1px solid red';
             mainEl.nextElementSibling.innerHTML = '請選擇主分類選項!';
         }
 
-        if (!subEl.value) {
+        if (subEl.value && subEl.value == "disabled") {
             isPass = false; // 沒有通過檢查
             subEl.style.border = '1px solid red';
             subEl.nextElementSibling.innerHTML = '請選擇子分類選項!';
@@ -343,13 +343,13 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             qtyEl.nextElementSibling.innerHTML = '請填入正確商品數量!';
         }
 
-        if (!carbonPointsEl.value) {
+        if (carbonPointsEl.value && carbonPointsEl.value == "disabled") {
             isPass = false;
             carbon_pointsEl.style.border = '1px solid red';
             carbon_pointsEl.nextElementSibling.innerHTML = '請選擇小碳點數!';
         }
 
-        if (!statusEl.value) {
+        if (statusEl.value && statusEl.value == "disabled") {
             isPass = false;
             statusEl.style.border = '1px solid red';
             statusEl.nextElementSibling.innerHTML = '請選擇上架狀態!';

@@ -55,6 +55,7 @@ if (empty($r)) {
                             <div class="mb-3">
                                 <label for="seller" class="form-label">*上架者</label>
                                 <select class="form-select" aria-label="Default select example" id="seller" name="seller">
+                                    <option value="disabled" disabled>請選擇選項</option>
                                     <option value="ellie12345" <?= $r['seller_id'] == 'ellie12345' ? 'selected' : '' ?>>ellie12345</option>
                                     <option value="ken222222" <?= $r['seller_id'] == 'ken222222' ? 'selected' : '' ?>>ken222222</option>
                                     <option value="amy333333" <?= $r['seller_id'] == 'amy333333' ? 'selected' : '' ?>>amy333333</option>
@@ -70,7 +71,7 @@ if (empty($r)) {
                             <div class="mb-3">
                                 <label for="main" class="form-label">*商品主分類</label>
                                 <select class="form-select" aria-label="Default select example" id="main" name="main">
-                                    <option selected disabled>請選擇選項</option>
+                                    <option value="disabled" selected disabled>請選擇選項</option>
                                     <?php foreach ($rows2 as $r2) : ?>
                                         <option value="<?= $r2['id'] ?>" <?= $r['main_category'] == $r2['id'] ? 'selected' : '' ?>><?= $r2['main'] ?></option>
                                     <?php endforeach ?>
@@ -142,6 +143,7 @@ if (empty($r)) {
                             <div class="mb-3">
                                 <label for="status" class="form-label">*上架狀態</label>
                                 <select class="form-select" aria-label="Default select example" id="status" name="status">
+                                    <option value="disabled" disabled>請選擇選項</option>
                                     <option value="上架中" <?= $r['status_now'] == '上架中' ? 'selected' : '' ?>>上架中</option>
                                     <option value="下架中" <?= $r['status_now'] == '下架中' ? 'selected' : '' ?>>下架中</option>
                                 </select>
@@ -217,7 +219,7 @@ if (empty($r)) {
         var subSelect = document.getElementById('sub');
 
         // 清空子分類選單
-        subSelect.innerHTML = '<option selected disabled>請選擇選項</option>'
+        subSelect.innerHTML = '<option value="disabled" selected disabled>請選擇選項</option>'
 
         // 遍歷子分類數據，僅添加與所選主分類相符的子分類
         subCategories.forEach(function(sub) {
@@ -236,7 +238,7 @@ if (empty($r)) {
         var cpSelect = document.getElementById('carbonPoints');
 
         // 清空小碳點選單
-        cpSelect.innerHTML = '<option selected disabled>請選擇選項</option>';
+        cpSelect.innerHTML = '<option value="disabled" selected disabled>請選擇選項</option>';
 
         // 遍歷小碳點數據，僅添加與所選主分類相符的小碳點
         mainCategories.forEach(function(main) {
@@ -338,49 +340,49 @@ if (empty($r)) {
 
         // TODO: 檢查各個欄位的資料, 有沒有符合規定
 
-        if (sellerEl.value == "") {
+        if (sellerEl.value && sellerEl.value == "disabled") {
             isPass = false; // 沒有通過檢查
             sellerEl.style.border = '1px solid red';
             sellerEl.nextElementSibling.innerHTML = '請選擇上架者名稱!';
         }
 
-        if (mainEl.value == "") {
+        if (mainEl.value && mainEl.value == "disabled") {
             isPass = false; // 沒有通過檢查
             mainEl.style.border = '1px solid red';
             mainEl.nextElementSibling.innerHTML = '請選擇主分類選項!';
         }
 
-        if (subEl.value == "") {
+        if (subEl.value && subEl.value == "disabled") {
             isPass = false; // 沒有通過檢查
             subEl.style.border = '1px solid red';
             subEl.nextElementSibling.innerHTML = '請選擇子分類選項!';
         }
 
-        if (nameEl.value == "") {
+        if (nameEl.value && nameEl.value == "disabled") {
             isPass = false; // 沒有通過檢查
             nameEl.style.border = '1px solid red';
             nameEl.nextElementSibling.innerHTML = '請填入商品名稱!';
         }
 
-        if (priceEl.value == "" && !validatePrice(priceEl.value)) {
+        if (priceEl.value.length < 1 || (priceEl.value && !validatePrice(priceEl.value))) {
             isPass = false; // 沒有通過檢查
             priceEl.style.border = '1px solid red';
             priceEl.nextElementSibling.innerHTML = '請填入正確商品價格!';
         }
 
-        if (qtyEl.value == "" || !validateQty(qtyEl.value)) {
+        if (qtyEl.value.length < 1 || (qtyEl.value && !validateQty(qtyEl.value))) {
             isPass = false; // 沒有通過檢查
             qtyEl.style.border = '1px solid red';
             qtyEl.nextElementSibling.innerHTML = '請填入正確商品數量!';
         }
 
-        if (carbonPointsEl.value == "") {
+        if (carbonPointsEl.value && carbonPointsEl.value == "disabled") {
             isPass = false;
             carbon_pointsEl.style.border = '1px solid red';
             carbon_pointsEl.nextElementSibling.innerHTML = '請選擇小碳點數!';
         }
 
-        if (statusEl.value == "") {
+        if (statusEl.value && statusEl.value == "disabled") {
             isPass = false;
             statusEl.style.border = '1px solid red';
             statusEl.nextElementSibling.innerHTML = '請選擇上架狀態!';

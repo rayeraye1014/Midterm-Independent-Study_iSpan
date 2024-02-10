@@ -4,6 +4,13 @@ require __DIR__ . '/0.parts/pdo-connect.php';
 $title = '新增商品子分類';
 $pageName = 'add_sub-category';
 
+$sub = "SELECT * FROM categories_sub";
+$stmt2 = $pdo->query($sub);
+$rows2 = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+
+$main = "SELECT * FROM categories_main";
+$stmt = $pdo->query($main);
+$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 <?php include __DIR__ . '/0.parts/html-head.php' ?>
@@ -28,8 +35,13 @@ $pageName = 'add_sub-category';
                 <div class="form-text"></div>
               </div>
               <div class="mb-3">
-                <label for="main_catgory" class="form-label">*所屬主分類代碼</label>
-                <input type="text" class="form-control" id="main_category" name="main_category" required>
+                <label for="main" class="form-label">*所屬主分類</label>
+                <select class="form-select" aria-label="Default select example" id="main" name="main">
+                  <option value="disabled" selected disabled>請選擇選項</option>
+                  <?php foreach ($rows as $r) : ?>
+                    <option value="<?= $r['id'] ?>"><?= $r['main'] ?></option>
+                  <?php endforeach ?>
+                </select>
                 <div class=" form-text">
                 </div>
               </div>
@@ -52,7 +64,7 @@ $pageName = 'add_sub-category';
       </div>
       <div class="modal-body">
         <div class="alert alert-success" role="alert">
-          資料新增成功
+          子分類新增成功
         </div>
       </div>
       <div class="modal-footer">
@@ -68,12 +80,12 @@ $pageName = 'add_sub-category';
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5">新增失敗</h1>
+        <h1 class="modal-title fs-5">新增結果</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="alert alert-danger" role="alert" id="failureInfo">
-          資料新增失敗
+          子類別新增失敗
         </div>
       </div>
       <div class="modal-footer">
@@ -88,20 +100,10 @@ $pageName = 'add_sub-category';
 <script>
   const {
     sub: subEl,
-    main_category: main_categoryEl,
+    main: mainEl,
   } = document.form1;
 
-  const fields = [subEl, main_categoryEl];
-
-  function validateSub(sub) {
-    const re = /^[a-zA-Z0-9\s.,-]{1,20}$/;
-    return re.test(sub);
-  }
-
-  function validateMC(main_category) {
-    const re = /^[0-9]+$/;
-    return re.test(main_category);
-  }
+  const fields = [subEl, mainEl];
 
   function sendData(e) {
     // 回復欄位的外觀
@@ -115,16 +117,16 @@ $pageName = 'add_sub-category';
 
     // TODO: 檢查各個欄位的資料, 有沒有符合規定
 
-    if (subEl.value.length < 1 || (subEl.value && !validateSub(sub))) {
+    if (subEl.value.length < 1) {
       isPass = false; // 沒有通過檢查
       subEl.style.border = '1px solid red';
       subEl.nextElementSibling.innerHTML = '請填寫正確的名稱!';
     }
 
-    if (main_categoryEl.value.length < 1 || (main_categoryEl.value && !validateMC(main_category))) {
+    if (main.value && main.value == "disabled") {
       isPass = false;
       main_categoryEl.style.border = '1px solid red';
-      main_categoryEl.nextElementSibling.innerHTML = '請填寫正確的主分類編號';
+      main_categoryEl.nextElementSibling.innerHTML = '請選擇主分類!';
     }
 
     // 有通過檢查才發送表單

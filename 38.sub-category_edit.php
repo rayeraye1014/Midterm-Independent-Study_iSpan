@@ -4,6 +4,10 @@ require __DIR__ . '/0.parts/pdo-connect.php';
 $title = '編輯商品子分類內容';
 $pageName = 'edit_sub-category';
 
+$main = "SELECT * FROM categories_main";
+$stmt = $pdo->query($main);
+$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 if (empty($id)) {
     header('Location: 32.sub-category_list.php');
@@ -43,8 +47,13 @@ if (empty($r)) {
                                 <div class="form-text"></div>
                             </div>
                             <div class="mb-3">
-                                <label for="main_category" class="form-label">*所屬主分類代碼</label>
-                                <input type="text" class="form-control" id="main_category" name="main_category" value="<?= $r['main_category'] ?>" required>
+                                <label for="main" class="form-label">*所屬主分類</label>
+                                <select class="form-select" aria-label="Default select example" id="main" name="main">
+                                    <option value="disabled" selected disabled>請選擇選項</option>
+                                    <?php foreach ($rows as $rs) : ?>
+                                        <option value="<?= $rs['id'] ?>" <?= $r['main_category'] == $rs['id'] ? 'selected' : '' ?>><?= $rs['main'] ?></option>
+                                    <?php endforeach ?>
+                                </select>
                                 <div class=" form-text">
                                 </div>
                             </div>
@@ -67,7 +76,7 @@ if (empty($r)) {
             </div>
             <div class="modal-body">
                 <div class="alert alert-success" role="alert">
-                    資料編輯成功
+                    子分類編輯成功
                 </div>
             </div>
             <div class="modal-footer">
@@ -83,12 +92,12 @@ if (empty($r)) {
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5">資料無修改</h1>
+                <h1 class="modal-title fs-5">編輯結果</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="alert alert-danger" role="alert" id="failureInfo">
-                    資料無修改
+                    子分類無修改
                 </div>
             </div>
             <div class=" modal-footer">
@@ -112,20 +121,10 @@ if (empty($r)) {
 
     const {
         sub: subEl,
-        main_category: main_categoryEl,
+        main: mainEl,
     } = document.form1;
 
-    const fields = [subEl, main_categoryEl];
-
-    function validateSub(sub) {
-        const re = /^[a-zA-Z0-9\s.,-]{1,10}$/;
-        return re.test(sub);
-    }
-
-    function validateMC(main_category) {
-        const re = /^[0-9]+$/;
-        return re.test(main_category);
-    }
+    const fields = [subEl, mainEl];
 
 
     function sendData(e) {
@@ -142,16 +141,16 @@ if (empty($r)) {
 
         // TODO: 檢查各個欄位的資料, 有沒有符合規定
 
-        if (subEl.value.length < 1 && !validateSub(sub)) {
+        if (subEl.value.length < 1) {
             isPass = false; // 沒有通過檢查
             subEl.style.border = '1px solid red';
             subEl.nextElementSibling.innerHTML = '請填寫正確的名稱!';
         }
 
-        if (main_categoryEl.value.length < 1 && !validateMC(main_category)) {
+        if (mainEl.value && mainEl.value == "disabled") {
             isPass = false;
             main_categoryEl.style.border = '1px solid red';
-            main_categoryEl.nextElementSibling.innerHTML = '請填寫正確的主分類編號';
+            main_categoryEl.nextElementSibling.innerHTML = '請選擇主分類';
         }
 
 

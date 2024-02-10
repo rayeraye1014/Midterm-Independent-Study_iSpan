@@ -65,7 +65,7 @@ $pageName = 'add';
       </div>
       <div class="modal-body">
         <div class="alert alert-success" role="alert">
-          資料新增成功
+          會員資料新增成功
         </div>
       </div>
       <div class="modal-footer">
@@ -81,12 +81,12 @@ $pageName = 'add';
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5">新增失敗</h1>
+        <h1 class="modal-title fs-5">新增結果</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="alert alert-danger" role="alert" id="failureInfo">
-          資料新增失敗
+          會員資料新增失敗
         </div>
       </div>
       <div class="modal-footer">

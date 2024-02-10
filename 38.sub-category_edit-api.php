@@ -20,8 +20,8 @@ if (!empty($_POST) && !empty($_POST['id'])) {
         exit;
     }
 
-    if ($_POST['main_category'] == "") {
-        $output['error'] = '請填寫主分類代碼';
+    if ($_POST['main'] == "") {
+        $output['error'] = '請選擇主分類';
         $output['code'] = 400;
         echo json_encode($output, JSON_UNESCAPED_UNICODE);
         exit;
@@ -35,7 +35,7 @@ if (!empty($_POST) && !empty($_POST['id'])) {
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
         $_POST['sub'],
-        $_POST['main_category'],
+        $_POST['main'],
         $_POST['id'],
     ]);
     $output['code'] = 200;

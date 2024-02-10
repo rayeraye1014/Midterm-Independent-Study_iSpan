@@ -80,7 +80,7 @@ if (empty($r)) {
       </div>
       <div class="modal-body">
         <div class="alert alert-success" role="alert">
-          資料編輯成功
+          會員資料編輯成功
         </div>
       </div>
       <div class="modal-footer">
@@ -96,12 +96,12 @@ if (empty($r)) {
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5">資料無修改</h1>
+        <h1 class="modal-title fs-5">編輯結果</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="alert alert-danger" role="alert" id="failureInfo">
-          資料無修改
+          會員資料無修改
         </div>
       </div>
       <div class=" modal-footer">

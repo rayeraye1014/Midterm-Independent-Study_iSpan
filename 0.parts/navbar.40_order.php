@@ -192,15 +192,17 @@ if (!isset($pageName)) {
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-start my-1 mx-2">
-                    <div class="">
-                        <button type="button" class="btn btn-danger btn-sm"><a class="color-a text-decoration-none" href="javascript:void(0);" onclick="delete_moreThenOne()">一鍵刪除</a></button>
+                <?php if (isset($_SESSION['admin'])) : ?>
+                    <div class="d-flex justify-content-start my-1 mx-2">
+                        <div class="">
+                            <button type="button" class="btn btn-danger btn-sm"><a class="color-a text-decoration-none" href="javascript:void(0);" onclick="delete_moreThenOne()">一鍵刪除</a></button>
+                        </div>
+                        <div class="ms-3">
+                            <button type="button" class="btn btn-info me-2 btn-sm"><a class="color-a text-decoration-none" href="42.order_add.php">添加商品</a></button>
+                            <!--<button type="button" class="btn btn-info btn-sm"><a class="color-a text-decoration-none" href="file_excel-product.php">匯出Excel表單</a></button>-->
+                        </div>
                     </div>
-                    <div class="ms-3">
-                        <button type="button" class="btn btn-info me-2 btn-sm"><a class="color-a text-decoration-none" href="42.order_add.php">添加商品</a></button>
-                        <!--<button type="button" class="btn btn-info btn-sm"><a class="color-a text-decoration-none" href="file_excel-product.php">匯出Excel表單</a></button>-->
-                    </div>
-                </div>
+                <?php endif; ?>
             </div>
         </div>
     <?php endif; ?>

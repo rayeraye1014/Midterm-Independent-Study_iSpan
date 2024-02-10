@@ -40,7 +40,7 @@ if ($totalRows) {
             height: 1000px;
         }
     </style>
-    <div class="container table-bordered table-striped overflow-auto">
+    <div class="container-fluid table-bordered table-striped overflow-auto">
         <div class="row mt-3">
             <div class="col">
                 <h6>共<?= $totalRows ?>筆</h6>

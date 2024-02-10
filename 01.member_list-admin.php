@@ -92,16 +92,15 @@ if ($totalRows) {
       <div class="col">
         <table id="myTable" class="table sortable-table table-hover">
           <thead>
-            <tr>
-              <th class="table-primary"><i id="selectAll" class="fa-solid fa-check-to-slot"></i></th>
-              <th class="table-primary">編號<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()"></th>
-              <th class="table-primary">姓名</th>
-              <th class="table-primary">電郵</th>
-              <th class="table-primary">手機</th>
-              <th class="table-primary">生日</th>
-              <th class="table-primary">地址</th>
-              <th class="table-primary">編輯</th>
-              <th class="table-primary">刪除</th>
+            <tr class="table-primary">
+              <th><i id="selectAll" class="fa-solid fa-check-to-slot"></i></th>
+              <th>編號<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()"></th>
+              <th>姓名</th>
+              <th>電郵</th>
+              <th>手機</th>
+              <th>生日</th>
+              <th>地址</th>
+              <th><i class="fa-solid fa-wrench"></i></th>
             </tr>
           </thead>
           <tbody>
@@ -118,14 +117,14 @@ if ($totalRows) {
                 <td><?= htmlentities($r['address']) ?></td> <!-- 比較好的方式避免惡意留言 -->
                 <!-- 另一種方式避免惡意留言 <td><?= strip_tags($r['address']) ?></td>-->
                 <td>
-                  <a href="05.member_edit.php?sid=<?= $r['sid'] ?>">
-                    <i class="fa-solid fa-file-pen"></i>
-                  </a>
-                </td>
-                <td>
-                  <a href="javascript: delete_one(<?= $r['sid'] ?>)">
-                    <i class="fa-solid fa-trash"></i>
-                  </a>
+                  <div class="d-flex flex-column">
+                    <a href="05.member_edit.php?sid=<?= $r['sid'] ?>">
+                      <i class="fa-solid fa-file-pen"></i>
+                    </a>
+                    <a href="javascript: delete_one(<?= $r['sid'] ?>)">
+                      <i class="fa-solid fa-trash"></i>
+                    </a>
+                  </div>
                 </td>
               </tr>
             <?php endforeach ?>

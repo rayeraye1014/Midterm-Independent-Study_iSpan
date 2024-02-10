@@ -44,6 +44,7 @@ if ($totalRows) {
     <div class="container table-bordered table-striped overflow-auto">
         <div class="row mt-3">
             <div class="col">
+                <h6>共<?= $totalRows ?>筆</h6>
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
                         <li class="page-item">

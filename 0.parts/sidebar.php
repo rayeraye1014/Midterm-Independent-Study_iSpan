@@ -101,22 +101,22 @@
     </li>
     <hr>
     <li class="mb-1 d-flex justify-content-center">
-      <a href="51.coupon_list.php">
-        <button class="cou-btn btn btn-toggle rounded collapsed" data-bs-toggle="collapse" data-bs-target="#Coupon-collapse" aria-expanded="false" type="button">
+      <a href="51.evaluation_list.php">
+        <button class="cou-btn btn btn-toggle rounded collapsed" data-bs-toggle="collapse" data-bs-target="#Evaluation-collapse" aria-expanded="false" type="button">
           <div class="title d-flex">
-            <h5><i class="fa-solid fa-hand-holding-dollar me-1"></i></h5>
-            <h4>Coupon management</h4>
+            <h5><i class="fa-regular fa-star-half-stroke me-1"></i></h5>
+            <h4>Evaluation management</h4>
           </div>
         </button>
       </a>
     </li>
     <hr>
     <li class="mb-1 d-flex justify-content-center">
-      <a href="61.evaluation_list.php">
-        <button class="cou-btn btn btn-toggle rounded collapsed" data-bs-toggle="collapse" data-bs-target="#Evaluation-collapse" aria-expanded="false" type="button">
+      <a href="61.coupon_list.php">
+        <button class="cou-btn btn btn-toggle rounded collapsed" data-bs-toggle="collapse" data-bs-target="#Coupon-collapse" aria-expanded="false" type="button">
           <div class="title d-flex">
-            <h5><i class="fa-regular fa-star-half-stroke me-1"></i></h5>
-            <h4>Evaluation management</h4>
+            <h5><i class="fa-solid fa-hand-holding-dollar me-1"></i></h5>
+            <h4>Coupon management</h4>
           </div>
         </button>
       </a>

@@ -45,11 +45,9 @@ if (!empty($_POST)) {
         }
     }
 
-    //生成隨機鹽值
-    $salt = bin2hex(random_bytes(16));
-    //將鹽值和密碼結合，使用雜湊函數計算雜湊值
-    $passwordWithSalt = $_POST['password'] . $salt;
-    $passwordHash = password_hash($passwordWithSalt, PASSWORD_DEFAULT);
+    //使用雜湊函數計算雜湊值
+    $password1 = $_POST['password'];
+    $passwordHash = password_hash($password1, PASSWORD_DEFAULT);
 
     $sql = "INSERT INTO team_user
       (`email`,
@@ -57,11 +55,10 @@ if (!empty($_POST)) {
        `mobile`,
        `address`,
        `birthday`,
-       `hash`,
        `nickname`,
        `create_at`) 
       VALUES 
-      (?, ?, ?, ?, ?, ?, ?, NOW())";
+      (?, ?, ?, ?, ?, ?, NOW())";
 
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
@@ -70,7 +67,6 @@ if (!empty($_POST)) {
         $_POST['mobile'],
         $_POST['address'],
         $birthday,
-        $salt,
         $_POST['nickname']
     ]);
 

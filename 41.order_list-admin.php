@@ -84,9 +84,9 @@ if ($totalRows) {
                 <table id="myTable" class="table table-hover sortable-table">
                     <thead>
                         <tr class="table-primary">
-                            <th><i id="selectAll" class="fa-solid fa-check-to-slot"></i></a>
+                            <th><i id="selectAll" class="fa-solid fa-check-to-slot" title="全選/選取checkBox"></i></a>
                             </th>
-                            <th>ID<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()"></th>
+                            <th>ID<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()" title="變更排序"></th>
                             <th class="text-nowrap">訂單類型</th>
                             <th>賣家編號</th>
                             <th>買家編號</th>
@@ -99,7 +99,7 @@ if ($totalRows) {
                             <th>下單日期</th>
                             <th class="text-nowrap">訂單狀態</th>
                             <th>訂單完成日期</th>
-                            <th><i class="fa-solid fa-wrench"></i></th>
+                            <th><i class="fa-solid fa-wrench" title="功能區"></i></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -122,10 +122,10 @@ if ($totalRows) {
                                 <td>
                                     <div class="d-flex flex-column">
                                         <a href="44.order_edit.php?id=<?= $r['id'] ?>">
-                                            <i class="fa-solid fa-file-pen"></i>
+                                            <i class="fa-solid fa-file-pen" title="編輯"></i>
                                         </a>
                                         <a href="javascript: delete_one(<?= $r['id'] ?>)">
-                                            <i class="fa-solid fa-trash"></i>
+                                            <i class="fa-solid fa-trash" title="刪除"></i>
                                         </a>
                                     </div>
                                 </td>

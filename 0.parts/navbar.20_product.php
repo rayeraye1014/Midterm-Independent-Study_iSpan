@@ -203,9 +203,9 @@ if (!isset($pageName)) {
                         <button class="btn btn-outline-secondary btn-sm" type="button" onclick="searchProd()">
                             搜尋產品
                         </button>
-                        <div class="d-flex align-item-center  p-1">
+                        <div class="d-flex align-item-center p-1">
                             <a href="21.product_list.php">
-                                <i class="fa-solid fa-rotate-left"></i>
+                                <i class="fa-solid fa-rotate-left" title="刷新頁面"></i>
                             </a>
                         </div>
                     </div>
@@ -216,9 +216,9 @@ if (!isset($pageName)) {
                         <button class="btn btn-outline-secondary btn-sm" type="button" onclick="searchPrice()">
                             搜尋價格
                         </button>
-                        <div class="d-flex align-item-center  p-1">
+                        <div class="d-flex align-item-center p-1">
                             <a href="21.product_list.php">
-                                <i class="fa-solid fa-rotate-left"></i>
+                                <i class="fa-solid fa-rotate-left" title="刷新頁面"></i>
                             </a>
                         </div>
                     </div>

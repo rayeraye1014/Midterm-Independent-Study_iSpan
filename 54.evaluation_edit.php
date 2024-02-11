@@ -1,8 +1,8 @@
 <?php
 require __DIR__ . '/0.parts/admin-require.php';
 require __DIR__ . '/0.parts/pdo-connect.php';
-$title = '新增評價';
-$pageName = 'add_evaluation';
+$title = '編輯評價';
+$pageName = 'edit_evaluation';
 
 $order = "SELECT * FROM orders";
 $stmt4 = $pdo->query($order);
@@ -11,6 +11,19 @@ $rows4 = $stmt4->fetchAll(PDO::FETCH_ASSOC);
 $evaluation = "SELECT evaluations.id, order_type, order_id, buyer_id, rating, comments, evaluation_date FROM evaluations JOIN orders ON evaluations.order_id = orders.id";
 $stmt = $pdo->query($evaluation);
 $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+if (empty($id)) {
+    header('Location: 51.evaluation_list.php');
+    exit;
+}
+
+$sql = "SELECT evaluations.id, order_type, order_id, buyer_id, rating, comments, evaluation_date FROM evaluations JOIN orders ON evaluations.order_id = orders.id WHERE evaluations.id=$id";
+$r = $pdo->query($sql)->fetch();
+if (empty($r)) {
+    header('Location: 51.evaluation_list.php');
+    exit;
+}
 
 ?>
 <?php include __DIR__ . '/0.parts/html-head.php' ?>
@@ -35,14 +48,14 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="col">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">新增評價</h5>
+                        <h5 class="card-title">編輯評價內容</h5>
                         <form name="form1" onsubmit="sendData(event)"> <!-- 因為有下onsubmit，故action和methon就沒有用處了，可以刪除 -->
+                            <input type="hidden" name="id" value="<?= $r['id'] ?>">
                             <div class="mb-3">
                                 <label for="orderId" class="form-label">*訂單編號</label>
                                 <select class="form-select" aria-label="Default select example" id="orderId" name="orderId">
-                                    <option value="disabled" selected disabled>請選擇選項</option>
                                     <?php foreach ($rows4 as $r4) : ?>
-                                        <option value="<?= $r4['id'] ?>"><?= $r4['id'] ?></option>
+                                        <option value="<?= $r4['id'] ?>" <?= $r['order_id'] == $r4['id'] ? 'selected' : '' ?> disabled><?= $r4['id'] ?></option>
                                     <?php endforeach ?>
                                 </select>
                                 <div class="form-text"></div>
@@ -50,14 +63,22 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="mb-3">
                                 <label for="orderType" class="form-label">*訂單類型</label>
                                 <select class="form-select" aria-label="Default select example" id="orderType" name="orderType">
-                                    <option value="disabled" selected disabled>請選擇選項</option>
+                                    <?php foreach ($rows4 as $r4) : ?>
+                                        <?php if ($r['order_id'] == $r4['id']) : ?>
+                                            <option value="<?= $r4['order_type'] ?>" selected><?= $r4['order_type'] ?></option>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
                                 </select>
                                 <div class="form-text"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="buyer" class="form-label">*買家編號</label>
                                 <select class="form-select" aria-label="Default select example" id="buyer" name="buyer">
-                                    <option value="disabled" selected disabled>請選擇選項</option>
+                                    <?php foreach ($rows4 as $r4) : ?>
+                                        <?php if ($r['order_id'] == $r4['id']) : ?>
+                                            <option value="<?= $r4['buyer_id'] ?>"><?= $r4['buyer_id'] ?></option>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
                                 </select>
                                 <div class="form-text"></div>
                             </div>
@@ -65,17 +86,17 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <label for="rating" class="form-label">*評分分數</label>
                                 <select class="form-select" aria-label="Default select example" id="rating" name="rating">
                                     <option value="disabled" selected disabled>請選擇選項</option>
-                                    <option value="5">5</option>
-                                    <option value="4">4</option>
-                                    <option value="3">3</option>
-                                    <option value="2">2</option>
-                                    <option value="1">1</option>
+                                    <option value="5" <?= $r['rating'] == '5' ? 'selected' : '' ?>>5</option>
+                                    <option value="4" <?= $r['rating'] == '4' ? 'selected' : '' ?>>4</option>
+                                    <option value="3" <?= $r['rating'] == '3' ? 'selected' : '' ?>>3</option>
+                                    <option value="2" <?= $r['rating'] == '2' ? 'selected' : '' ?>>2</option>
+                                    <option value="1" <?= $r['rating'] == '1' ? 'selected' : '' ?>>1</option>
                                 </select>
                                 <div class="form-text"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="comment" class="form-label">評論</label>
-                                <textarea class="form-control" name="comment" id="comment" cols="30" rows="5"></textarea>
+                                <textarea class="form-control" name="comment" id="comment" cols="30" rows="5" value="<?= $r['comments'] ?>"><?= $r['comments'] ?></textarea>
                                 <div class="form-text"></div>
                             </div>
                             <div class="mb-3">
@@ -83,7 +104,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <input type="text" class="form-control" name="createdT" id="createdT" placeholder="" readonly>
                                 <div class="form-text"></div>
                             </div>
-                            <button type="submit" class="btn btn-primary">新增</button>
+                            <button type="submit" class="btn btn-primary">修改</button>
                         </form>
                     </div>
                 </div>
@@ -97,12 +118,12 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5">新增結果</h1>
+                <h1 class="modal-title fs-5">編輯結果</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="alert alert-success" role="alert">
-                    評價新增成功
+                    評價編輯成功
                 </div>
             </div>
             <div class="modal-footer">
@@ -118,12 +139,12 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5">新增結果</h1>
+                <h1 class="modal-title fs-5">編輯結果</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="alert alert-danger" role="alert" id="failureInfo">
-                    評價新增失敗
+                    評價無修改
                 </div>
             </div>
             <div class="modal-footer">
@@ -241,7 +262,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if (isPass) {
             const fd = new FormData(document.form1); // 沒有外觀的表單物件
 
-            fetch(`52.evaluation_add-api.php`, {
+            fetch(`54.evaluation_edit-api.php`, {
                 method: 'POST',
                 body: fd,
             }).then(r => r.json()).then(data => {

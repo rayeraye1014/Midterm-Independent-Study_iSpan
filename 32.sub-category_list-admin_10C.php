@@ -32,7 +32,7 @@ if ($totalRows) {
     }
 
     # ``可以不用標，這個只用來標示資料表名稱；''單引號只可以用來標示值
-    $sql = sprintf("SELECT * FROM categories_main join categories_sub on categories_sub.main_category = categories_main.id  WHERE main = '相機拍攝' ORDER BY categories_sub.id LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
+    $sql = sprintf("SELECT * FROM categories_main join categories_sub on categories_sub.main_category = categories_main.id  WHERE main = '相機拍攝' ORDER BY categories_sub.id DESC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
     $rows = $pdo->query($sql)->fetchAll();
 }
 
@@ -94,17 +94,16 @@ $sql_join2 = $result->fetchAll();
         </div>
         <div class="row">
             <div class="col">
-                <table id="myTable" class="table table-hover">
+                <table id="myTable" class="table table-hover sortable-table">
                     <thead>
                         <tr class="table-primary">
-                            <th><i id="selectAll" class="fa-solid fa-check-to-slot"></i></a>
+                            <th><i id="selectAll" class="fa-solid fa-check-to-slot" title="全選/選取checkBox"></i></a>
                             </th>
-                            <th>編號</th>
+                            <th>編號<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()" title="變更排序"></th>
                             <th>子分類</th>
                             <th>主分類</th>
                             <th>所屬主分類代碼</th>
-                            <th>編輯</th>
-                            <th>刪除</th>
+                            <th><i class="fa-solid fa-wrench" title="功能區"></i></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -118,14 +117,14 @@ $sql_join2 = $result->fetchAll();
                                 <td><?= $r['main'] ?></td>
                                 <td><?= $r['main_category'] ?></td>
                                 <td>
-                                    <a href="38.sub-category_edit.php?id=<?= $r['id'] ?>">
-                                        <i class="fa-solid fa-file-pen"></i>
-                                    </a>
-                                </td>
-                                <td>
-                                    <a href="javascript: delete_one(<?= $r['id'] ?>)">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </a>
+                                    <div class="d-flex flex-column">
+                                        <a href="38.sub-category_edit.php?id=<?= $r['id'] ?>">
+                                            <i class="fa-solid fa-file-pen" title="編輯"></i>
+                                        </a>
+                                        <a href="javascript: delete_one(<?= $r['id'] ?>)">
+                                            <i class="fa-solid fa-trash" title="刪除"></i>
+                                        </a>
+                                    </div>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -196,6 +195,34 @@ $sql_join2 = $result->fetchAll();
                 }
             }
         }
+    }
+
+    let sortOrder = -1; // 初始為降冪排列
+    function sortTable() {
+        const table = document.querySelector('.sortable-table');
+        const rows = Array.from(table.rows).slice(1); // Skip the header row
+        const isNumberColumn = 1; // 假設 ID 列是數字列
+
+        rows.sort((a, b) => {
+            const aValue = isNumberColumn ? parseInt(a.cells[1].textContent, 10) : a.cells[1].textContent;
+            const bValue = isNumberColumn ? parseInt(b.cells[1].textContent, 10) : b.cells[1].textContent;
+
+            return sortOrder * (bValue - aValue);
+        });
+
+        // 移除現有的行
+        rows.forEach(row => table.tBodies[0].appendChild(row));
+
+        // 切換排序順序
+        sortOrder *= -1;
+
+        // 更新 icon 顯示
+        updateSortIcon();
+    }
+
+    function updateSortIcon() {
+        const icon = document.getElementById('sortIcon');
+        icon.className = sortOrder === 1 ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down';
     }
 </script>
 <?php include __DIR__ . '/0.parts/html-foot.php' ?>

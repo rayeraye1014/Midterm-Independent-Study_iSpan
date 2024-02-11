@@ -145,7 +145,7 @@ if (!empty($_POST) && !empty($_POST['id'])) {
         `product_intro`=?,
         `carbon_points_available`=?,
         `edit_new`=?,
-        `status_now`=? 
+        `status_now`=?,
         `product_photos`=CONCAT(`product_photos`, ',')  # 保留原有的圖片名稱
         WHERE `id`=?";
 

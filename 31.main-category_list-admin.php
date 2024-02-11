@@ -93,13 +93,12 @@ if ($totalRows) {
         <table id="myTable" class="table table-hover sortable-table">
           <thead>
             <tr class="table-primary">
-              <th><i id="selectAll" class="fa-solid fa-check-to-slot"></i></a>
+              <th><i id="selectAll" class="fa-solid fa-check-to-slot" title="全選/選取checkBox"></i></a>
               </th>
-              <th>編號<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()"></th>
+              <th>編號<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()" title="變更排序"></th>
               <th>主分類</th>
               <th>此分類可獲得小碳點數</th>
-              <th>編輯</th>
-              <th>刪除</th>
+              <th><i class="fa-solid fa-wrench" title="功能區"></i></th>
             </tr>
           </thead>
           <tbody>
@@ -112,13 +111,14 @@ if ($totalRows) {
                 <td><?= $r['main'] ?></td>
                 <td><?= $r['carbon_points_available'] ?></td>
                 <td>
-                  <a href="37.main-category_edit.php?id=<?= $r['id'] ?>">
-                    <i class="fa-solid fa-file-pen"></i>
-                  </a>
-                </td>
-                <td><a href="javascript: delete_one(<?= $r['id'] ?>)">
-                    <i class="fa-solid fa-trash"></i>
-                  </a>
+                  <div class="d-flex flex-column">
+                    <a href="37.main-category_edit.php?id=<?= $r['id'] ?>" title="編輯">
+                      <i class="fa-solid fa-file-pen"></i>
+                    </a>
+                    <a href="javascript: delete_one(<?= $r['id'] ?>)" title="刪除">
+                      <i class="fa-solid fa-trash"></i>
+                    </a>
+                  </div>
                 </td>
               </tr>
             <?php endforeach ?>

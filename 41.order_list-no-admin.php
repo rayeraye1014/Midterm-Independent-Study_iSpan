@@ -83,7 +83,7 @@ if ($totalRows) {
                 <table id="myTable" class="table table-hover sortable-table">
                     <thead>
                         <tr class="table-info">
-                            <th>ID<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()"></th>
+                            <th>ID<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()" title="變更排序"></th>
                             <th class="text-nowrap">訂單類型</th>
                             <th>賣家編號</th>
                             <th>買家編號</th>

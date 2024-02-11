@@ -136,7 +136,11 @@ if (!isset($pageName)) {
                             <button class="btn btn-outline-secondary btn-sm" type="button" onclick="searchAddress()">
                                 搜尋地址
                             </button>
-                            <div class="d-flex align-item-center p-1"><a href="01.member_list.php"><i class="fa-solid fa-rotate-left"></i></a></div>
+                            <div class="d-flex align-item-center p-1">
+                                <a href="01.member_list.php">
+                                    <i class="fa-solid fa-rotate-left" title="刷新頁面"></i>
+                                </a>
+                            </div>
                         </div>
                         <button type="button" class="btn btn-info me-2 btn-sm"><a class="color-a text-decoration-none" href="02.member_add.php">新增會員資料</a></button>
                         <button type="button" class="btn btn-danger btn-sm"><a class="color-a text-decoration-none" href="javascript:void(0);" onclick="delete_moreThenOne()">一鍵刪除</a></button>

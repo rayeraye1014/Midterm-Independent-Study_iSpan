@@ -97,14 +97,13 @@ $sql_join2 = $result->fetchAll();
         <table id="myTable" class="table table-hover sortable-table">
           <thead>
             <tr class="table-primary">
-              <th><i id="selectAll" class="fa-solid fa-check-to-slot"></i></a>
+              <th><i id="selectAll" class="fa-solid fa-check-to-slot" title="全選/選取checkBox"></i></a>
               </th>
-              <th>編號<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()"></th>
+              <th>編號<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()" title="變更排序"></th>
               <th>子分類</th>
               <th>主分類</th>
               <th>所屬主分類代碼</th>
-              <th>編輯</th>
-              <th>刪除</th>
+              <th><i class="fa-solid fa-wrench" title="功能區"></i></th>
             </tr>
           </thead>
           <tbody>
@@ -118,14 +117,14 @@ $sql_join2 = $result->fetchAll();
                 <td><?= $r['main'] ?></td>
                 <td><?= $r['main_category'] ?></td>
                 <td>
-                  <a href="38.sub-category_edit.php?id=<?= $r['id'] ?>">
-                    <i class="fa-solid fa-file-pen"></i>
-                  </a>
-                </td>
-                <td>
-                  <a href="javascript: delete_one(<?= $r['id'] ?>)">
-                    <i class="fa-solid fa-trash"></i>
-                  </a>
+                  <div class="d-flex flex-column">
+                    <a href="38.sub-category_edit.php?id=<?= $r['id'] ?>">
+                      <i class="fa-solid fa-file-pen" title="編輯"></i>
+                    </a>
+                    <a href="javascript: delete_one(<?= $r['id'] ?>)">
+                      <i class="fa-solid fa-trash" title="刪除"></i>
+                    </a>
+                  </div>
                 </td>
               </tr>
             <?php endforeach; ?>

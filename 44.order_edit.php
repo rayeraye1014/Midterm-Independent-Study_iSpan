@@ -171,7 +171,7 @@ if (empty($r)) {
                                 <input type="date" class="form-control" name="completeD" id="completeD" placeholder="" value="<?= $r['complete_date'] ?>">
                                 <div class="form-text"></div>
                             </div>
-                            <button type="submit" class="btn btn-primary">送出編輯</button>
+                            <button type="submit" class="btn btn-primary">修改</button>
                         </form>
                     </div>
                 </div>

@@ -53,11 +53,11 @@ if ($totalRows) {
         <div class="row">
             <div class="col">
                 <h6>共<?= $totalRows ?>筆</h6>
-                <table id="myTable" class="table table-hover">
+                <table id="myTable" class="table table-hover sortable-table">
                     <thead>
                         <tr class="table-primary">
-                            <th><i id="selectAll" class="fa-solid fa-check-to-slot"></i></th>
-                            <th>ID</th>
+                            <th><i id="selectAll" class="fa-solid fa-check-to-slot" title="全選/選取checkBox"></i></th>
+                            <th>ID<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()" title="變更排序"></i></th>
                             <th>Seller</th>
                             <th>Main</th>
                             <th>Sub</th>
@@ -70,7 +70,7 @@ if ($totalRows) {
                             <th>Ctime</th>
                             <th>Utime</th>
                             <th>Statusss</th>
-                            <th>W</th>
+                            <th><i class="fa-solid fa-wrench" title="功能區"></i></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -92,7 +92,7 @@ if ($totalRows) {
                                 <td><?= $r['status_now'] ?></td>
                                 <td>
                                     <div class="d-flex flex-column">
-                                        <a href="javascript: change_status(<?= $r['id'] ?>)">
+                                        <a href="javascript: change_status(<?= $r['id'] ?>)" title="變更上下架">
                                             <?php if ($r['status_now'] == '上架中') : ?>
                                                 <i class="fa-solid fa-turn-down"></i>
                                             <?php else : ?>
@@ -100,10 +100,10 @@ if ($totalRows) {
                                             <?php endif; ?>
                                         </a>
                                         <a href="24.product_edit.php?id=<?= $r['id'] ?>">
-                                            <i class="fa-solid fa-file-pen"></i>
+                                            <i class="fa-solid fa-file-pen" title="編輯"></i>
                                         </a>
                                         <a href="javascript: delete_one(<?= $r['id'] ?>)">
-                                            <i class="fa-solid fa-trash"></i>
+                                            <i class="fa-solid fa-trash" title="刪除"></i>
                                         </a>
                                     </div>
                                 </td>
@@ -212,6 +212,34 @@ if ($totalRows) {
                 }
             }
         }
+    }
+
+    let sortOrder = -1; // 初始為降冪排列
+    function sortTable() {
+        const table = document.querySelector('.sortable-table');
+        const rows = Array.from(table.rows).slice(1); // Skip the header row
+        const isNumberColumn = 1; // 假設 ID 列是數字列
+
+        rows.sort((a, b) => {
+            const aValue = isNumberColumn ? parseInt(a.cells[1].textContent, 10) : a.cells[1].textContent;
+            const bValue = isNumberColumn ? parseInt(b.cells[1].textContent, 10) : b.cells[1].textContent;
+
+            return sortOrder * (bValue - aValue);
+        });
+
+        // 移除現有的行
+        rows.forEach(row => table.tBodies[0].appendChild(row));
+
+        // 切換排序順序
+        sortOrder *= -1;
+
+        // 更新 icon 顯示
+        updateSortIcon();
+    }
+
+    function updateSortIcon() {
+        const icon = document.getElementById('sortIcon');
+        icon.className = sortOrder === 1 ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down';
     }
 </script>
 <?php include __DIR__ . '/0.parts/html-foot.php' ?>

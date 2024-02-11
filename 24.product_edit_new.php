@@ -149,7 +149,7 @@ if (empty($r)) {
                                 </select>
                                 <div class="form-text"></div>
                             </div>
-                            <button type="submit" class="btn btn-primary">送出編輯</button>
+                            <button type="submit" class="btn btn-primary">修改</button>
                         </form>
                     </div>
                 </div>

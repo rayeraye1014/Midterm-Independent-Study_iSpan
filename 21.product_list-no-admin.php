@@ -91,7 +91,7 @@ if ($totalRows) {
                 <table id="myTable" class="table table-hover sortable-table">
                     <thead>
                         <tr class="table-info">
-                            <th>ID<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()"></i>
+                            <th>ID<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()" title="變更排序"></i>
                             </th>
                             <th>Seller</th>
                             <th>Main</th>

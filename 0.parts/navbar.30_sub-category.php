@@ -199,6 +199,11 @@ if (!isset($pageName)) {
           <button class="btn btn-outline-secondary btn-sm" type="button" onclick="searchProd()">
             搜尋分類
           </button>
+          <div class="d-flex align-item-center p-1">
+            <a href="32.sub-category_list.php" title="刷新頁面">
+              <i class="fa-solid fa-rotate-left"></i>
+            </a>
+          </div>
         </div>
         <button type="button" class="btn btn-info me-2 btn-sm"><a class="color-a text-decoration-none" href="34.sub-category_add.php">添加子分類</a></button>
         <button type="button" class="btn btn-danger btn-sm"><a class="color-a text-decoration-none" href="javascript:void(0);" onclick="delete_moreThenOne()">一鍵刪除</a></button>

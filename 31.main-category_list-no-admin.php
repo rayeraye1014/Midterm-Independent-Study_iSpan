@@ -92,7 +92,7 @@ if ($totalRows) {
                 <table id="myTable" class="table table-hover sortable-table">
                     <thead>
                         <tr class="table-info">
-                            <th>編號<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()"></th>
+                            <th>編號<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()" title="變更排序"></th>
                             <th>主分類</th>
                             <th>此分類可獲得小碳點數</th>
                         </tr>

@@ -5,7 +5,7 @@ header('Content-Type: application/json');
 $output = [
     'success' => false, # 有沒有新增成功
     'postData' => $_POST,
-    'error' => '',
+    'error' => '資料無修改',
     'code' => 0, # 追踨程式執行的編號
 ];
 

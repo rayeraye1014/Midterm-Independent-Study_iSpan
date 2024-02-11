@@ -91,8 +91,8 @@ if ($totalRows) {
                 <table id="myTable" class="table table-hover sortable-table">
                     <thead>
                         <tr class="table-primary">
-                            <th><i id="selectAll" class="fa-solid fa-check-to-slot"></i></th>
-                            <th>ID<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()"></i>
+                            <th><i id="selectAll" class="fa-solid fa-check-to-slot" title="全選/選取checkBox"></i></th>
+                            <th>ID<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()" title="變更排序"></i>
                             </th>
                             <th>Seller</th>
                             <th>Main</th>
@@ -106,7 +106,7 @@ if ($totalRows) {
                             <th>Created time</th>
                             <th>Updated time</th>
                             <th>Status</th>
-                            <th><i class="fa-solid fa-wrench"></i></th>
+                            <th><i class="fa-solid fa-wrench" title="功能區"></i></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -128,7 +128,7 @@ if ($totalRows) {
                                 <td class="status" id="statusText<?= $r['id'] ?>"><?= $r['status_now'] ?></td>
                                 <td>
                                     <div class="d-flex flex-column">
-                                        <a class="load" name="load" href="javascript: change_status(<?= $r['id'] ?>)" id="statusIcon<?= $r['id'] ?>">
+                                        <a class="load" name="load" href="javascript: change_status(<?= $r['id'] ?>)" id="statusIcon<?= $r['id'] ?>" title="變更上下架">
                                             <?php if ($r['status_now'] == '上架中') : ?>
                                                 <i class="fa-solid fa-turn-down"></i>
                                             <?php else : ?>
@@ -136,10 +136,10 @@ if ($totalRows) {
                                             <?php endif; ?>
                                         </a>
                                         <a href="24.product_edit_new.php?id=<?= $r['id'] ?>">
-                                            <i class="fa-solid fa-file-pen"></i>
+                                            <i class="fa-solid fa-file-pen" title="編輯"></i>
                                         </a>
                                         <a href="javascript: delete_one(<?= $r['id'] ?>)">
-                                            <i class="fa-solid fa-trash"></i>
+                                            <i class="fa-solid fa-trash" title="刪除"></i>
                                         </a>
                                     </div>
                                 </td>

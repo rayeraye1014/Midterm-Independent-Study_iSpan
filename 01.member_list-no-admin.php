@@ -87,7 +87,7 @@ if ($totalRows) {
         <table class="table sortable-table table-hover">
           <thead>
             <tr>
-              <th class="table-info">編號<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()"></th>
+              <th class="table-info">編號<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()" title="變更排序"></th>
               <th class="table-info">姓名</th>
               <th class="table-info">電郵</th>
             </tr>

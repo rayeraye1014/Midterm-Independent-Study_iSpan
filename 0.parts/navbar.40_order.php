@@ -174,7 +174,7 @@ if (!isset($pageName)) {
                         </button>
                         <div class="d-flex align-item-center p-1">
                             <a href="41.order_list.php">
-                                <i class="fa-solid fa-rotate-left"></i>
+                                <i class="fa-solid fa-rotate-left" title="刷新頁面"></i>
                             </a>
                         </div>
                     </div>
@@ -187,7 +187,7 @@ if (!isset($pageName)) {
                         </button>
                         <div class="d-flex align-item-center  p-1">
                             <a href="41.order_list.php">
-                                <i class="fa-solid fa-rotate-left"></i>
+                                <i class="fa-solid fa-rotate-left" title="刷新頁面"></i>
                             </a>
                         </div>
                     </div>

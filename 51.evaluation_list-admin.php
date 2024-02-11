@@ -84,16 +84,16 @@ if ($totalRows) {
                 <table id="myTable" class="table table-hover sortable-table">
                     <thead>
                         <tr class="table-primary">
-                            <th><i id="selectAll" class="fa-solid fa-check-to-slot"></i></a>
+                            <th><i id="selectAll" class="fa-solid fa-check-to-slot" title="全選/選取checkBox"></i></a>
                             </th>
-                            <th>ID<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()"></th>
+                            <th>ID<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()" title="變更排序"></th>
                             <th class="text-nowrap">訂單編號</th>
                             <th class="text-nowrap">訂單類型</th>
                             <th class="text-nowrap">買家編號</th>
                             <th class="text-nowrap">評分分數</th>
                             <th>評論</th>
                             <th class="text-nowrap">評論日期</th>
-                            <th><i class="fa-solid fa-wrench"></i></th>
+                            <th><i class="fa-solid fa-wrench" title="功能區"></i></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -110,10 +110,10 @@ if ($totalRows) {
                                 <td>
                                     <div class="d-flex flex-column">
                                         <a href="54.evaluation_edit.php?id=<?= $r['id'] ?>">
-                                            <i class="fa-solid fa-file-pen"></i>
+                                            <i class="fa-solid fa-file-pen" title="編輯"></i>
                                         </a>
                                         <a href="javascript: delete_one(<?= $r['id'] ?>)">
-                                            <i class="fa-solid fa-trash"></i>
+                                            <i class="fa-solid fa-trash" title="刪除"></i>
                                         </a>
                                     </div>
                                 </td>

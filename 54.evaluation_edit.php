@@ -85,7 +85,7 @@ if (empty($r)) {
                             <div class="mb-3">
                                 <label for="rating" class="form-label">*評分分數</label>
                                 <select class="form-select" aria-label="Default select example" id="rating" name="rating">
-                                    <option value="disabled" selected disabled>請選擇選項</option>
+                                    <option value="disabled" disabled>請選擇選項</option>
                                     <option value="5" <?= $r['rating'] == '5' ? 'selected' : '' ?>>5</option>
                                     <option value="4" <?= $r['rating'] == '4' ? 'selected' : '' ?>>4</option>
                                     <option value="3" <?= $r['rating'] == '3' ? 'selected' : '' ?>>3</option>

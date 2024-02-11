@@ -12,7 +12,7 @@ $delete_ids = isset($_GET['delete_ids']) ? $_GET['delete_ids'] : [];
 foreach ($delete_ids as $id) {
     $id = intval($id);
     if (!empty($id)) {
-        $sql = "DELETE FROM `coupons` WHERE id=$id";
+        $sql = "DELETE FROM `coupon` WHERE id=$id";
         $pdo->query($sql);
     }
 }

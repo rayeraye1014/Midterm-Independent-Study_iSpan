@@ -154,26 +154,6 @@ if ($totalRows) {
 
 <?php include __DIR__ . '/0.parts/script.php' ?>
 <script>
-    function delete_one(id) {
-        if (confirm(`是否要刪除編號為 ${id} 的資料?`)) {
-            location.href = `53.evaluation_delete.php?id=${id}`;
-        }
-    }
-
-    function delete_moreThenOne() {
-        var checkboxes = document.getElementsByName('delete_ids[]');
-        var selectedIds = [];
-        for (var i = 0; i < checkboxes.length; i++) {
-            if (checkboxes[i].checked) {
-                selectedIds.push(checkboxes[i].value);
-            }
-        }
-        if (selectedIds.length > 0 && confirm('是否要刪除所選資料?')) {
-            var idsQueryString = selectedIds.join('&delete_ids[]=');
-            location.href = `53.evaluation_delete.php?delete_ids[]=${idsQueryString}`;
-        }
-    }
-
     function filterOrders() {
         // 獲取下拉式選單的值
         var selectedOrderType = document.getElementById("orderTypeFilter").value;
@@ -248,20 +228,6 @@ if ($totalRows) {
             }
         }
     }
-
-    document.addEventListener("DOMContentLoaded", function() {
-        // 連結icon和checkbox
-        var selectAllIcon = document.getElementById("selectAll");
-        var checkboxes = document.querySelectorAll('input[name="delete_ids[]"]');
-
-        // 添加點擊事件監聽器
-        selectAllIcon.addEventListener("click", function() {
-            //切换所有checkbox選中的狀態
-            checkboxes.forEach(function(checkbox) {
-                checkbox.checked = !checkbox.checked;
-            });
-        });
-    });
 
     function searchProd() {
         // 取得輸入框中的關鍵字

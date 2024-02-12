@@ -76,7 +76,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="mb-3">
                                 <label for="comment" class="form-label">評論</label>
                                 <textarea class="form-control" name="comment" id="comment" cols="30" rows="5"></textarea>
-                                <div class="form-text"></div>
+                                <div id="charCount" class="form-text ms-2"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="createdT" class="form-label">評價建立時間</label>
@@ -182,6 +182,29 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
         // 將格式化後的時間設置到 input 的值中
         document.getElementById('createdT').value = formattedTime;
     });
+
+    document.getElementById('comment').addEventListener('input', function() {
+        //取得textarea中的內容
+        let text = this.value;
+
+        //計算字數
+        let charCount = text.length;
+
+        //限制字數為500字
+        if (charCount > 500) {
+            //截斷多餘的字元
+            text = text.substring(0, 500);
+
+            //更新textarea的值
+            this.value = text;
+
+            //更新字數
+            charCount = 500;
+        }
+
+        //顯示字數
+        document.getElementById('charCount').textContent = "字數" + charCount + "/500";
+    })
 
     const {
         orderId: orderIdEl,

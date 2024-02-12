@@ -45,6 +45,7 @@ $pageName = 'add';
               <div class="mb-3">
                 <label for="address" class="form-label">地址</label>
                 <textarea class="form-control" name="address" id="address" cols="30" rows="3"></textarea>
+                <div id="charCount" class="form-text ms-2 mt-2"></div>
               </div>
               <button type="submit" class="btn btn-primary">新增</button>
             </form>
@@ -99,6 +100,29 @@ $pageName = 'add';
 
 <?php include __DIR__ . '/0.parts/script.php' ?>
 <script>
+  document.getElementById('address').addEventListener('input', function() {
+    //取得textarea中的內容
+    let text = this.value;
+
+    //計算字數
+    let charCount = text.length;
+
+    //限制字數為255字
+    if (charCount > 255) {
+      //截斷多餘的字元
+      text = text.substring(0, 255);
+
+      //更新textarea的值
+      this.value = text;
+
+      //更新字數
+      charCount = 255;
+    }
+
+    //顯示字數
+    document.getElementById('charCount').textContent = "字數" + charCount + "/255";
+  })
+
   const {
     name: nameEl,
     email: emailEl,

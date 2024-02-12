@@ -60,6 +60,7 @@ if (empty($r)) {
               <div class="mb-3">
                 <label for="address" class="form-label">地址</label>
                 <textarea class="form-control" name="address" id="address" cols="30" rows="3"><?= $r['address'] ?></textarea>
+                <div id="charCount" class="form-text ms-2"></div>
               </div>
               <button type="submit" class="btn btn-primary">修改</button>
             </form>
@@ -120,7 +121,32 @@ if (empty($r)) {
     } else {
       location.href = '01.member_list.php';
     }
+  }
 
+  document.addEventListener('DOMContentLoaded', function() {
+    // 頁面載入時計算並顯示字數
+    updateCounter();
+
+    // 監聽 textarea 的 input 事件
+    document.getElementById('address').addEventListener('input', function() {
+      // 當文字改變時再次計算並更新顯示的字數
+      updateCounter();
+    });
+  });
+
+  function updateCounter() {
+    let textarea = document.getElementById('address');
+    let charCount = document.getElementById('charCount');
+    let maxLength = 255;
+
+    // 取得 textarea 的值
+    let text = textarea.value;
+
+    // 計算字數
+    let currentLength = text.length;
+
+    // 更新顯示的計數
+    charCount.textContent = '字數' + currentLength + '/' + maxLength;
   }
 
   const {

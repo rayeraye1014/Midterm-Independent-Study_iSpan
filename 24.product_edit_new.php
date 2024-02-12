@@ -117,7 +117,7 @@ if (empty($r)) {
                             <div class="mb-3">
                                 <label for="intro" class="form-label">商品介紹</label>
                                 <textarea class="form-control" name="intro" id="intro" cols="30" rows="5"><?= $r['product_intro'] ?></textarea>
-                                <div class="form-text"></div>
+                                <div id="charCount" class="form-text ms-2"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="carbonPoints" class="form-label">*可獲得小碳點數</label>
@@ -251,6 +251,31 @@ if (empty($r)) {
         });
     });
 
+    document.addEventListener('DOMContentLoaded', function() {
+        // 頁面載入時計算並顯示字數
+        updateCounter();
+
+        // 監聽 textarea 的 input 事件
+        document.getElementById('intro').addEventListener('input', function() {
+            // 當文字改變時再次計算並更新顯示的字數
+            updateCounter();
+        });
+    });
+
+    function updateCounter() {
+        let textarea = document.getElementById('intro');
+        let charCount = document.getElementById('charCount');
+        let maxLength = 500;
+
+        // 取得 textarea 的值
+        let text = textarea.value;
+
+        // 計算字數
+        let currentLength = text.length;
+
+        // 更新顯示的計數
+        charCount.textContent = '字數' + currentLength + '/' + maxLength;
+    }
 
     function uploadFile() {
         const container = document.querySelector(".card-container");

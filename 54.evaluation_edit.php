@@ -97,7 +97,7 @@ if (empty($r)) {
                             <div class="mb-3">
                                 <label for="comment" class="form-label">評論</label>
                                 <textarea class="form-control" name="comment" id="comment" cols="30" rows="5" value="<?= $r['comments'] ?>"><?= $r['comments'] ?></textarea>
-                                <div class="form-text"></div>
+                                <div id="charCount" class="form-text ms-2"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="createdT" class="form-label">評價建立時間</label>
@@ -203,6 +203,32 @@ if (empty($r)) {
         // 將格式化後的時間設置到 input 的值中
         document.getElementById('createdT').value = formattedTime;
     });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // 頁面載入時計算並顯示字數
+        updateCounter();
+
+        // 監聽 textarea 的 input 事件
+        document.getElementById('comment').addEventListener('input', function() {
+            // 當文字改變時再次計算並更新顯示的字數
+            updateCounter();
+        });
+    });
+
+    function updateCounter() {
+        let textarea = document.getElementById('comment');
+        let charCount = document.getElementById('charCount');
+        let maxLength = 500;
+
+        // 取得 textarea 的值
+        let text = textarea.value;
+
+        // 計算字數
+        let currentLength = text.length;
+
+        // 更新顯示的計數
+        charCount.textContent = '字數' + currentLength + '/' + maxLength;
+    }
 
     const {
         orderId: orderIdEl,

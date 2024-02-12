@@ -94,7 +94,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <div class="mb-3">
                                 <label for="intro" class="form-label">商品介紹</label>
                                 <textarea class="form-control" name="intro" id="intro" cols="30" rows="5"></textarea>
-                                <div class="form-text"></div>
+                                <div id="charCount" class="form-text ms-2 mt-2"></div>
                             </div>
                             <div class="mb-3">
                                 <label for="carbonPoints" class="form-label">*可獲得小碳點數</label>
@@ -216,6 +216,29 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             }
         });
     });
+
+    document.getElementById('intro').addEventListener('input', function() {
+        //取得textarea中的內容
+        let text = this.value;
+
+        //計算字數
+        let charCount = text.length;
+
+        //限制字數為500字
+        if (charCount > 500) {
+            //截斷多餘的字元
+            text = text.substring(0, 500);
+
+            //更新textarea的值
+            this.value = text;
+
+            //更新字數
+            charCount = 500;
+        }
+
+        //顯示字數
+        document.getElementById('charCount').textContent = "字數" + charCount + "/500";
+    })
 
     const container = document.querySelector(".card-container");
 

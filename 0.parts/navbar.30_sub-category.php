@@ -206,6 +206,7 @@ if (!isset($pageName)) {
           </div>
         </div>
         <button type="button" class="btn btn-info me-2 btn-sm"><a class="color-a text-decoration-none" href="34.sub-category_add.php">添加子分類</a></button>
+        <button id="importBtn" type="button" class="btn btn-secondary btn-sm me-2">批次匯入CSV</button>
         <button id="exportBtn" type="button" class="btn btn-secondary btn-sm me-2">匯出csv表單</button>
         <button type="button" class="btn btn-danger btn-sm"><a class="color-a text-decoration-none" href="javascript:void(0);" onclick="delete_moreThenOne()">一鍵刪除</a></button>
       </div>

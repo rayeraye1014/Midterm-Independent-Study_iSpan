@@ -168,6 +168,47 @@ if ($totalRows) {
     </div>
   </div>
 </div>
+
+<!--Import Modal for success-->
+<div class="modal fade" id="successImport" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">匯入結果</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-success" role="alert" id="successInfoImport">
+          csv匯入成功
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="31.main-category_list.php" class="btn btn-primary">回到主分類列表頁</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Import Modal for failure-->
+<div class="modal fade" id="failureImport" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">匯入結果</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-danger" role="alert" id="failureInfoImport">
+          csv匯入失敗
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="31.main-category_list.php" class="btn btn-primary">回到主分類列表頁</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <?php include __DIR__ . '/0.parts/script.php' ?>
 <script>
   function delete_one(id) {
@@ -189,6 +230,88 @@ if ($totalRows) {
       location.href = `35.main-category_delete.php?delete_ids[]=${idsQueryString}`;
     }
   }
+
+  document.getElementById('importBtn').addEventListener('click', function() {
+    // 執行批次匯入CSV的操作
+    batchImportCSV();
+  });
+
+  function batchImportCSV() {
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = '.csv';
+
+    fileInput.addEventListener('change', function() {
+      const file = fileInput.files[0];
+      if (file) {
+        const formData = new FormData();
+        formData.append('csvFile', file);
+
+        fetch('39.importCSV-main.php', {
+            method: 'POST',
+            body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              successModalImport.show();
+            } else {
+              document.querySelector('#failureInfoImport').innerHTML = `發生錯誤: ${error.message}`;
+              failureModalImport.show();
+            }
+          })
+          .catch(error => {
+            document.querySelector('#failureInfoImport').innerHTML = `發生錯誤: ${error.message}`;
+            failureModalImport.show();
+          });
+      }
+    });
+
+    fileInput.click();
+  }
+
+  document.getElementById('exportBtn').addEventListener('click', function() {
+    if (confirm(`是否將會員列表資料匯出csv檔?`)) {
+      // 使用 fetch 進行 AJAX 請求
+      fetch('07.file_csv-member.php')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.blob();
+        })
+        .then(data => {
+          // 建立一個 Blob URL，並創建一個連結
+          const blobUrl = URL.createObjectURL(data);
+          const a = document.createElement('a');
+          a.href = blobUrl;
+          a.download = 'member_list.csv';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          // 顯示成功訊息
+          successModalExport.show();
+        })
+        .catch(error => {
+          document.querySelector('#failureInfoExport').innerHTML = `發生錯誤: ${error.message}`;
+          failureModalExport.show();
+        });
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", function() {
+    // 連結icon和checkbox
+    var selectAllIcon = document.getElementById("selectAll");
+    var checkboxes = document.querySelectorAll('input[name="delete_ids[]"]');
+
+    // 添加點擊事件監聽器
+    selectAllIcon.addEventListener("click", function() {
+      //切换所有checkbox選中的狀態
+      checkboxes.forEach(function(checkbox) {
+        checkbox.checked = !checkbox.checked;
+      });
+    });
+  });
 
   document.getElementById('exportBtn').addEventListener('click', function() {
     if (confirm(`是否將主分類列表資料匯出csv檔?`)) {
@@ -288,5 +411,7 @@ if ($totalRows) {
 
   const successModalExport = new bootstrap.Modal('#successExport');
   const failureModalExport = new bootstrap.Modal('#failureExport');
+  const successModalImport = new bootstrap.Modal('#successImport');
+  const failureModalImport = new bootstrap.Modal('#failureImport');
 </script>
 <?php include __DIR__ . '/0.parts/html-foot.php' ?>

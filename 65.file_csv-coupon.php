@@ -30,21 +30,27 @@ $rs->execute();
 // 寫入 CSV 的標頭
 $csvData = "id,couponType,couponName,couponDiscount,startDate,endDate,couponStatus\n";
 
+
 // 寫入 CSV 的內容
 while ($row = $rs->fetch(PDO::FETCH_ASSOC)) {
 
     $csvData .= implode(',', $row) . "\n";
 }
 
+// 寫入檔案
+$fp = fopen('coupon_list.csv', 'w');
+fprintf($fp, chr(0xEF) . chr(0xBB) . chr(0xBF)); // 添加 BOM
+fwrite($fp, $csvData);
+fclose($fp);
+
 // 設定網頁的 Content-Type 為 CSV
 header('Content-type: text/csv; charset=utf-8');
 
 // 設定檔案名稱，並告知瀏覽器開啟下載對話框
 header("Content-Disposition: attachment; filename=coupon_list.csv");
-$fp = fopen('php://output', 'w');
-fprintf($fp, chr(0xEF) . chr(0xBB) . chr(0xBF)); // 添加 BOM
-fwrite($fp, $csvData);
-fclose($fp);
 
-// 輸出 CSV 資料
-echo $csvData;
+// 直接回應 CSV 內容
+readfile('coupon_list.csv');
+
+// 結束程式
+exit;

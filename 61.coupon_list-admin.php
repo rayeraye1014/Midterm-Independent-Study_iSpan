@@ -191,7 +191,7 @@ if ($totalRows) {
     document.getElementById('exportBtn').addEventListener('click', function() {
         if (confirm(`是否將優惠券列表資料匯出csv檔?`)) {
             // 使用 fetch 進行 AJAX 請求
-            fetch('65.file_csv-coupon.php')
+            fetch(`65.file_csv-coupon.php`)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error(`HTTP error! Status: ${response.status}`);

@@ -138,46 +138,6 @@ if ($totalRows) {
     </div>
 </div>
 
-<!-- Modal for success-->
-<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5">更新結果</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="alert alert-success" role="alert">
-                    變更訂單狀態成功
-                </div>
-            </div>
-            <div class="modal-footer">
-                <a href="41.order_list.php" class="btn btn-primary">回到訂單列表頁</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal for failure-->
-<div class="modal fade" id="failureModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5">更新結果</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="alert alert-danger" role="alert" id="failureInfo">
-                    變更訂單狀態失敗
-                </div>
-            </div>
-            <div class="modal-footer">
-                <a href="41.order_list.php" class="btn btn-primary">回到訂單列表頁</a>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!--Export Modal for success-->
 <div class="modal fade" id="successExport" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">

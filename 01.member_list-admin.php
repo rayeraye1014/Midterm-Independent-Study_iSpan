@@ -174,6 +174,46 @@ if ($totalRows) {
     </div>
   </div>
 </div>
+
+<!--Import Modal for success-->
+<div class="modal fade" id="successImport" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">匯入結果</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-success" role="alert" id="successInfoImport">
+          csv匯入成功
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="01.member_list.php" class="btn btn-primary">回到會員列表頁</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Import Modal for failure-->
+<div class="modal fade" id="failureImport" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">匯入結果</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-danger" role="alert" id="failureInfoImport">
+          csv匯入失敗
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="01.member_list.php" class="btn btn-primary">回到會員列表頁</a>
+      </div>
+    </div>
+  </div>
+</div>
 <?php include __DIR__ . '/0.parts/script.php' ?>
 
 <script>
@@ -195,6 +235,45 @@ if ($totalRows) {
       var idsQueryString = selectedIds.join('&delete_ids[]=');
       location.href = `04.member_delete.php?delete_ids[]=${idsQueryString}`;
     }
+  }
+
+  document.getElementById('importBtn').addEventListener('click', function() {
+    // 執行批次匯入CSV的操作
+    batchImportCSV();
+  });
+
+  function batchImportCSV() {
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = '.csv';
+
+    fileInput.addEventListener('change', function() {
+      const file = fileInput.files[0];
+      if (file) {
+        const formData = new FormData();
+        formData.append('csvFile', file);
+
+        fetch('08.importCSV-member.php', {
+            method: 'POST',
+            body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              successModalImport.show();
+            } else {
+              document.querySelector('#failureInfoImport').innerHTML = `發生錯誤: ${error.message}`;
+              failureModalImport.show();
+            }
+          })
+          .catch(error => {
+            document.querySelector('#failureInfoImport').innerHTML = `發生錯誤: ${error.message}`;
+            failureModalImport.show();
+          });
+      }
+    });
+
+    fileInput.click();
   }
 
   document.getElementById('exportBtn').addEventListener('click', function() {
@@ -296,5 +375,7 @@ if ($totalRows) {
 
   const successModalExport = new bootstrap.Modal('#successExport');
   const failureModalExport = new bootstrap.Modal('#failureExport');
+  const successModalImport = new bootstrap.Modal('#successImport');
+  const failureModalImport = new bootstrap.Modal('#failureImport');
 </script>
 <?php include __DIR__ . '/0.parts/html-foot.php' ?>

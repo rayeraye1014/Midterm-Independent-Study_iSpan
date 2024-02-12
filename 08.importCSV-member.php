@@ -46,56 +46,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['csvFile'])) {
             }
 
             $birthday = $row[3]; // CSV文件的第4列是生日
-            if (!empty($birthday)) {
-                $birthday = strtotime($birthday);
-                if ($birthday === false) {
-                    # 不是合法的日期字串
-                    $birthday = null;
-                } else {
-                    $birthday = date('Y-m-d', $birthday);
-                }
-            }
+            $birthday = !empty($birthday) ? date('Y-m-d', strtotime($birthday)) : null;
 
             $address = $row[4]; // CSV文件的第5列是地址
+            if (strlen($address) < 3) {
+                $output['error'] = '請填寫正確的地址ˋ';
+                $output['code'] = 600;
+                echo json_encode($output, JSON_UNESCAPED_UNICODE);
+                exit;
+            }
 
             $createdAt = $row[5]; // CSV文件的第6列是創建時間
-            if (!empty($createdAt)) {
-                $createdAt = strtotime($createdAt);
-                if ($createdAt === false) {
-                    $createdAt = null;
-                } else {
-                    $createdAt = date('Y-m-d', $createdAt);
-                }
-            }
+            $createdAt = !empty($createdAt) ? date('Y-m-d', strtotime($createdAt)) : null;
 
             // 在這裡執行數據庫插入操作，使用SQL語句
             // 根據數據庫結構編寫插入
-            if (!empty($createdAt)) {
+            if ($createdAt !== null) {
                 $sql = "INSERT INTO address_book 
             (`name`, `email`, `mobile`, `birthday`, `address`, `created_at`) 
             VALUES 
             (?, ?, ?, ?, ?, ?)";
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute([$name, $email, $mobile, $birthday, $address, $createdAt]);
-
-                $output['success'] = true;
             } else {
                 $sql = "INSERT INTO address_book 
             (`name`, `email`, `mobile`, `birthday`, `address`, `created_at`) 
-            VALUES 
+            VALUES
             (?, ?, ?, ?, ?, Now())";
                 $stmt = $pdo->prepare($sql);
-                $stmt->execute([$name, $email, $mobile, $birthday, $address, $createdAt]);
-
-                $output['success'] = true;
+                $stmt->execute([$name, $email, $mobile, $birthday, $address]);
             }
         }
 
         $output['success'] = true;
     } else {
+
         $output['error'] = '上傳文件時出错：' . $csvFile['error'];
     }
 } else {
+
     $output['error'] = '無效的請求';
 }
 

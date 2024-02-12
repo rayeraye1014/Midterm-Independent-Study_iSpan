@@ -285,5 +285,8 @@ if ($totalRows) {
     const icon = document.getElementById('sortIcon');
     icon.className = sortOrder === 1 ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down';
   }
+
+  const successModalExport = new bootstrap.Modal('#successExport');
+  const failureModalExport = new bootstrap.Modal('#failureExport');
 </script>
 <?php include __DIR__ . '/0.parts/html-foot.php' ?>

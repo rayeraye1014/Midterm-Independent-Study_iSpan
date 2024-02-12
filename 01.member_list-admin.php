@@ -212,7 +212,7 @@ if ($totalRows) {
           const blobUrl = URL.createObjectURL(data);
           const a = document.createElement('a');
           a.href = blobUrl;
-          a.download = 'product_list.csv';
+          a.download = 'member_list.csv';
           document.body.appendChild(a);
           a.click();
           document.body.removeChild(a);

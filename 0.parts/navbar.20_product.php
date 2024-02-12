@@ -231,7 +231,7 @@ if (!isset($pageName)) {
                     </div>
                     <div class="">
                         <button type="button" class="btn btn-info me-2 btn-sm"><a class="color-a text-decoration-none" href="22.product_add.php">添加商品</a></button>
-                        <button id="exportBtn" type="button" class="btn btn-info btn-sm">匯出csv表單</button>
+                        <button id="exportBtn" type="button" class="btn btn-secondary btn-sm">匯出csv表單</button>
                     </div>
                 </div>
             </div>

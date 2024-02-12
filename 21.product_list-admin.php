@@ -257,30 +257,32 @@ if ($totalRows) {
     }
 
     document.getElementById('exportBtn').addEventListener('click', function() {
-        // 使用 fetch 進行 AJAX 請求
-        fetch('file_csv-product.php')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-                return response.blob();
-            })
-            .then(data => {
-                // 建立一個 Blob URL，並創建一個連結
-                const blobUrl = URL.createObjectURL(data);
-                const a = document.createElement('a');
-                a.href = blobUrl;
-                a.download = 'product_list.csv';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                // 顯示成功訊息
-                successModalExport.show();
-            })
-            .catch(error => {
-                document.querySelector('#failureInfoExport').innerHTML = `發生錯誤: ${error.message}`;
-                failureModalExport.show();
-            });
+        if (confirm(`是否將產品列表資料匯出csv檔?`)) {
+            // 使用 fetch 進行 AJAX 請求
+            fetch('26.file_csv-product.php')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.blob();
+                })
+                .then(data => {
+                    // 建立一個 Blob URL，並創建一個連結
+                    const blobUrl = URL.createObjectURL(data);
+                    const a = document.createElement('a');
+                    a.href = blobUrl;
+                    a.download = 'product_list.csv';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    // 顯示成功訊息
+                    successModalExport.show();
+                })
+                .catch(error => {
+                    document.querySelector('#failureInfoExport').innerHTML = `發生錯誤: ${error.message}`;
+                    failureModalExport.show();
+                });
+        }
     });
 
     document.addEventListener("DOMContentLoaded", function() {

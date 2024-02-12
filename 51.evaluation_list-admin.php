@@ -140,7 +140,7 @@ if ($totalRows) {
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="32.sub-category_list.php" class="btn btn-primary">回到子分類列表頁</a>
+                <a href="51.evaluation_list.php" class="btn btn-primary">回到評價列表頁</a>
             </div>
         </div>
     </div>
@@ -160,7 +160,7 @@ if ($totalRows) {
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="32.sub-category_list.php" class="btn btn-primary">回到主分類列表頁</a>
+                <a href="51.evaluation_list.php" class="btn btn-primary">回到評價列表頁</a>
             </div>
         </div>
     </div>
@@ -384,9 +384,6 @@ if ($totalRows) {
         icon.className = sortOrder === 1 ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down';
     }
 
-
-    const successModal = new bootstrap.Modal('#successModal');
-    const failureModal = new bootstrap.Modal('#failureModal');
     const successModalExport = new bootstrap.Modal('#successExport');
     const failureModalExport = new bootstrap.Modal('#failureExport');
 </script>

@@ -470,9 +470,6 @@ if ($totalRows) {
         }
     }
 
-
-    const successModal = new bootstrap.Modal('#successModal');
-    const failureModal = new bootstrap.Modal('#failureModal');
     const successModalExport = new bootstrap.Modal('#successExport');
     const failureModalExport = new bootstrap.Modal('#failureExport');
 </script>

@@ -69,13 +69,13 @@ if ($totalRows) {
                                 <th>Main</th>
                                 <th>Sub</th>
                                 <th>Photos</th>
-                                <th>Product name</th>
+                                <th>ProductName</th>
                                 <th>Price</th>
                                 <th>Qty</th>
                                 <th>Intro</th>
-                                <th class="text-nowrap">C points</th>
-                                <th>Created time</th>
-                                <th>Updated time</th>
+                                <th class="text-nowrap">Cpoints</th>
+                                <th>CreatedTime</th>
+                                <th>UpdatedTime</th>
                                 <th>Status</th>
                                 <th><i class="fa-solid fa-wrench" title="功能區"></i></th>
                             </tr>
@@ -169,13 +169,13 @@ if ($totalRows) {
                                 <th>Main</th>
                                 <th>Sub</th>
                                 <th>Photos</th>
-                                <th>Product name</th>
+                                <th>ProductName</th>
                                 <th>Price</th>
                                 <th>Qty</th>
                                 <th>Intro</th>
-                                <th class="text-nowrap">C points</th>
-                                <th>Created time</th>
-                                <th>Updated time</th>
+                                <th class="text-nowrap">Cpoints</th>
+                                <th>CreatedTime</th>
+                                <th>UpdatedTime</th>
                                 <th>Status</th>
                                 <th><i class="fa-solid fa-wrench" title="功能區"></i></th>
                             </tr>
@@ -186,7 +186,7 @@ if ($totalRows) {
                                     <td><input class="form-check-input me-1" type="checkbox" value="<?= $r['id'] ?>" id="flexCheck<?= $r['id'] ?>" name="delete_ids[]"></td>
                                     <td><?= $r['id'] ?></td>
                                     <td><?= $r['seller_id'] ?></td>
-                                    <td><?= $r['main'] ?></td>
+                                    <td class="text-nowrap"><?= $r['main'] ?></td>
                                     <td><?= $r['sub_category'] ?></td>
                                     <td><img class="td-img" src="./02.imgs/<?= explode(",", $r['product_photos'])[0] ?>" alt=""></td>
                                     <td><?= $r['product_name'] ?></td>
@@ -196,7 +196,7 @@ if ($totalRows) {
                                     <td><?= $r['carbon_points_available'] ?></td>
                                     <td><?= $r['created_at'] ?></td>
                                     <td class="editTime" id="editTime<?= $r['id'] ?>"><?= $r['edit_new'] ?></td>
-                                    <td class="status" id="statusText<?= $r['id'] ?>"><?= $r['status_now'] ?></td>
+                                    <td class="status text-nowrap" id="statusText<?= $r['id'] ?>"><?= $r['status_now'] ?></td>
                                     <td>
                                         <div class="d-flex flex-column">
                                             <a class="load" name="load" href="javascript: change_status(<?= $r['id'] ?>)" id="statusIcon<?= $r['id'] ?>" title="變更上下架">

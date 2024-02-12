@@ -88,7 +88,7 @@ if (!empty($_POST) && !empty($_POST['id'])) {
     }
 
     if ($_POST['carbonPoints'] == "") {
-        $output['error'] = '請填寫小碳點數量';
+        $output['error'] = '請選擇小碳點數量';
         $output['code'] = 800;
         echo json_encode($output, JSON_UNESCAPED_UNICODE);
         exit;

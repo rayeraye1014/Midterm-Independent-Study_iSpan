@@ -378,8 +378,8 @@ if (empty($r)) {
 
         if (carbonPointsEl.value && carbonPointsEl.value == "disabled") {
             isPass = false;
-            carbon_pointsEl.style.border = '1px solid red';
-            carbon_pointsEl.nextElementSibling.innerHTML = '請選擇小碳點數!';
+            carbonPointsEl.style.border = '1px solid red';
+            carbonPointsEl.nextElementSibling.innerHTML = '請選擇小碳點數!';
         }
 
         if (statusEl.value && statusEl.value == "disabled") {

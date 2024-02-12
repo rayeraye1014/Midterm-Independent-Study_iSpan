@@ -41,8 +41,6 @@ if (!empty($_POST)) {
     }
   }
 
-
-
   $sql = "INSERT INTO address_book 
       (`name`, `email`, `mobile`, `birthday`, `address`, `created_at`) 
       VALUES 

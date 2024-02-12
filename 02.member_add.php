@@ -21,7 +21,7 @@ $pageName = 'add';
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">新增通訊錄</h5>
-            <form name="form1" onsubmit="sendData(e)"> <!-- 因為有下onsubmit，故action和methon就沒有用處了，可以刪除 -->
+            <form name="form1" onsubmit="sendData(event)"> <!-- 因為有下onsubmit，故action和methon就沒有用處了，可以刪除 -->
               <div class="mb-3">
                 <label for="name" class="form-label">*姓名</label>
                 <input type="text" class="form-control" id="name" name="name" require>

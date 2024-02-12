@@ -1,6 +1,9 @@
 <?php
 require __DIR__ . '/0.parts/admin-require.php';
 require __DIR__ . '/0.parts/pdo-connect.php';
+// 獲取 從evaluation list來的 URL 參數 id 的值
+$order_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
 $title = '訂單列表';
 $pageName = 'order_list';
 
@@ -25,8 +28,15 @@ if ($totalRows) {
     }
 
     # ``可以不用標，這個只用來標示資料表名稱；''單引號只可以用來標示值
-    $sql = sprintf("SELECT orders.id, order_type, orders.seller_id, buyer_id, product_id, shipment_fee, payment_status, shipment_status, order_date, complete_status, complete_date, product_name, product_price FROM orders JOIN products ON orders.product_id = products.id ORDER BY id DESC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
-    $rows = $pdo->query($sql)->fetchAll();
+    if ($order_id) {
+        // 如果有傳遞 id 參數，只顯示該行資料
+        $sql = sprintf("SELECT orders.id, order_type, orders.seller_id, buyer_id, product_id, shipment_fee, payment_status, shipment_status, order_date, complete_status, complete_date, product_name, product_price FROM orders JOIN products ON orders.product_id = products.id WHERE orders.id = %d", $order_id);
+        $row = $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+    } else {
+        // 如果沒有傳遞 id 參數，顯示一般訂單列表
+        $sql = sprintf("SELECT orders.id, order_type, orders.seller_id, buyer_id, product_id, shipment_fee, payment_status, shipment_status, order_date, complete_status, complete_date, product_name, product_price FROM orders JOIN products ON orders.product_id = products.id ORDER BY id DESC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
+        $rows = $pdo->query($sql)->fetchAll();
+    }
 }
 
 
@@ -42,99 +52,159 @@ if ($totalRows) {
         }
     </style>
     <div class="container-fluid table-bordered table-striped overflow-auto">
-        <div class="row mt-3">
-            <div class="col">
-                <h6>共<?= $totalRows ?>筆</h6>
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="?page=1">
-                                <i class="fa-solid fa-angles-left"></i>
-                            </a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="?page=<?= $page != 1 ? $page - 1 : 1 ?>">
-                                <i class="fa-solid fa-angle-left"></i>
-                            </a>
-                        </li>
-                        <?php $visiblePageRange = 5;   #每頁只可看到5頁頁碼
-                        $startPage = max(1, $page - floor($visiblePageRange / 2));
-                        $endPage = min($totalPages, $startPage + $visiblePageRange - 1); ?>
-                        <?php for ($i = $startPage; $i <= $endPage; $i++) : ?>
-                            <li class="page-item <?= $page == $i ? 'active' : '' ?>">
-                                <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
-                            </li>
-                        <?php endfor ?>
-                        <li class="page-item">
-                            <a class="page-link" href="?page=<?= $page != 45 ? $page + 1 : 45 ?>">
-                                <i class="fa-solid fa-angle-right"></i>
-                            </a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="?page=45">
-                                <i class="fa-solid fa-angles-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <table id="myTable" class="table table-hover sortable-table">
-                    <thead>
-                        <tr class="table-primary">
-                            <th><i id="selectAll" class="fa-solid fa-check-to-slot" title="全選/選取checkBox"></i></a>
-                            </th>
-                            <th>ID<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()" title="變更排序"></th>
-                            <th class="text-nowrap">訂單類型</th>
-                            <th>賣家編號</th>
-                            <th>買家編號</th>
-                            <th>商品名稱</th>
-                            <th class="text-nowrap">商品金額</th>
-                            <th class="text-nowrap">運費</th>
-                            <th class="text-nowrap">總金額</th>
-                            <th class="text-nowrap">付款狀態</th>
-                            <th class="text-nowrap">運送狀態</th>
-                            <th>下單日期</th>
-                            <th class="text-nowrap">訂單狀態</th>
-                            <th>訂單完成日期</th>
-                            <th><i class="fa-solid fa-wrench" title="功能區"></i></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($rows as $r) : ?>
+        <?php if ($order_id) : ?>
+            <div class="row mt-3">
+                <div class="col">
+                    <!-- 顯示單一行的內容 -->
+                    <h2>訂單詳細資料</h2>
+                    <table id="myTable" class="table table-hover sortable-table">
+                        <thead>
+                            <tr class="table-primary">
+                                <th><i id="selectAll" class="fa-solid fa-check-to-slot" title="全選/選取checkBox"></i></a>
+                                </th>
+                                <th>ID<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()" title="變更排序"></th>
+                                <th class="text-nowrap">訂單類型</th>
+                                <th>賣家編號</th>
+                                <th>買家編號</th>
+                                <th>商品名稱</th>
+                                <th class="text-nowrap">商品金額</th>
+                                <th class="text-nowrap">運費</th>
+                                <th class="text-nowrap">總金額</th>
+                                <th class="text-nowrap">付款狀態</th>
+                                <th class="text-nowrap">運送狀態</th>
+                                <th>下單日期</th>
+                                <th class="text-nowrap">訂單狀態</th>
+                                <th>訂單完成日期</th>
+                                <th><i class="fa-solid fa-wrench" title="功能區"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             <tr>
-                                <td><input class="form-check-input me-1" type="checkbox" value="<?= $r['id'] ?>" id="flexCheck<?= $r['id'] ?>" name="delete_ids[]"></td>
-                                <td><?= $r['id'] ?></td>
-                                <td><?= $r['order_type'] ?></td>
-                                <td><?= $r['seller_id'] ?></td>
-                                <td><?= $r['buyer_id'] ?></td>
-                                <td><?= $r['product_name'] ?></td>
-                                <td><?= ($r['order_type'] == '以物易物') ? '0' : $r['product_price'] ?></td>
-                                <td><?= $r['shipment_fee'] ?></td>
-                                <td><?= ($r['order_type'] == '以物易物') ? '0' + $r['shipment_fee'] : $r['product_price'] + $r['shipment_fee'] ?></td>
-                                <td><?= $r['payment_status'] ?></td>
-                                <td><?= $r['shipment_status'] ?></td>
-                                <td><?= $r['order_date'] ?></td>
-                                <td class="completeStatus" id="statusText<?= $r['id'] ?>"><?= $r['complete_status'] ?></td>
-                                <td id="completeTime<?= $r['id'] ?>" class="completeTime"><?= $r['complete_date'] ?></td>
+                                <td><input class="form-check-input me-1" type="checkbox" value="<?= $row['id'] ?>" id="flexCheck<?= $row['id'] ?>" name="delete_ids[]"></td>
+                                <td><?= $row['id'] ?></td>
+                                <td><?= $row['order_type'] ?></td>
+                                <td><?= $row['seller_id'] ?></td>
+                                <td><?= $row['buyer_id'] ?></td>
+                                <td><?= $row['product_name'] ?></td>
+                                <td><?= ($row['order_type'] == '以物易物') ? '0' : $row['product_price'] ?></td>
+                                <td><?= $row['shipment_fee'] ?></td>
+                                <td><?= ($row['order_type'] == '以物易物') ? '0' + $row['shipment_fee'] : $row['product_price'] + $row['shipment_fee'] ?></td>
+                                <td><?= $row['payment_status'] ?></td>
+                                <td><?= $row['shipment_status'] ?></td>
+                                <td><?= $row['order_date'] ?></td>
+                                <td class="completeStatus" id="statusText<?= $row['id'] ?>"><?= $row['complete_status'] ?></td>
+                                <td id="completeTime<?= $row['id'] ?>" class="completeTime"><?= $row['complete_date'] ?></td>
                                 <td>
                                     <div class="d-flex flex-column">
-                                        <a href="44.order_edit.php?id=<?= $r['id'] ?>">
+                                        <a href="44.order_edit.php?id=<?= $row['id'] ?>">
                                             <i class="fa-solid fa-file-pen" title="編輯"></i>
                                         </a>
-                                        <a href="javascript: delete_one(<?= $r['id'] ?>)">
+                                        <a href="javascript: delete_one(<?= $row['id'] ?>)">
                                             <i class="fa-solid fa-trash" title="刪除"></i>
                                         </a>
                                     </div>
                                 </td>
                             </tr>
-                        <?php endforeach ?>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
+        <?php else : ?>
+            <!-- 顯示一般訂單列表的內容 -->
+            <div class="row mt-3">
+                <div class="col">
+                    <h6>共<?= $totalRows ?>筆</h6>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" href="?page=1">
+                                    <i class="fa-solid fa-angles-left"></i>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=<?= $page != 1 ? $page - 1 : 1 ?>">
+                                    <i class="fa-solid fa-angle-left"></i>
+                                </a>
+                            </li>
+                            <?php $visiblePageRange = 5;   #每頁只可看到5頁頁碼
+                            $startPage = max(1, $page - floor($visiblePageRange / 2));
+                            $endPage = min($totalPages, $startPage + $visiblePageRange - 1); ?>
+                            <?php for ($i = $startPage; $i <= $endPage; $i++) : ?>
+                                <li class="page-item <?= $page == $i ? 'active' : '' ?>">
+                                    <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                                </li>
+                            <?php endfor ?>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=<?= $page != 45 ? $page + 1 : 45 ?>">
+                                    <i class="fa-solid fa-angle-right"></i>
+                                </a>
+                            </li>
+                            <li class="page-item">
+                                <a class="page-link" href="?page=45">
+                                    <i class="fa-solid fa-angles-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <table id="myTable" class="table table-hover sortable-table">
+                        <thead>
+                            <tr class="table-primary">
+                                <th><i id="selectAll" class="fa-solid fa-check-to-slot" title="全選/選取checkBox"></i></a>
+                                </th>
+                                <th>ID<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()" title="變更排序"></th>
+                                <th class="text-nowrap">訂單類型</th>
+                                <th>賣家編號</th>
+                                <th>買家編號</th>
+                                <th>商品名稱</th>
+                                <th class="text-nowrap">商品金額</th>
+                                <th class="text-nowrap">運費</th>
+                                <th class="text-nowrap">總金額</th>
+                                <th class="text-nowrap">付款狀態</th>
+                                <th class="text-nowrap">運送狀態</th>
+                                <th>下單日期</th>
+                                <th class="text-nowrap">訂單狀態</th>
+                                <th>訂單完成日期</th>
+                                <th><i class="fa-solid fa-wrench" title="功能區"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($rows as $r) : ?>
+                                <tr>
+                                    <td><input class="form-check-input me-1" type="checkbox" value="<?= $r['id'] ?>" id="flexCheck<?= $r['id'] ?>" name="delete_ids[]"></td>
+                                    <td><?= $r['id'] ?></td>
+                                    <td><?= $r['order_type'] ?></td>
+                                    <td><?= $r['seller_id'] ?></td>
+                                    <td><?= $r['buyer_id'] ?></td>
+                                    <td><a class="text-decoration-none" href="21.product_list-admin.php?id=<?= $r['product_id'] ?>"><?= $r['product_name'] ?></a></td>
+                                    <td><?= ($r['order_type'] == '以物易物') ? '0' : $r['product_price'] ?></td>
+                                    <td><?= $r['shipment_fee'] ?></td>
+                                    <td><?= ($r['order_type'] == '以物易物') ? '0' + $r['shipment_fee'] : $r['product_price'] + $r['shipment_fee'] ?></td>
+                                    <td><?= $r['payment_status'] ?></td>
+                                    <td><?= $r['shipment_status'] ?></td>
+                                    <td><?= $r['order_date'] ?></td>
+                                    <td class="completeStatus" id="statusText<?= $r['id'] ?>"><?= $r['complete_status'] ?></td>
+                                    <td id="completeTime<?= $r['id'] ?>" class="completeTime"><?= $r['complete_date'] ?></td>
+                                    <td>
+                                        <div class="d-flex flex-column">
+                                            <a href="44.order_edit.php?id=<?= $r['id'] ?>">
+                                                <i class="fa-solid fa-file-pen" title="編輯"></i>
+                                            </a>
+                                            <a href="javascript: delete_one(<?= $r['id'] ?>)">
+                                                <i class="fa-solid fa-trash" title="刪除"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endforeach ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <?php endif; ?>
     </div>
 </div>
 

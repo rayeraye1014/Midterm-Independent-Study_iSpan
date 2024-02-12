@@ -30,7 +30,6 @@ if ($totalRows) {
 }
 
 
-
 ?>
 <?php include __DIR__ . '/0.parts/html-head.php' ?>
 <?php include __DIR__ . '/0.parts/sidebar.php' ?>
@@ -101,7 +100,7 @@ if ($totalRows) {
                             <tr>
                                 <td><input class="form-check-input me-1" type="checkbox" value="<?= $r['id'] ?>" id="flexCheck<?= $r['id'] ?>" name="delete_ids[]"></td>
                                 <td><?= $r['id'] ?></td>
-                                <td><?= $r['order_id'] ?></td>
+                                <td><a class="text-decoration-none" href="41.order_list-admin.php?id=<?= $r['order_id'] ?>"><?= $r['order_id'] ?></a></td>
                                 <td><?= $r['order_type'] ?></td>
                                 <td><?= $r['buyer_id'] ?></td>
                                 <td><?= $r['rating'] ?></td>

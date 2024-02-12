@@ -178,6 +178,45 @@ if ($totalRows) {
     </div>
 </div>
 
+<!--Export Modal for success-->
+<div class="modal fade" id="successExport" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">匯出結果</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-success" role="alert" id="successInfoExport">
+                    csv匯出成功
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="41.order_list.php" class="btn btn-primary">回到訂單列表頁</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Export Modal for failure-->
+<div class="modal fade" id="failureExport" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">匯出結果</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger" role="alert" id="failureInfoExport">
+                    csv匯出失敗
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="41.order_list.php" class="btn btn-primary">回到訂單列表頁</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php include __DIR__ . '/0.parts/script.php' ?>
 <script>
@@ -200,6 +239,35 @@ if ($totalRows) {
             location.href = `43.order_delete.php?delete_ids[]=${idsQueryString}`;
         }
     }
+
+    document.getElementById('exportBtn').addEventListener('click', function() {
+        if (confirm(`是否將訂單列表資料匯出csv檔?`)) {
+            // 使用 fetch 進行 AJAX 請求
+            fetch('45.file_csv-order.php')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.blob();
+                })
+                .then(data => {
+                    // 建立一個 Blob URL，並創建一個連結
+                    const blobUrl = URL.createObjectURL(data);
+                    const a = document.createElement('a');
+                    a.href = blobUrl;
+                    a.download = 'order_list.csv';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    // 顯示成功訊息
+                    successModalExport.show();
+                })
+                .catch(error => {
+                    document.querySelector('#failureInfoExport').innerHTML = `發生錯誤: ${error.message}`;
+                    failureModalExport.show();
+                });
+        }
+    });
 
     function filterOrders() {
         // 獲取下拉式選單的值
@@ -445,5 +513,7 @@ if ($totalRows) {
 
     const successModal = new bootstrap.Modal('#successModal');
     const failureModal = new bootstrap.Modal('#failureModal');
+    const successModalExport = new bootstrap.Modal('#successExport');
+    const failureModalExport = new bootstrap.Modal('#failureExport');
 </script>
 <?php include __DIR__ . '/0.parts/html-foot.php' ?>

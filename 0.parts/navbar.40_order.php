@@ -199,7 +199,7 @@ if (!isset($pageName)) {
                         </div>
                         <div class="ms-3">
                             <button type="button" class="btn btn-info me-2 btn-sm"><a class="color-a text-decoration-none" href="42.order_add.php">添加商品</a></button>
-                            <!--<button type="button" class="btn btn-info btn-sm"><a class="color-a text-decoration-none" href="file_excel-product.php">匯出Excel表單</a></button>-->
+                            <button id="exportBtn" type="button" class="btn btn-secondary btn-sm">匯出csv表單</button>
                         </div>
                     </div>
                 <?php endif; ?>

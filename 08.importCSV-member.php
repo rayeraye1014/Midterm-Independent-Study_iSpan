@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['csvFile'])) {
             $birthday = !empty($birthday) ? date('Y-m-d', strtotime($birthday)) : null;
 
             $address = $row[4]; // CSV文件的第5列是地址
-            if (strlen($address) < 3) {
+            if (empty($address)) {
                 $output['error'] = '請填寫正確的地址ˋ';
                 $output['code'] = 600;
                 echo json_encode($output, JSON_UNESCAPED_UNICODE);

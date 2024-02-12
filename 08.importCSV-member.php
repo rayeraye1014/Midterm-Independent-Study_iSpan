@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['csvFile'])) {
             }
 
             $mobile = $row[2]; // CSV文件的第3列是手機
-            $mobile = trim($mobile, "'"); // 去除单引号
+            $mobile = trim($mobile, "'"); // 去除單引號
             if (!preg_match('/^\d{10}$/', $mobile)) {
                 $output['error'] = '請填寫正確的手機格式';
                 $output['code'] = 500;
@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['csvFile'])) {
             $createdAt = $row[5]; // CSV文件的第6列是創建時間
             $createdAt = !empty($createdAt) ? date('Y-m-d', strtotime($createdAt)) : null;
 
-            // 在這裡執行數據庫插入操作，使用SQL語句
+            // 執行數據庫插入操作，使用SQL語句
             // 根據數據庫結構編寫插入
             if ($createdAt !== null) {
                 $sql = "INSERT INTO address_book 

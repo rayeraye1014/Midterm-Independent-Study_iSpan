@@ -194,13 +194,10 @@ if (!isset($pageName)) {
                 </div>
                 <?php if (isset($_SESSION['admin'])) : ?>
                     <div class="d-flex justify-content-start my-1 mx-2">
-                        <div class="">
-                            <button type="button" class="btn btn-danger btn-sm"><a class="color-a text-decoration-none" href="javascript:void(0);" onclick="delete_moreThenOne()">一鍵刪除</a></button>
-                        </div>
-                        <div class="ms-3">
-                            <button type="button" class="btn btn-info me-2 btn-sm"><a class="color-a text-decoration-none" href="42.order_add.php">添加商品</a></button>
-                            <button id="exportBtn" type="button" class="btn btn-secondary btn-sm">匯出csv表單</button>
-                        </div>
+                        <button type="button" class="btn btn-info me-2 btn-sm"><a class="color-a text-decoration-none" href="42.order_add.php">添加商品</a></button>
+                        <button id="importBtn" type="button" class="btn btn-secondary btn-sm me-2">批次匯入CSV</button>
+                        <button id="exportBtn" type="button" class="btn btn-secondary btn-sm me-2">匯出csv表單</button>
+                        <button type="button" class="btn btn-danger btn-sm"><a class="color-a text-decoration-none" href="javascript:void(0);" onclick="delete_moreThenOne()">一鍵刪除</a></button>
                     </div>
                 <?php endif; ?>
             </div>

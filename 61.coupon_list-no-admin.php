@@ -82,7 +82,7 @@ if ($totalRows) {
             <div class="col">
                 <table id="myTable" class="table table-hover sortable-table">
                     <thead>
-                        <tr class="table-primary">
+                        <tr class="table-info text-center">
                             <th>ID<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()" title="變更排序"></th>
                             <th class="text-nowrap">優惠券類別</th>
                             <th class="text-nowrap">優惠券名稱</th>
@@ -94,7 +94,7 @@ if ($totalRows) {
                     </thead>
                     <tbody>
                         <?php foreach ($rows as $r) : ?>
-                            <tr>
+                            <tr class="text-center">
                                 <td><?= $r['id'] ?></td>
                                 <td><?= $r['coupon_type'] ?></td>
                                 <td><?= $r['coupon_name'] ?></td>
@@ -123,7 +123,7 @@ if ($totalRows) {
 
         // 遍歷每一行，根據選擇的值來顯示或隱藏行
         for (let i = 0; i < rows.length; i++) {
-            var couponTypeCell = rows[i].getElementsByTagName("td")[2]; // 第3列是優惠券類型列
+            var couponTypeCell = rows[i].getElementsByTagName("td")[1]; // 第2列是優惠券類型列
 
             if (couponTypeCell) {
                 var couponType = couponTypeCell.textContent || couponTypeCell.innerText;
@@ -147,7 +147,7 @@ if ($totalRows) {
 
         // 遍歷每一行，根據選擇的值來顯示或隱藏行
         for (let i = 0; i < rows.length; i++) {
-            var statusCell = rows[i].getElementsByTagName("td")[7]; // 第8列是優惠券狀態列
+            var statusCell = rows[i].getElementsByTagName("td")[6]; // 第7列是優惠券狀態列
 
             if (statusCell) {
                 var status = statusCell.textContent || statusCell.innerText;
@@ -197,8 +197,8 @@ if ($totalRows) {
 
         // 遍歷表格的每一行，進行評價分數範圍搜尋
         for (var i = 1; i < tr.length; i++) {
-            var td = tr[i].getElementsByTagName("td")[5]; // 開始日期在第6個欄位
-            var td2 = tr[i].getElementsByTagName("td")[6]; // 結束日期在第7個欄位
+            var td = tr[i].getElementsByTagName("td")[4]; // 開始日期在第5個欄位
+            var td2 = tr[i].getElementsByTagName("td")[5]; // 結束日期在第6個欄位
 
             if (td && td2) {
                 var start = new Date(td.textContent || td.innerText);
@@ -221,10 +221,10 @@ if ($totalRows) {
         const isNumberColumn = 1; // 假設 ID 列是數字列
 
         rows.sort((a, b) => {
-            const aValue = isNumberColumn ? parseInt(a.cells[1].textContent, 10) : a.cells[1].textContent;
-            const bValue = isNumberColumn ? parseInt(b.cells[1].textContent, 10) : b.cells[1].textContent;
+            const aValue = a.cells[1].textContent;
+            const bValue = b.cells[1].textContent;
 
-            return sortOrder * (bValue - aValue);
+            return sortOrder * aValue.localeCompare(bValue);
         });
 
         // 移除現有的行

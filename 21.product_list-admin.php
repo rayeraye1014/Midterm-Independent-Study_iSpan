@@ -59,6 +59,7 @@ if ($totalRows) {
             <div class="row mt-3">
                 <div class="col">
                     <!-- 顯示單一行的內容 -->
+                    <h2>商品詳細資料</h2>
                     <table id="myTable" class="table table-hover sortable-table">
                         <thead>
                             <tr class="table-primary text-center">

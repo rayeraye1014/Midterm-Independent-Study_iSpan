@@ -82,7 +82,7 @@ if ($totalRows) {
             <div class="col">
                 <table id="myTable" class="table table-hover sortable-table">
                     <thead>
-                        <tr class="table-primary">
+                        <tr class="table-primary text-center">
                             <th><i id="selectAll" class="fa-solid fa-check-to-slot" title="全選/選取checkBox"></i></a>
                             </th>
                             <th>ID<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()" title="變更排序"></th>
@@ -97,7 +97,7 @@ if ($totalRows) {
                     </thead>
                     <tbody>
                         <?php foreach ($rows as $r) : ?>
-                            <tr>
+                            <tr class="text-center">
                                 <td><input class="form-check-input me-1" type="checkbox" value="<?= $r['id'] ?>" id="flexCheck<?= $r['id'] ?>" name="delete_ids[]"></td>
                                 <td><?= $r['id'] ?></td>
                                 <td><a class="text-decoration-none" href="41.order_list-admin.php?id=<?= $r['order_id'] ?>"><?= $r['order_id'] ?></a></td>

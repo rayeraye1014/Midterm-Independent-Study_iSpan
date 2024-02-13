@@ -99,9 +99,6 @@ if (!isset($pageName)) {
                             <li class="nav-item">
                                 <a class="nav-link" href="#">USER MODE</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link <?= $pageName == 'evaluation_list' ? 'active' : '' ?>" href="51.evaluation_list.php">評價列表</a>
-                            </li>
                         <?php endif; ?>
                     </ul>
 

@@ -82,7 +82,7 @@ if ($totalRows) {
             <div class="col">
                 <table id="myTable" class="table table-hover sortable-table">
                     <thead>
-                        <tr class="table-info">
+                        <tr class="table-info text-center">
                             <th>ID<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()" title="變更排序"></th>
                             <th class="text-nowrap">訂單編號</th>
                             <th class="text-nowrap">訂單類型</th>
@@ -94,7 +94,7 @@ if ($totalRows) {
                     </thead>
                     <tbody>
                         <?php foreach ($rows as $r) : ?>
-                            <tr>
+                            <tr class="text-center">
                                 <td><?= $r['id'] ?></td>
                                 <td><?= $r['order_id'] ?></td>
                                 <td><?= $r['order_type'] ?></td>
@@ -163,7 +163,7 @@ if ($totalRows) {
 
         // 遍歷每一行，根據選擇的值來顯示或隱藏行
         for (let i = 0; i < rows.length; i++) {
-            var orderTypeCell = rows[i].getElementsByTagName("td")[3]; // 第4列是訂單類型列
+            var orderTypeCell = rows[i].getElementsByTagName("td")[2]; // 第3列是訂單類型列
 
             if (orderTypeCell) {
                 var orderType = orderTypeCell.textContent || orderTypeCell.innerText;
@@ -187,7 +187,7 @@ if ($totalRows) {
 
         // 遍歷每一行，根據選擇的值來顯示或隱藏行
         for (let i = 0; i < rows.length; i++) {
-            var ratingCell = rows[i].getElementsByTagName("td")[5]; // 第6列是付款狀態列
+            var ratingCell = rows[i].getElementsByTagName("td")[4]; // 第5列是付款狀態列
 
             if (ratingCell) {
                 var rating = ratingCell.textContent || ratingCell.innerText;
@@ -211,7 +211,7 @@ if ($totalRows) {
 
         // 遍歷每一行，根據選擇的值來顯示或隱藏行
         for (let i = 0; i < rows.length; i++) {
-            var dateCell = rows[i].getElementsByTagName("td")[7]; // 第8列是評論日期列
+            var dateCell = rows[i].getElementsByTagName("td")[6]; // 第7列是評論日期列
 
             if (dateCell) {
                 var date = dateCell.textContent || dateCell.innerText;
@@ -239,7 +239,7 @@ if ($totalRows) {
 
         // 遍歷表格的每一行，進行搜尋
         for (i = 0; i < tr.length; i++) {
-            td = tr[i].getElementsByTagName("td")[3]; // 假設名稱在第4個欄位
+            td = tr[i].getElementsByTagName("td")[2]; // 假設名稱在第2個欄位
 
             if (td) {
                 txtValue = td.textContent || td.innerText;
@@ -264,7 +264,7 @@ if ($totalRows) {
 
         // 遍歷表格的每一行，進行評價分數範圍搜尋
         for (var i = 1; i < tr.length; i++) {
-            var td = tr[i].getElementsByTagName("td")[5]; // 評價分數在第6個欄位
+            var td = tr[i].getElementsByTagName("td")[4]; // 評價分數在第5個欄位
 
             if (td) {
                 var rating = parseFloat(td.textContent || td.innerText);

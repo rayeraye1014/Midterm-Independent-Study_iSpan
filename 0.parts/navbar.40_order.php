@@ -99,9 +99,6 @@ if (!isset($pageName)) {
                             <li class="nav-item">
                                 <a class="nav-link" href="#">USER MODE</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link <?= $pageName == 'order_list' ? 'active' : '' ?>" href="41.order_list.php">訂單列表</a>
-                            </li>
                         <?php endif; ?>
                     </ul>
 

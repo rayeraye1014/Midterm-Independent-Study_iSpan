@@ -99,9 +99,6 @@ if (!isset($pageName)) {
                             <li class="nav-item">
                                 <a class="nav-link" href="#">USER MODE</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link <?= $pageName == 'coupon_list' ? 'active' : '' ?>" href="61.coupon_list.php">優惠券列表</a>
-                            </li>
                         <?php endif; ?>
                     </ul>
 

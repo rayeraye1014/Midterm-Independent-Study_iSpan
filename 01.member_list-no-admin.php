@@ -69,12 +69,12 @@ if ($totalRows) {
               </li>
             <?php endfor ?>
             <li class="page-item">
-              <a class="page-link" href="?page=<?= $page != 40 ? $page + 1 : 40 ?>">
+              <a class="page-link" href="?page=<?= $page != 50 ? $page + 1 : 500 ?>">
                 <i class="fa-solid fa-angle-right"></i>
               </a>
             </li>
             <li class="page-item">
-              <a class="page-link" href="?page=40">
+              <a class="page-link" href="?page=50">
                 <i class="fa-solid fa-angles-right"></i>
               </a>
             </li>

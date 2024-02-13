@@ -8,7 +8,7 @@ if ($page < 1) {
     header('local: ?page=1');
     exit;
 }
-$perPage = 10;   #每一頁有幾筆
+$perPage = 20;   #每一頁有幾筆
 
 #算總筆數
 $t_sql = "SELECT COUNT(1) FROM products";
@@ -38,7 +38,7 @@ if ($totalRows) {
 <?php include __DIR__ . '/0.parts/sidebar.php' ?>
 <style>
     .td-img {
-        width: 150px;
+        width: 100px;
     }
 
     .overflow-auto {
@@ -90,18 +90,18 @@ if ($totalRows) {
             <div class="col">
                 <table id="myTable" class="table table-hover sortable-table">
                     <thead>
-                        <tr class="table-info text-center">
+                        <tr class="table-info text-center text-nowrap">
                             <th>ID<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()" title="變更排序"></i>
                             </th>
                             <th>Seller</th>
                             <th>Main</th>
                             <th>Sub</th>
                             <th>Photos</th>
-                            <th>Name</th>
+                            <th>ProductName</th>
                             <th>Intro</th>
-                            <th>Carbon</th>
-                            <th>Ctime</th>
-                            <th>Statuss</th>
+                            <th>CPoints</th>
+                            <th>Createdtime</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>

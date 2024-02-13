@@ -82,7 +82,7 @@ if ($totalRows) {
             <div class="col">
                 <table id="myTable" class="table table-hover sortable-table">
                     <thead>
-                        <tr class="table-info">
+                        <tr class="table-info text-center">
                             <th>ID<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()" title="變更排序"></th>
                             <th class="text-nowrap">訂單類型</th>
                             <th>賣家編號</th>
@@ -100,7 +100,7 @@ if ($totalRows) {
                     </thead>
                     <tbody>
                         <?php foreach ($rows as $r) : ?>
-                            <tr>
+                            <tr class="text-center">
                                 <td><?= $r['id'] ?></td>
                                 <td><?= $r['order_type'] ?></td>
                                 <td><?= $r['seller_id'] ?></td>
@@ -136,7 +136,7 @@ if ($totalRows) {
 
         // 遍歷每一行，根據選擇的值來顯示或隱藏行
         for (let i = 0; i < rows.length; i++) {
-            var orderTypeCell = rows[i].getElementsByTagName("td")[1]; // 第3列是訂單類型列
+            var orderTypeCell = rows[i].getElementsByTagName("td")[1]; // 第2列是訂單類型列
 
             if (orderTypeCell) {
                 var orderType = orderTypeCell.textContent || orderTypeCell.innerText;
@@ -160,7 +160,7 @@ if ($totalRows) {
 
         // 遍歷每一行，根據選擇的值來顯示或隱藏行
         for (let i = 0; i < rows.length; i++) {
-            var orderTypeCell = rows[i].getElementsByTagName("td")[8]; // 第10列是付款狀態列
+            var orderTypeCell = rows[i].getElementsByTagName("td")[8]; // 第9列是付款狀態列
 
             if (orderTypeCell) {
                 var orderType = orderTypeCell.textContent || orderTypeCell.innerText;
@@ -184,7 +184,7 @@ if ($totalRows) {
 
         // 遍歷每一行，根據選擇的值來顯示或隱藏行
         for (let i = 0; i < rows.length; i++) {
-            var orderTypeCell = rows[i].getElementsByTagName("td")[9]; // 第11列是運送狀態列
+            var orderTypeCell = rows[i].getElementsByTagName("td")[9]; // 第10列是運送狀態列
 
             if (orderTypeCell) {
                 var orderType = orderTypeCell.textContent || orderTypeCell.innerText;
@@ -208,7 +208,7 @@ if ($totalRows) {
 
         // 遍歷每一行，根據選擇的值來顯示或隱藏行
         for (let i = 0; i < rows.length; i++) {
-            var orderTypeCell = rows[i].getElementsByTagName("td")[11]; // 第13列是訂單狀態列
+            var orderTypeCell = rows[i].getElementsByTagName("td")[11]; // 第12列是訂單狀態列
 
             if (orderTypeCell) {
                 var orderType = orderTypeCell.textContent || orderTypeCell.innerText;
@@ -259,7 +259,7 @@ if ($totalRows) {
 
         // 遍歷表格的每一行，進行價格範圍搜尋
         for (var i = 1; i < tr.length; i++) {
-            var td = tr[i].getElementsByTagName("td")[7]; // 總價格在第9個欄位
+            var td = tr[i].getElementsByTagName("td")[7]; // 總價格在第8個欄位
 
             if (td) {
                 var price = parseFloat(td.textContent || td.innerText);

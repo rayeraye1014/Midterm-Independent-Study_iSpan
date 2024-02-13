@@ -40,6 +40,7 @@ $totalRows5 = $pdo->query($t_sql_coupon)->fetch(PDO::FETCH_NUM)[0];
 <div class="container-fluid px-0 mx-0">
   <?php include __DIR__ . '/0.parts/navbar_main.php' ?>
   <div class="container d-flex flex-column mt-5 mb-5">
+    <h2 class="text-center">Admin Mode具權限，可進行CRUD</h2>
     <div class="area1 d-flex justify-content-center">
       <div class="d-flex border border-dark border-3 rounded-3 mt-5 me-5" style="width: 17rem;">
         <div class="">

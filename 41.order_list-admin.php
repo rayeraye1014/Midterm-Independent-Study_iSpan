@@ -59,7 +59,7 @@ if ($totalRows) {
                     <h2>訂單詳細資料</h2>
                     <table id="myTable" class="table table-hover sortable-table">
                         <thead>
-                            <tr class="table-primary">
+                            <tr class="table-primary text-center">
                                 <th><i id="selectAll" class="fa-solid fa-check-to-slot" title="全選/選取checkBox"></i></a>
                                 </th>
                                 <th>ID<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()" title="變更排序"></th>
@@ -79,7 +79,7 @@ if ($totalRows) {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr class="text-center">
                                 <td><input class="form-check-input me-1" type="checkbox" value="<?= $row['id'] ?>" id="flexCheck<?= $row['id'] ?>" name="delete_ids[]"></td>
                                 <td><?= $row['id'] ?></td>
                                 <td><?= $row['order_type'] ?></td>
@@ -152,7 +152,7 @@ if ($totalRows) {
                 <div class="col">
                     <table id="myTable" class="table table-hover sortable-table">
                         <thead>
-                            <tr class="table-primary">
+                            <tr class="table-primary text-center">
                                 <th><i id="selectAll" class="fa-solid fa-check-to-slot" title="全選/選取checkBox"></i></a>
                                 </th>
                                 <th>ID<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()" title="變更排序"></th>
@@ -173,7 +173,7 @@ if ($totalRows) {
                         </thead>
                         <tbody>
                             <?php foreach ($rows as $r) : ?>
-                                <tr>
+                                <tr class="text-center">
                                     <td><input class="form-check-input me-1" type="checkbox" value="<?= $r['id'] ?>" id="flexCheck<?= $r['id'] ?>" name="delete_ids[]"></td>
                                     <td><?= $r['id'] ?></td>
                                     <td><?= $r['order_type'] ?></td>

@@ -23,7 +23,58 @@ $totalcomplete = $pdo->query($t_sql_complete)->fetch(PDO::FETCH_NUM)[0];
 $t_sql_complete2 = "SELECT COUNT(1) FROM orders WHERE complete_status = '已完成'";
 $totalcomplete2 = $pdo->query($t_sql_complete2)->fetch(PDO::FETCH_NUM)[0];
 
+//取產品名字用
+$product = "SELECT * FROM products";
+$stmt4 = $pdo->query($product);
+$rows4 = $stmt4->fetchAll(PDO::FETCH_ASSOC);
 
+$order = "SELECT orders.id, order_type, orders.seller_id, buyer_id, product_id, shipment_fee, payment_status, shipment_status, order_date, complete_status, complete_date, product_name, product_price FROM orders JOIN products ON orders.product_id = products.id";
+$stmt = $pdo->query($order);
+$rows2 = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// 計算前5多出現的商品
+$t_sql_id = "SELECT product_id, COUNT(*) as product_count
+FROM orders
+GROUP BY product_id
+ORDER BY product_count DESC
+LIMIT 1";
+$one = $pdo->query($t_sql_id)->fetch(PDO::FETCH_ASSOC);
+
+$t_sql_id2 = "SELECT product_id, COUNT(*) as product_count
+FROM orders
+GROUP BY product_id
+ORDER BY product_count DESC
+LIMIT 1 OFFSET 1";
+$two = $pdo->query($t_sql_id2)->fetch(PDO::FETCH_ASSOC);
+
+$t_sql_id3 = "SELECT product_id, COUNT(*) as product_count
+FROM orders
+GROUP BY product_id
+ORDER BY product_count DESC
+LIMIT 1 OFFSET 2";
+$three = $pdo->query($t_sql_id3)->fetch(PDO::FETCH_ASSOC);
+
+$t_sql_id4 = "SELECT product_id, COUNT(*) as product_count
+FROM orders
+GROUP BY product_id
+ORDER BY product_count DESC
+LIMIT 1 OFFSET 3";
+$four = $pdo->query($t_sql_id4)->fetch(PDO::FETCH_ASSOC);
+
+$t_sql_id5 = "SELECT product_id, COUNT(*) as product_count
+FROM orders
+GROUP BY product_id
+ORDER BY product_count DESC
+LIMIT 1 OFFSET 4";
+$five = $pdo->query($t_sql_id5)->fetch(PDO::FETCH_ASSOC);
+
+foreach ($rows4 as $r4) :
+    if ($r4['id'] == $one['product_id']) $name1 = $r4['product_name'];
+    if ($r4['id'] == $two['product_id']) $name2 = $r4['product_name'];
+    if ($r4['id'] == $three['product_id']) $name3 = $r4['product_name'];
+    if ($r4['id'] == $four['product_id']) $name4 = $r4['product_name'];
+    if ($r4['id'] == $five['product_id']) $name5 = $r4['product_name'];
+endforeach;
 
 ?>
 <?php include __DIR__ . '/0.parts/html-head.php' ?>
@@ -42,6 +93,12 @@ $totalcomplete2 = $pdo->query($t_sql_complete2)->fetch(PDO::FETCH_NUM)[0];
     #myChart2 {
         width: 600px;
         height: 400px;
+        margin-top: 50px;
+    }
+
+    #myChart3 {
+        width: 800px;
+        height: 600px;
         margin-top: 50px;
     }
 </style>
@@ -122,6 +179,12 @@ $totalcomplete2 = $pdo->query($t_sql_complete2)->fetch(PDO::FETCH_NUM)[0];
                 <canvas id="myChart2"></canvas>
             </div>
         </div>
+        <div class="d-flex justify-content-center">
+            <div class="chart3">
+                <!-- 長條圖顯示的位置 -->
+                <canvas id="myChart3"></canvas>
+            </div>
+        </div>
     </div>
 </div>
 <?php include __DIR__ . '/0.parts/script.php' ?>
@@ -157,6 +220,22 @@ $totalcomplete2 = $pdo->query($t_sql_complete2)->fetch(PDO::FETCH_NUM)[0];
     new Chart(chartElement2, {
         type: 'bar',
         data: data2,
+    });
+
+
+    const chartElement3 = document.getElementById('myChart3');
+    const data3 = {
+        labels: [
+            '<?= $name1 ?>', '<?= $name2 ?>', '<?= $name3 ?>', '<?= $name4 ?>', '<?= $name5 ?>'
+        ],
+        datasets: [{
+            label: '前五銷售排名商品',
+            data: [<?= $one['product_count'] ?? 0 ?>, <?= $two['product_count'] ?? 0 ?>, <?= $three['product_count'] ?? 0 ?>, <?= $four['product_count'] ?? 0 ?>, <?= $five['product_count'] ?? 0 ?>],
+        }]
+    };
+    new Chart(chartElement3, {
+        type: 'bar',
+        data: data3,
     });
 </script>
 <?php include __DIR__ . '/0.parts/html-foot.php' ?>

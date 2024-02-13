@@ -31,7 +31,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <form name="form1" onsubmit="sendData(event)"> <!-- 因為有下onsubmit，故action和methon就沒有用處了，可以刪除 -->
               <div class="mb-3">
                 <label for="sub" class="form-label">*子分類名稱</label>
-                <input type="text" class="form-control" id="sub" name="sub" required>
+                <input type="text" class="form-control" id="sub" name="sub">
                 <div class="form-text"></div>
               </div>
               <div class="mb-3">
@@ -117,7 +117,7 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     // TODO: 檢查各個欄位的資料, 有沒有符合規定
 
-    if (subEl.value.length < 1) {
+    if ((subEl.value == "")) {
       isPass = false; // 沒有通過檢查
       subEl.style.border = '1px solid red';
       subEl.nextElementSibling.innerHTML = '請填寫正確的名稱!';
@@ -125,8 +125,8 @@ $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     if (main.value && main.value == "disabled") {
       isPass = false;
-      main_categoryEl.style.border = '1px solid red';
-      main_categoryEl.nextElementSibling.innerHTML = '請選擇主分類!';
+      mainEl.style.border = '1px solid red';
+      mainEl.nextElementSibling.innerHTML = '請選擇主分類!';
     }
 
     // 有通過檢查才發送表單

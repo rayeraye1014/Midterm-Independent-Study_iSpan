@@ -95,7 +95,7 @@ $sql_join2 = $result->fetchAll();
             <div class="col">
                 <table id="myTable" class="table table-hover sortable-table">
                     <thead>
-                        <tr class="table-info">
+                        <tr class="table-info text-center">
                             <th>編號<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()" title="變更排序"></th>
                             <th>子分類</th>
                             <th>主分類</th>
@@ -104,7 +104,7 @@ $sql_join2 = $result->fetchAll();
                     </thead>
                     <tbody>
                         <?php foreach ($rows as $r) : ?>
-                            <tr>
+                            <tr class="text-center">
                                 <td><?= $r['id'] ?></td>
                                 <td><?= $r['sub'] ?></td>
                                 <td><?= $r['main'] ?></td>
@@ -147,5 +147,19 @@ $sql_join2 = $result->fetchAll();
         const icon = document.getElementById('sortIcon');
         icon.className = sortOrder === 1 ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down';
     }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // 連結icon和checkbox
+        var selectAllIcon = document.getElementById("selectAll");
+        var checkboxes = document.querySelectorAll('input[name="delete_ids[]"]');
+
+        // 添加點擊事件監聽器
+        selectAllIcon.addEventListener("click", function() {
+            //切换所有checkbox選中的狀態
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = !checkbox.checked;
+            });
+        });
+    });
 </script>
 <?php include __DIR__ . '/0.parts/html-foot.php' ?>

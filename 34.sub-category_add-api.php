@@ -13,7 +13,7 @@ $output = [
 if (!empty($_POST)) {
   // TODO: 檢查各個欄位的資料, 有沒有符合規定
 
-  if (strlen($_POST['sub']) < 1 || strlen($_POST['sub']) > 10) {
+  if (empty($_POST['sub'])) {
     $output['error'] = '請填寫正確的名稱';
     $output['code'] = 100;
     echo json_encode($output, JSON_UNESCAPED_UNICODE);

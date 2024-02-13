@@ -91,15 +91,15 @@ if ($totalRows) {
             <div class="col">
                 <table id="myTable" class="table table-hover sortable-table">
                     <thead>
-                        <tr class="table-info">
+                        <tr class="table-info text-center">
                             <th>編號<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()" title="變更排序"></th>
-                            <th>主分類</th>
+                            <th>主分類名稱</th>
                             <th>此分類可獲得小碳點數</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($rows as $r) : ?>
-                            <tr>
+                            <tr class="text-center">
                                 <td><?= $r['id'] ?></td>
                                 <td><?= $r['main'] ?></td>
                                 <td><?= $r['carbon_points_available'] ?></td>
@@ -114,6 +114,20 @@ if ($totalRows) {
 </div>
 <?php include __DIR__ . '/0.parts/script.php' ?>
 <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // 連結icon和checkbox
+        var selectAllIcon = document.getElementById("selectAll");
+        var checkboxes = document.querySelectorAll('input[name="delete_ids[]"]');
+
+        // 添加點擊事件監聽器
+        selectAllIcon.addEventListener("click", function() {
+            //切换所有checkbox選中的狀態
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = !checkbox.checked;
+            });
+        });
+    });
+
     let sortOrder = -1; // 初始為降冪排列
     function sortTable() {
         const table = document.querySelector('.sortable-table');

@@ -96,19 +96,19 @@ $sql_join2 = $result->fetchAll();
       <div class="col">
         <table id="myTable" class="table table-hover sortable-table">
           <thead>
-            <tr class="table-primary">
+            <tr class="table-primary text-center">
               <th><i id="selectAll" class="fa-solid fa-check-to-slot" title="全選/選取checkBox"></i></a>
               </th>
               <th>編號<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()" title="變更排序"></th>
-              <th>子分類</th>
-              <th>主分類</th>
+              <th>子分類名稱</th>
+              <th>主分類名稱</th>
               <th>所屬主分類代碼</th>
               <th><i class="fa-solid fa-wrench" title="功能區"></i></th>
             </tr>
           </thead>
           <tbody>
             <?php foreach ($rows as $r) : ?>
-              <tr>
+              <tr class="text-center">
                 <td>
                   <input class="form-check-input me-1" type="checkbox" value="<?= $r['id'] ?>" id="flexCheck<?= $r['id'] ?>" name="delete_ids[]">
                 </td>
@@ -237,6 +237,20 @@ $sql_join2 = $result->fetchAll();
     }
   }
 
+  document.addEventListener("DOMContentLoaded", function() {
+    // 連結icon和checkbox
+    var selectAllIcon = document.getElementById("selectAll");
+    var checkboxes = document.querySelectorAll('input[name="delete_ids[]"]');
+
+    // 添加點擊事件監聽器
+    selectAllIcon.addEventListener("click", function() {
+      //切换所有checkbox選中的狀態
+      checkboxes.forEach(function(checkbox) {
+        checkbox.checked = !checkbox.checked;
+      });
+    });
+  });
+
   document.getElementById('importBtn').addEventListener('click', function() {
     // 執行批次匯入CSV的操作
     batchImportCSV();
@@ -277,49 +291,6 @@ $sql_join2 = $result->fetchAll();
   }
 
   document.getElementById('exportBtn').addEventListener('click', function() {
-    if (confirm(`是否將會員列表資料匯出csv檔?`)) {
-      // 使用 fetch 進行 AJAX 請求
-      fetch('07.file_csv-member.php')
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          return response.blob();
-        })
-        .then(data => {
-          // 建立一個 Blob URL，並創建一個連結
-          const blobUrl = URL.createObjectURL(data);
-          const a = document.createElement('a');
-          a.href = blobUrl;
-          a.download = 'member_list.csv';
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          // 顯示成功訊息
-          successModalExport.show();
-        })
-        .catch(error => {
-          document.querySelector('#failureInfoExport').innerHTML = `發生錯誤: ${error.message}`;
-          failureModalExport.show();
-        });
-    }
-  });
-
-  document.addEventListener("DOMContentLoaded", function() {
-    // 連結icon和checkbox
-    var selectAllIcon = document.getElementById("selectAll");
-    var checkboxes = document.querySelectorAll('input[name="delete_ids[]"]');
-
-    // 添加點擊事件監聽器
-    selectAllIcon.addEventListener("click", function() {
-      //切换所有checkbox選中的狀態
-      checkboxes.forEach(function(checkbox) {
-        checkbox.checked = !checkbox.checked;
-      });
-    });
-  });
-
-  document.getElementById('exportBtn').addEventListener('click', function() {
     if (confirm(`是否將子分類列表資料匯出csv檔?`)) {
       // 使用 fetch 進行 AJAX 請求
       fetch('39.file_csv-sub.php')
@@ -347,22 +318,6 @@ $sql_join2 = $result->fetchAll();
         });
     }
   });
-
-  document.addEventListener("DOMContentLoaded", function() {
-    // 連結icon和checkbox
-    var selectAllIcon = document.getElementById("selectAll");
-    var checkboxes = document.querySelectorAll('input[name="delete_ids[]"]');
-
-    // 添加點擊事件監聽器
-    selectAllIcon.addEventListener("click", function() {
-      //切换所有checkbox選中的狀態
-      checkboxes.forEach(function(checkbox) {
-        checkbox.checked = !checkbox.checked;
-      });
-    });
-  });
-
-
 
   function searchProd() {
     // 取得輸入框中的關鍵字

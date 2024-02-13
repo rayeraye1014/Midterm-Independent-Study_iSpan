@@ -17,7 +17,7 @@ $pageName = 'login';
 
   .bg-img {
     background-image: url(./02.imgs/bg.png);
-    background-size: contain;
+    background-size: cover;
   }
 
   .addHeight {

@@ -86,7 +86,7 @@ if ($totalRows) {
       <div class="col">
         <table class="table sortable-table table-hover">
           <thead>
-            <tr>
+            <tr class="text-center">
               <th class="table-info">編號<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()" title="變更排序"></th>
               <th class="table-info">姓名</th>
               <th class="table-info">電郵</th>
@@ -94,7 +94,7 @@ if ($totalRows) {
           </thead>
           <tbody>
             <?php foreach ($rows as $r) : ?>
-              <tr>
+              <tr class="text-center">
                 <td><?= $r['sid'] ?></td>
                 <td><?= $r['name'] ?></td>
                 <td><?= $r['email'] ?></td>

@@ -24,7 +24,7 @@ if ($totalRows) {
     }
 
     # ``可以不用標，這個只用來標示資料表名稱；''單引號只可以用來標示值
-    $sql = sprintf("SELECT products.id, seller_id, main_category, sub_category, product_photos, product_name, product_price, product_quantity, product_intro, products.carbon_points_available, created_at, edit_new, status_now, main FROM products JOIN categories_main ON products.main_category = categories_main.id WHERE main = '男裝服飾' ORDER BY id LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
+    $sql = sprintf("SELECT products.id, seller_id, main_category, sub_category, product_photos, product_name, product_price, product_quantity, product_intro, products.carbon_points_available, created_at, edit_new, status_now, main FROM products JOIN categories_main ON products.main_category = categories_main.id WHERE main = '男裝服飾' ORDER BY id DESC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
     $rows = $pdo->query($sql)->fetchAll();
 }
 
@@ -55,31 +55,31 @@ if ($totalRows) {
                 <h6>共<?= $totalRows ?>筆</h6>
                 <table id="myTable" class="table table-hover sortable-table">
                     <thead>
-                        <tr class="table-primary">
+                        <tr class="table-primary text-center">
                             <th><i id="selectAll" class="fa-solid fa-check-to-slot" title="全選/選取checkBox"></i></th>
                             <th>ID<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()" title="變更排序"></i></th>
                             <th>Seller</th>
                             <th>Main</th>
                             <th>Sub</th>
                             <th>Photos</th>
-                            <th>Name</th>
+                            <th>ProductName</th>
                             <th>Price</th>
                             <th>Qty</th>
                             <th>Intro</th>
-                            <th>Carbon</th>
-                            <th>Ctime</th>
-                            <th>Utime</th>
-                            <th>Statusss</th>
+                            <th>CPoints</th>
+                            <th>CreatedTime</th>
+                            <th>UpdatedTime</th>
+                            <th>Status</th>
                             <th><i class="fa-solid fa-wrench" title="功能區"></i></th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($rows as $r) : ?>
-                            <tr>
+                            <tr class="text-center">
                                 <td><input class="form-check-input me-1" type="checkbox" value="<?= $r['id'] ?>" id="flexCheck<?= $r['id'] ?>" name="delete_ids[]"></td>
                                 <td><?= $r['id'] ?></td>
                                 <td><?= $r['seller_id'] ?></td>
-                                <td><?= $r['main'] ?></td>
+                                <td class="text-nowrap"><?= $r['main'] ?></td>
                                 <td><?= $r['sub_category'] ?></td>
                                 <td><img class="td-img" src="./02.imgs/<?= explode(",", $r['product_photos'])[0] ?>" alt=""></td>
                                 <td><?= $r['product_name'] ?></td>
@@ -87,9 +87,9 @@ if ($totalRows) {
                                 <td><?= $r['product_quantity'] ?></td>
                                 <td class="text-truncate" style="max-width: 180px;"><?= $r['product_intro'] ?></td>
                                 <td><?= $r['carbon_points_available'] ?></td>
-                                <td><?= $r['created_at'] ?></td>
-                                <td><?= $r['edit_new'] ?></td>
-                                <td><?= $r['status_now'] ?></td>
+                                <td class="text-nowrap"><?= $r['created_at'] ?></td>
+                                <td class="text-nowrap"><?= $r['edit_new'] ?></td>
+                                <td class="text-nowrap"><?= $r['status_now'] ?></td>
                                 <td>
                                     <div class="d-flex flex-column">
                                         <a href="javascript: change_status(<?= $r['id'] ?>)" title="變更上下架">
@@ -240,6 +240,31 @@ if ($totalRows) {
     function updateSortIcon() {
         const icon = document.getElementById('sortIcon');
         icon.className = sortOrder === 1 ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down';
+    }
+
+    function searchProd() {
+        // 取得輸入框中的關鍵字
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+
+        // 遍歷表格的每一行，進行搜尋
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[6]; // 假設名稱在第7個欄位
+
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+
+                // 判斷是否包含關鍵字
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
     }
 </script>
 <?php include __DIR__ . '/0.parts/html-foot.php' ?>

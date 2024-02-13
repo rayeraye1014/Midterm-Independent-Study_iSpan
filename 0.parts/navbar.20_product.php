@@ -225,14 +225,14 @@ if (!isset($pageName)) {
                 </div>
                 <div class="d-flex justify-content-between my-1 mx-2">
                     <div class="">
-                        <button type="button" class="btn btn-warning btn-sm"><a class="color-a text-decoration-none" href="javascript:void(0);" onclick="change_status_down(id)">一鍵下架</a></button>
-                        <button type="button" class="btn btn-success btn-sm"><a class="color-a text-decoration-none" href="javascript:void(0);" onclick="change_status_up(id)">一鍵上架</a></button>
+                        <button type="button" class="btn btn-warning btn-sm me-2"><a class="color-a text-decoration-none" href="javascript:void(0);" onclick="change_status_down(id)">一鍵下架</a></button>
+                        <button type="button" class="btn btn-success btn-sm me-2"><a class="color-a text-decoration-none" href="javascript:void(0);" onclick="change_status_up(id)">一鍵上架</a></button>
                         <button type="button" class="btn btn-danger btn-sm"><a class="color-a text-decoration-none" href="javascript:void(0);" onclick="delete_moreThenOne()">一鍵刪除</a></button>
                     </div>
                     <div class="">
                         <button type="button" class="btn btn-info me-2 btn-sm"><a class="color-a text-decoration-none" href="22.product_add.php">添加商品</a></button>
                         <button id="importBtn" type="button" class="btn btn-secondary btn-sm me-2">批次匯入CSV</button>
-                        <button id="exportBtn" type="button" class="btn btn-secondary btn-sm">匯出csv表單</button>
+                        <button id="exportBtn" type="button" class="btn btn-secondary btn-sm me-4">匯出csv表單</button>
                     </div>
                 </div>
             </div>

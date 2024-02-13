@@ -90,7 +90,7 @@ if ($totalRows) {
             <div class="col">
                 <table id="myTable" class="table table-hover sortable-table">
                     <thead>
-                        <tr class="table-info">
+                        <tr class="table-info text-center">
                             <th>ID<i id="sortIcon" class="fa-solid fa-caret-down" onclick="sortTable()" title="變更排序"></i>
                             </th>
                             <th>Seller</th>
@@ -106,7 +106,7 @@ if ($totalRows) {
                     </thead>
                     <tbody>
                         <?php foreach ($rows as $r) : ?>
-                            <tr>
+                            <tr class="text-center">
                                 <td><?= $r['id'] ?></td>
                                 <td><?= $r['seller_id'] ?></td>
                                 <td><?= $r['main'] ?></td>
@@ -115,8 +115,8 @@ if ($totalRows) {
                                 <td><?= $r['product_name'] ?></td>
                                 <td class="text-truncate" style="max-width: 180px;"><?= $r['product_intro'] ?></td>
                                 <td><?= $r['carbon_points_available'] ?></td>
-                                <td><?= $r['created_at'] ?></td>
-                                <td class="status" id="statusText<?= $r['id'] ?>"><?= $r['status_now'] ?></td>
+                                <td class="text-nowrap"><?= $r['created_at'] ?></td>
+                                <td class="status text-nowrap" id="statusText<?= $r['id'] ?>"><?= $r['status_now'] ?></td>
                             </tr>
                         <?php endforeach ?>
                     </tbody>
@@ -179,6 +179,31 @@ if ($totalRows) {
     function updateSortIcon() {
         const icon = document.getElementById('sortIcon');
         icon.className = sortOrder === 1 ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down';
+    }
+
+    function searchProd() {
+        // 取得輸入框中的關鍵字
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+
+        // 遍歷表格的每一行，進行搜尋
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[6]; // 假設名稱在第7個欄位
+
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+
+                // 判斷是否包含關鍵字
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
     }
 </script>
 <?php include __DIR__ . '/0.parts/html-foot.php' ?>

@@ -242,5 +242,30 @@ if ($totalRows) {
         const icon = document.getElementById('sortIcon');
         icon.className = sortOrder === 1 ? 'fa-solid fa-caret-up' : 'fa-solid fa-caret-down';
     }
+
+    function searchProd() {
+        // 取得輸入框中的關鍵字
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+
+        // 遍歷表格的每一行，進行搜尋
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[6]; // 假設名稱在第7個欄位
+
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+
+                // 判斷是否包含關鍵字
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
 </script>
 <?php include __DIR__ . '/0.parts/html-foot.php' ?>

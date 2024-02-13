@@ -153,6 +153,20 @@ $pageName = 'register';
         return re.test(password);
     }
 
+    function checkPasswordMatch() {
+        if (password2El.value && (passwordEl.value !== password2El.value)) {
+            isPass = false;
+            password2El.style.border = '1px solid red';
+            password2El.nextElementSibling.innerHTML = '密碼填寫不一致!';
+        } else {
+            // 密碼一致時，移除相關樣式
+            password2El.style.border = '1px solid #CCC';
+            password2El.nextElementSibling.innerHTML = '';
+        }
+    }
+    // 呼叫檢查密碼函式
+    password2El.addEventListener('blur', checkPasswordMatch);
+
     function validateMobile(mobile) {
         const re = /^09\d{2}-?\d{3}-?\d{3}$/;
         return re.test(mobile);
@@ -181,13 +195,8 @@ $pageName = 'register';
             passwordEl.style.border = '1px solid red';
             passwordEl.nextElementSibling.innerHTML = '請填寫正確的密碼!';
         }
-        password2El.addEventListener('blur', function() {
-            if (password2El.value && passwordEl.value !== password2El.value) {
-                isPass = false; // 沒有通過檢查
-                password2El.style.border = '1px solid red';
-                password2El.nextElementSibling.innerHTML = '密碼填寫不一致!';
-            }
-        });
+
+        password2El.removeEventListener('blur', checkPasswordMatch);
 
         if (mobileEl.value && !validateMobile(mobileEl.value)) {
             isPass = false;

@@ -3,10 +3,6 @@
 
 
 #host是主機，決定連到哪一個主機
-$db_host = 'localhost';
-$db_user = 'root';
-$db_pass = 'Nan794@food';
-$db_name = 'proj57';
 
 
 # dsn ""中不可以有空格
